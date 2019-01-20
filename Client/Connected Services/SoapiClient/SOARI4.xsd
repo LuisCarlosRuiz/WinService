@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Opa.RiskManagerIntegration.Model.Entities.Repository" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Opa.RiskManagerIntegration.Model.Entities.Repository" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://riskmanagerintegration.test.local/SOARI.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfExecutionControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ExecutionControl" nillable="true" type="tns:ExecutionControl" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfExecutionControl" nillable="true" type="tns:ArrayOfExecutionControl" />
+  <xs:complexType name="ExecutionControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExecutionId" type="ser:guid" />
+      <xs:element minOccurs="0" name="LastExecution" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SyncType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExecutionControl" nillable="true" type="tns:ExecutionControl" />
+  <xs:complexType name="ArrayOfCuotasExtrasCreditoRepository">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CuotasExtrasCreditoRepository" nillable="true" type="tns:CuotasExtrasCreditoRepository" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCuotasExtrasCreditoRepository" nillable="true" type="tns:ArrayOfCuotasExtrasCreditoRepository" />
+  <xs:complexType name="CuotasExtrasCreditoRepository">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CuotasExtrasCreditoRepositoryId" type="ser:guid" />
+      <xs:element minOccurs="0" name="FechaCorte" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaVence" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Interes" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NumeroCredito" type="xs:long" />
+      <xs:element minOccurs="0" name="Pagado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Plazo" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalCuota" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorCuota" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CuotasExtrasCreditoRepository" nillable="true" type="tns:CuotasExtrasCreditoRepository" />
+</xs:schema>

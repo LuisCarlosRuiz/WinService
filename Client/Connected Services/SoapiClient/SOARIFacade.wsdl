@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SOARIFacade" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="wsSecureService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp />
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:EndorsingSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:SecureConversationToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:BootstrapPolicy>
+                  <wsp:Policy>
+                    <sp:SignedParts>
+                      <sp:Body />
+                      <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+                    </sp:SignedParts>
+                    <sp:EncryptedParts>
+                      <sp:Body />
+                    </sp:EncryptedParts>
+                    <sp:TransportBinding>
+                      <wsp:Policy>
+                        <sp:TransportToken>
+                          <wsp:Policy>
+                            <sp:HttpsToken RequireClientCertificate="false" />
+                          </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                          <wsp:Policy>
+                            <sp:Basic256 />
+                          </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                          <wsp:Policy>
+                            <sp:Strict />
+                          </wsp:Policy>
+                        </sp:Layout>
+                        <sp:IncludeTimestamp />
+                      </wsp:Policy>
+                    </sp:TransportBinding>
+                    <sp:SignedSupportingTokens>
+                      <wsp:Policy>
+                        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                          <wsp:Policy>
+                            <sp:WssUsernameToken10 />
+                          </wsp:Policy>
+                        </sp:UsernameToken>
+                      </wsp:Policy>
+                    </sp:SignedSupportingTokens>
+                    <sp:Wss11>
+                      <wsp:Policy />
+                    </sp:Wss11>
+                    <sp:Trust10>
+                      <wsp:Policy>
+                        <sp:MustSupportIssuedTokens />
+                        <sp:RequireClientEntropy />
+                        <sp:RequireServerEntropy />
+                      </wsp:Policy>
+                    </sp:Trust10>
+                  </wsp:Policy>
+                </sp:BootstrapPolicy>
+              </wsp:Policy>
+            </sp:SecureConversationToken>
+          </wsp:Policy>
+        </sp:EndorsingSupportingTokens>
+        <sp:Wss11 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy />
+        </sp:Wss11>
+        <sp:Trust10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:MustSupportIssuedTokens />
+            <sp:RequireClientEntropy />
+            <sp:RequireServerEntropy />
+          </wsp:Policy>
+        </sp:Trust10>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://riskmanagerintegration.test.local/SOARI.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://riskmanagerintegration.test.local/SOARI.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://riskmanagerintegration.test.local/SOARI.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Opa.RiskManagerIntegration.Model.Entities.Partial" />
+      <xsd:import schemaLocation="https://riskmanagerintegration.test.local/SOARI.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Opa.RiskManagerIntegration.Model.Entities.Repository" />
+      <xsd:import schemaLocation="https://riskmanagerintegration.test.local/SOARI.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ISOARIFacade_GetLastSync_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLastSync" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_GetLastSync_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLastSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerCreditos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCreditos" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerCreditos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCreditosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerAsociado_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAsociado" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerAsociado_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAsociadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerBalance" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerBalanceAgencia_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerBalanceAgencia" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerBalanceAgencia_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerBalanceAgenciaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerAhorroContractual_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAhorroContractual" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerAhorroContractual_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAhorroContractualResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerAporte_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAporte" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerAporte_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAporteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerAhorroTermino_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAhorroTermino" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerAhorroTermino_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAhorroTerminoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerAhorroVista_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAhorroVista" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerAhorroVista_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAhorroVistaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerNovedades_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerNovedades" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerNovedades_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerNovedadesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerTransacciones_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerTransacciones" />
+  </wsdl:message>
+  <wsdl:message name="ISOARIFacade_ObtenerTransacciones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerTransaccionesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ISOARIFacade">
+    <wsdl:operation name="GetLastSync">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISOARIFacade/GetLastSync" message="tns:ISOARIFacade_GetLastSync_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISOARIFacade/GetLastSyncResponse" message="tns:ISOARIFacade_GetLastSync_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCreditos">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerCreditos" message="tns:ISOARIFacade_ObtenerCreditos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerCreditosResponse" message="tns:ISOARIFacade_ObtenerCreditos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAsociado">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerAsociado" message="tns:ISOARIFacade_ObtenerAsociado_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerAsociadoResponse" message="tns:ISOARIFacade_ObtenerAsociado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerBalance" message="tns:ISOARIFacade_ObtenerBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerBalanceResponse" message="tns:ISOARIFacade_ObtenerBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerBalanceAgencia">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerBalanceAgencia" message="tns:ISOARIFacade_ObtenerBalanceAgencia_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerBalanceAgenciaResponse" message="tns:ISOARIFacade_ObtenerBalanceAgencia_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAhorroContractual">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerAhorroContractual" message="tns:ISOARIFacade_ObtenerAhorroContractual_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerAhorroContractualResponse" message="tns:ISOARIFacade_ObtenerAhorroContractual_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAporte">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerAporte" message="tns:ISOARIFacade_ObtenerAporte_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerAporteResponse" message="tns:ISOARIFacade_ObtenerAporte_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAhorroTermino">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerAhorroTermino" message="tns:ISOARIFacade_ObtenerAhorroTermino_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerAhorroTerminoResponse" message="tns:ISOARIFacade_ObtenerAhorroTermino_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAhorroVista">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerAhorroVista" message="tns:ISOARIFacade_ObtenerAhorroVista_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerAhorroVistaResponse" message="tns:ISOARIFacade_ObtenerAhorroVista_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNovedades">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerNovedades" message="tns:ISOARIFacade_ObtenerNovedades_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerNovedadesResponse" message="tns:ISOARIFacade_ObtenerNovedades_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTransacciones">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerTransacciones" message="tns:ISOARIFacade_ObtenerTransacciones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISOARIFacade/ObtenerTransaccionesResponse" message="tns:ISOARIFacade_ObtenerTransacciones_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wsSecureService" type="tns:ISOARIFacade">
+    <wsp:PolicyReference URI="#wsSecureService_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetLastSync">
+      <soap12:operation soapAction="http://tempuri.org/ISOARIFacade/GetLastSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCreditos">
+      <soap12:operation soapAction="http://tempuri.org/ISOARIFacade/ObtenerCreditos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAsociado">
+      <soap12:operation soapAction="http://tempuri.org/ISOARIFacade/ObtenerAsociado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerBalance">
+      <soap12:operation soapAction="http://tempuri.org/ISOARIFacade/ObtenerBalance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerBalanceAgencia">
+      <soap12:operation soapAction="http://tempuri.org/ISOARIFacade/ObtenerBalanceAgencia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAhorroContractual">
+      <soap12:operation soapAction="http://tempuri.org/ISOARIFacade/ObtenerAhorroContractual" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAporte">
+      <soap12:operation soapAction="http://tempuri.org/ISOARIFacade/ObtenerAporte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAhorroTermino">
+      <soap12:operation soapAction="http://tempuri.org/ISOARIFacade/ObtenerAhorroTermino" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAhorroVista">
+      <soap12:operation soapAction="http://tempuri.org/ISOARIFacade/ObtenerAhorroVista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNovedades">
+      <soap12:operation soapAction="http://tempuri.org/ISOARIFacade/ObtenerNovedades" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTransacciones">
+      <soap12:operation soapAction="http://tempuri.org/ISOARIFacade/ObtenerTransacciones" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SOARIFacade">
+    <wsdl:port name="wsSecureService" binding="tns:wsSecureService">
+      <soap12:address location="https://riskmanagerintegration.test.local/SOARI.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://riskmanagerintegration.test.local/SOARI.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

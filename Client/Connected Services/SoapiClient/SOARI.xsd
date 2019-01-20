@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Opa.RiskManagerIntegration.Model.Entities.Partial" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Opa.RiskManagerIntegration.Model.Entities.Partial" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://riskmanagerintegration.test.local/SOARI.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Opa.RiskManagerIntegration.Model.Entities.Repository" />
+  <xs:import schemaLocation="https://riskmanagerintegration.test.local/SOARI.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="FiltroBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClaveEntidad" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FiltroBase" nillable="true" type="tns:FiltroBase" />
+  <xs:complexType name="FiltroProducto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FiltroBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SaldosMayores" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FiltroProducto" nillable="true" type="tns:FiltroProducto" />
+  <xs:complexType name="ArrayOfCreditoSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditoSOARIPartial" nillable="true" type="tns:CreditoSOARIPartial" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCreditoSOARIPartial" nillable="true" type="tns:ArrayOfCreditoSOARIPartial" />
+  <xs:complexType name="CreditoSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Agencia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AlturaCredito" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="AnualidadCredito" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CapitalInicial" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CategoriaFinal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CedulaAsociado" type="xs:long" />
+      <xs:element minOccurs="0" name="ClaseGarantia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodigoLinea" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Opa.RiskManagerIntegration.Model.Entities.Repository" minOccurs="0" name="CuotasExtrasCreditoRepository" nillable="true" type="q1:ArrayOfCuotasExtrasCreditoRepository" />
+      <xs:element minOccurs="0" name="DiasMora" type="xs:int" />
+      <xs:element minOccurs="0" name="FechaDesembolso" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaPago" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaVencimiento" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Garantia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InteresCorriente" type="xs:decimal" />
+      <xs:element minOccurs="0" name="InteresCorrienteContingente" type="xs:decimal" />
+      <xs:element minOccurs="0" name="InteresMora" type="xs:decimal" />
+      <xs:element minOccurs="0" name="InteresMoraContingente" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ModalidadInteres" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreDestino" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Pagare" type="xs:long" />
+      <xs:element minOccurs="0" name="PeriodoCapital" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="PeriodoInteres" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="PlazoCredito" type="xs:int" />
+      <xs:element minOccurs="0" name="Provision" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProvisionInteres" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SaldoCapital" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SaldoPonerseDia" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TasaColocacion" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TasaEfectiva" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TipoCuota" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ValorGarantia" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditoSOARIPartial" nillable="true" type="tns:CreditoSOARIPartial" />
+  <xs:complexType name="FiltroAsociado">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FiltroBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DesdeFechaIngreso" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FiltroAsociado" nillable="true" type="tns:FiltroAsociado" />
+  <xs:complexType name="ArrayOfAsociadoSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AsociadoSOARIPartial" nillable="true" type="tns:AsociadoSOARIPartial" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAsociadoSOARIPartial" nillable="true" type="tns:ArrayOfAsociadoSOARIPartial" />
+  <xs:complexType name="AsociadoSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Arriendos" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BarrioNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bonificaciones" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CIIUNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cargo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CargoNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CedulaAsociado" type="xs:long" />
+      <xs:element minOccurs="0" name="CiudadResidenciaNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodidoEmpresaLabora" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodidoEmpresaPagadora" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodigoAgencia" type="xs:int" />
+      <xs:element minOccurs="0" name="CodigoCIIU" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Comisiones" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Dividendos" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Empleado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EstadoCivil" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estrato" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estudios" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaActa" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaIngresoEntidad" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaNacimiento" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GastoAlimentacion" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoArriendo" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoCuotaDomestica" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoDeuda" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoEducacion" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoOtroNegocios" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoOtroPrestamo" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoPrestamoVehiculo" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoPrestamoVivienda" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoSalud" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoServicioPublico" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoTrajetaCredito" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GastoTransporte" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Honorarios" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IdAsociado" type="xs:long" />
+      <xs:element minOccurs="0" name="InteresInversiones" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NombreDepartamentoResidencia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreDivisionCiiu" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreEmpresa" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreSegmento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreZona" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nombres" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OtroGasto" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OtrosIngresos" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PaisDocumentoNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaisNacimientoNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaisResidenciaNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Pensiones" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PersonaExpuesta" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimerApellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Refrigerio" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Salario" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SegundoApellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sexo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SubsidioLocalizacion" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Sueldo" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TipoContrato" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TipoIdentificacion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UtilidadNegocio" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AsociadoSOARIPartial" nillable="true" type="tns:AsociadoSOARIPartial" />
+  <xs:complexType name="FiltroBalance">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FiltroBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Anio" type="xs:int" />
+          <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CodigoCuentas" nillable="true" type="q2:ArrayOfstring" />
+          <xs:element minOccurs="0" name="Mes" type="xs:int" />
+          <xs:element minOccurs="0" name="SaldosMayores" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FiltroBalance" nillable="true" type="tns:FiltroBalance" />
+  <xs:complexType name="ArrayOfBalanceSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BalanceSOARIPartial" nillable="true" type="tns:BalanceSOARIPartial" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBalanceSOARIPartial" nillable="true" type="tns:ArrayOfBalanceSOARIPartial" />
+  <xs:complexType name="BalanceSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodigoCuenta" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaCorte" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NombreCuenta" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SaldoCuenta" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BalanceSOARIPartial" nillable="true" type="tns:BalanceSOARIPartial" />
+  <xs:complexType name="ArrayOfBalanceAgenciaSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BalanceAgenciaSOARIPartial" nillable="true" type="tns:BalanceAgenciaSOARIPartial" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBalanceAgenciaSOARIPartial" nillable="true" type="tns:ArrayOfBalanceAgenciaSOARIPartial" />
+  <xs:complexType name="BalanceAgenciaSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodigoAgencia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodigoCuenta" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaCorte" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NombreAgencia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SaldoCuenta" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BalanceAgenciaSOARIPartial" nillable="true" type="tns:BalanceAgenciaSOARIPartial" />
+  <xs:complexType name="ArrayOfAhorroContractualSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AhorroContractualSOARIPartial" nillable="true" type="tns:AhorroContractualSOARIPartial" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAhorroContractualSOARIPartial" nillable="true" type="tns:ArrayOfAhorroContractualSOARIPartial" />
+  <xs:complexType name="AhorroContractualSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Agencia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodLinea" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaInicio" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaUtlimaTransaccion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaVencimiento" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Identificacion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InteresCausado" type="xs:decimal" />
+      <xs:element minOccurs="0" name="InteresDisponible" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NumeroAhorroContractual" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Plazo" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="SaldoAhorro" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TasaInteres" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AhorroContractualSOARIPartial" nillable="true" type="tns:AhorroContractualSOARIPartial" />
+  <xs:complexType name="ArrayOfAporteSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AporteSOARIPartial" nillable="true" type="tns:AporteSOARIPartial" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAporteSOARIPartial" nillable="true" type="tns:ArrayOfAporteSOARIPartial" />
+  <xs:complexType name="AporteSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Agencia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodigoLinea" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaApertura" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaUltimaTransaccion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Identificacion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumeroCuentaAporte" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SaldoAhorro" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TipoAporte" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ValorAporte" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AporteSOARIPartial" nillable="true" type="tns:AporteSOARIPartial" />
+  <xs:complexType name="ArrayOfAhorroTerminoSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AhorroTerminoSOARIPartial" nillable="true" type="tns:AhorroTerminoSOARIPartial" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAhorroTerminoSOARIPartial" nillable="true" type="tns:ArrayOfAhorroTerminoSOARIPartial" />
+  <xs:complexType name="AhorroTerminoSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Agencia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodLinea" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaInicio" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaUtlimaTransaccion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaVencimiento" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Identificacion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InteresCausado" type="xs:decimal" />
+      <xs:element minOccurs="0" name="InteresDisponible" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NumeroDeposito" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PeriodoInteres" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="Plazo" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="TasaInteres" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorDeposito" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AhorroTerminoSOARIPartial" nillable="true" type="tns:AhorroTerminoSOARIPartial" />
+  <xs:complexType name="ArrayOfAhorroVistaSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AhorroVistaSOARIPartial" nillable="true" type="tns:AhorroVistaSOARIPartial" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAhorroVistaSOARIPartial" nillable="true" type="tns:ArrayOfAhorroVistaSOARIPartial" />
+  <xs:complexType name="AhorroVistaSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Agencia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodLinea" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaInicio" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaUtlimaTransaccion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Identificacion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InteresCausado" type="xs:decimal" />
+      <xs:element minOccurs="0" name="InteresDisponible" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NumeroDeposito" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PeriodoLiquida" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TasaCaptacion" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorDeposito" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AhorroVistaSOARIPartial" nillable="true" type="tns:AhorroVistaSOARIPartial" />
+  <xs:complexType name="ArrayOfNovedadesSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NovedadesSOARIPartial" nillable="true" type="tns:NovedadesSOARIPartial" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNovedadesSOARIPartial" nillable="true" type="tns:ArrayOfNovedadesSOARIPartial" />
+  <xs:complexType name="NovedadesSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CedulaAsociado" type="xs:long" />
+      <xs:element minOccurs="0" name="CodigoNovedad" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cuota" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SaldoFinal" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SaldoInicial" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TipoNovedad" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NovedadesSOARIPartial" nillable="true" type="tns:NovedadesSOARIPartial" />
+  <xs:complexType name="FiltroTransacciones">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FiltroBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="MovimientosDesde" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="MovimientosHasta" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FiltroTransacciones" nillable="true" type="tns:FiltroTransacciones" />
+  <xs:complexType name="ArrayOfTransaccionesSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TransaccionesSOARIPartial" nillable="true" type="tns:TransaccionesSOARIPartial" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTransaccionesSOARIPartial" nillable="true" type="tns:ArrayOfTransaccionesSOARIPartial" />
+  <xs:complexType name="TransaccionesSOARIPartial">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodigoAgenciaProducto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodigoLinea" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodigoOficina" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaTransaccion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdentificacionTitular" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LugarTransaccion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreAgenciaProducto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreEjecutor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumeroProducto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumeroTransaccion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Oficina" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TipoProducto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TipoTransaccion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ValorTransaccion" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransaccionesSOARIPartial" nillable="true" type="tns:TransaccionesSOARIPartial" />
+</xs:schema>
