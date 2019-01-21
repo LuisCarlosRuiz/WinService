@@ -49,16 +49,23 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientTest\ClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ClientTest\" />
     <Folder Include="dbWinServiceTest\" />
     <Folder Include="JobTest\" />
     <Folder Include="SoariModelTest\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client\Soari.WinService.Client.csproj">
+      <Project>{98a7d260-a2f9-4c6e-8950-799724b7079c}</Project>
+      <Name>Soari.WinService.Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bussines\GetData.cs" />
+    <Compile Include="Partial\Filters.cs" />
+    <Compile Include="Partial\GetLastSyncPartial.cs" />
     <Compile Include="SoapiConection.cs" />
     <Compile Include="Connected Services\SoapiClient\Reference.cs">
       <AutoGen>True</AutoGen>

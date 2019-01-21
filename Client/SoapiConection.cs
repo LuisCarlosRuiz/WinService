@@ -1,23 +1,28 @@
-﻿using System;
-
+﻿using System.ServiceModel;
+using Client.SoapiClient;
 
 namespace Client
 {
 	public class SoapiConection
 	{
-
-		private string Url, User, Password; 
-
-		public SoapiConection(string _Url, string _User, string _Password)
+		/// <summary>
+		/// Global
+		/// </summary>
+		protected string Url, User, Password; 
+		
+		/// <summary>
+		/// Conect to Soapi service
+		/// </summary>
+		/// <returns></returns>
+		protected SOARIFacadeClient Client()
 		{
-			Url = _Url;
-			User = _User;
-			Password = _Password;
-		}
+			SOARIFacadeClient client = new SOARIFacadeClient();
 
-		private void SoariConection()
-		{
-			var obj = new Client.SoapiClient();
+			client.Endpoint.Address = new EndpointAddress(Url);
+			client.ClientCredentials.UserName.UserName = User;
+			client.ClientCredentials.UserName.Password = Password;
+
+			return client;
 		}
 	}
 }
