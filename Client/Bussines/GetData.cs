@@ -1,5 +1,5 @@
 ﻿using Client.Partial;
-using System.Collections.Generic;
+using Client.SoapiClient;
 
 namespace Client.Bussines
 {
@@ -21,24 +21,34 @@ namespace Client.Bussines
 			Password = _Password;
 		}
 
-		public List<GetLastSyncPartial> GetLastSync(FiltroBase filtro)
+		/// <summary>
+		/// Gets the last sync method.
+		/// </summary>
+		/// <param name="filtro">The filtro.</param>
+		/// <returns></returns>
+		public ExecutionControl[] GetLastSync(Partial.FiltroBase filtro)
 		{
 			var data = Client().GetLastSync(new SoapiClient.FiltroBase() {
 				ClaveEntidad = filtro.ClaveEntidad
 			});
 
-			var lstGetLastSync = new List<GetLastSyncPartial>();
+			return data;
+		}
 
-			foreach (var lst in data)
-			{
-				lstGetLastSync.Add(new GetLastSyncPartial() {
-					ExecutionId = lst.ExecutionId,
-					LastExecution = lst.LastExecution,
-					SyncType = lst.SyncType
-				});
-			}
+		/// <summary>
+		/// Gets the asociado.
+		/// </summary>
+		/// <param name="filtro">The filtro.</param>
+		/// <returns></returns>
+		public AsociadoSOARIPartial[] GetAsociado(Partial.FiltroAsociado filtro)
+		{
+			var data = Client().ObtenerAsociado(new SoapiClient.FiltroAsociado()
+			{				
+				ClaveEntidad = filtro.ClaveEntidad,
+				DesdeFechaIngreso = filtro.DesdeFechaIngreso
+			});
 
-			return lstGetLastSync;
+			return data;
 		}
 	}
 }
