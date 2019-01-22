@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,11 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\dbService\FilterBalance.cs" />
+    <Compile Include="Entities\dbService\FilterTransaccion.cs" />
+    <Compile Include="Entities\dbService\FilterAsociado.cs" />
+    <Compile Include="Entities\dbService\FilterProducto.cs" />
+    <Compile Include="Entities\dbService\Cuenta.cs" />
+    <Compile Include="Entities\dbService\ServiceTask.cs" />
+    <Compile Include="Entities\dbService\ClientConfiguration.cs" />
+    <Compile Include="Entities\dbService\ExecutionControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BussinesLogic\" />
-    <Folder Include="Entities\dbService\" />
     <Folder Include="Entities\Partial\" />
     <Folder Include="Entities\Soari\" />
     <Folder Include="Migrations\" />
