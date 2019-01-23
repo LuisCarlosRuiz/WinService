@@ -7,6 +7,7 @@
 
 namespace ServiceModel.Entities.dbService
 {
+	using System;
 	using System.ComponentModel.DataAnnotations;
 	using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,13 +18,50 @@ namespace ServiceModel.Entities.dbService
 	public class FilterTransaccion
 	{
 		/// <summary>
-		/// Gets or sets the identifier.
+		/// Gets or sets the filter identifier.
 		/// </summary>
 		/// <value>
-		/// The identifier.
+		/// The filter identifier.
 		/// </value>
 		[Key]
-		[Column("")]
-		public int Id { get; set; }
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		[Column("FilterId")]
+		public int FilterId { get; set; }
+
+		/// <summary>
+		/// Gets or sets the movimientos desde.
+		/// </summary>
+		/// <value>
+		/// The movimientos desde.
+		/// </value>
+		[Column("MovimientosDesde", TypeName = "datetime")]
+		public DateTime MovimientosDesde { get; set; }
+
+		/// <summary>
+		/// Gets or sets the movimientos hasta.
+		/// </summary>
+		/// <value>
+		/// The movimientos hasta.
+		/// </value>
+		[Column("MovimientosHasta", TypeName = "datetime")]
+		public DateTime MovimientosHasta { get; set; }
+
+		/// <summary>
+		/// Gets or sets the configuration identifier.
+		/// </summary>
+		/// <value>
+		/// The configuration identifier.
+		/// </value>
+		[Column("ConfigurationId", TypeName ="uniqueidentifier")]
+		public Guid ConfigurationId { get; set; }
+
+		/// <summary>
+		/// Gets or sets the client configuration.
+		/// </summary>
+		/// <value>
+		/// The client configuration.
+		/// </value>
+		[ForeignKey("ConfigurationId")]
+		public ClientConfiguration ClientConfiguration { get; set; }
 	}
 }
