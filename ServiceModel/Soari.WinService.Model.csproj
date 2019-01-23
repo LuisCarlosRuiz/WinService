@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BussinesLogic\NitBL.cs" />
+    <Compile Include="DAO\NitsDao.cs" />
+    <Compile Include="Entities\ConectionEngine\Deal.cs" />
     <Compile Include="Entities\dbService\DbServiceContext.cs" />
     <Compile Include="Entities\dbService\FilterBalance.cs" />
     <Compile Include="Entities\dbService\FilterTransaccion.cs" />
@@ -57,6 +60,9 @@
     <Compile Include="Entities\dbService\ServiceTask.cs" />
     <Compile Include="Entities\dbService\ClientConfiguration.cs" />
     <Compile Include="Entities\dbService\ExecutionControl.cs" />
+    <Compile Include="Entities\Soari\Nit.cs" />
+    <Compile Include="Entities\Soari\SoaryContext.cs" />
+    <Compile Include="Facade\SoariFacade.cs" />
     <Compile Include="Migrations\201901220218183_Se añaden los onjetos de la base de datos del servicio.cs" />
     <Compile Include="Migrations\201901220218183_Se añaden los onjetos de la base de datos del servicio.Designer.cs">
       <DependentUpon>201901220218183_Se añaden los onjetos de la base de datos del servicio.cs</DependentUpon>
@@ -65,9 +71,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BussinesLogic\" />
     <Folder Include="Entities\Partial\" />
-    <Folder Include="Entities\Soari\" />
     <Folder Include="SyncJobs\" />
   </ItemGroup>
   <ItemGroup>

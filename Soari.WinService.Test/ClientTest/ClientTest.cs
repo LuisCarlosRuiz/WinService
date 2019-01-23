@@ -1,13 +1,20 @@
-﻿using Client.Bussines;
-using Client.Partial;
-using Client.Util;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// Luis Carlos Ruiz 
+// <summary>
+//   Defines the Client Test type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Soari.WinService.Test.ClientTest
 {
+	using Client.Bussines;
+	using Client.Partial;
+	using Client.Util;
+	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+
 	/// <summary>
 	/// the client test
 	/// </summary>
