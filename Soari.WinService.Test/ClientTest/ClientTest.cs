@@ -1,7 +1,9 @@
 ﻿using Client.Bussines;
 using Client.Partial;
+using Client.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Soari.WinService.Test.ClientTest
@@ -23,14 +25,15 @@ namespace Soari.WinService.Test.ClientTest
 									, "opa123.");
 		}
 
+		#region Test Methods
 		/// <summary>
 		/// Clients the conection test.
 		/// </summary>
 		[TestMethod]
 		public void ClientConectionTest()
-		{			
+		{
 			var data = obj.GetLastSync(new FiltroBase()
-						{ ClaveEntidad = dbServicePassword });
+			{ ClaveEntidad = dbServicePassword });
 
 			if (!data.Any())
 				Assert.Inconclusive();
@@ -214,6 +217,27 @@ namespace Soari.WinService.Test.ClientTest
 			});
 
 			if (!data.Any())
+				Assert.Inconclusive();
+		}
+		#endregion
+
+		/// <summary>
+		/// Gets the service method test.
+		/// </summary>
+		[TestMethod]
+		public void GetServiceMethodTest()
+		{
+			Global obj = new Global();
+
+			var methodList = obj.GetServiceAtributes().Where(q => !q.Name.Contains("Async"));
+			List<string> methodNames = new List<string>();
+
+			foreach (var item in methodList)
+			{
+				methodNames.Add(item.Name);
+			}
+
+			if (!methodNames.Any())
 				Assert.Inconclusive();
 		}
 	}
