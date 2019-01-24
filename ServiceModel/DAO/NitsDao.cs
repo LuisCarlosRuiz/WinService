@@ -15,7 +15,7 @@ namespace ServiceModel.DAO
 	/// <summary>
 	/// the Nits data access
 	/// </summary>
-	public class NitsDao
+	internal class NitsDao
 	{
 		private string ConfigurationId;
 

@@ -42,6 +42,7 @@ namespace ServiceModel.Entities.ConectionEngine
 				objConfiguration = ctx.ClientConfiguration.Where(q => q.JobId == IdCliente).FirstOrDefault();
 			}
 
+
 			return $@"Data Source={objConfiguration.DBServerName};
 					Initial Catalog={objConfiguration.DBName};
 					Persist Security Info=True;

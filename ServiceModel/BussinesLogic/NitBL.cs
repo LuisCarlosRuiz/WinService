@@ -14,7 +14,7 @@ namespace ServiceModel.BussinesLogic
 	/// <summary>
 	/// the nit logic layer
 	/// </summary>
-	public class NitBL
+	internal class NitBL
 	{
 		private string ConfigurationId;
 

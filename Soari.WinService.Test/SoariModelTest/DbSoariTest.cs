@@ -24,10 +24,30 @@ namespace Soari.WinService.Test.JobTest
 		[TestMethod]
 		public void GetNitsTest()
 		{
-			//Falta implementar 
-			//1. crear parametrizacion en base de datos
-			//2. enviar el id al contexto del modelo
-			throw new NotImplementedException();
+			SoariFacade objFac = new SoariFacade("0002");
+
+			var lstNit = objFac.GetNit();
+
+			if (!lstNit.Any())
+				Assert.Inconclusive();
+		}
+
+		/// <summary>
+		/// Gets the nits from diferent database test.
+		/// </summary>
+		[TestMethod]
+		public void GetNitsFromDiferentDBTest()
+		{
+			SoariFacade objFac1 = new SoariFacade("0001");
+			SoariFacade objFac2 = new SoariFacade("0002");
+			SoariFacade objFac3 = new SoariFacade("0003");
+
+			var lstNit1 = objFac1.GetNit();
+			var lstNit2 = objFac2.GetNit();
+			var lstNit3 = objFac3.GetNit();
+
+			if (!lstNit1.Any() || !lstNit2.Any() || !lstNit3.Any())
+				Assert.Inconclusive();
 		}
 	}
 }

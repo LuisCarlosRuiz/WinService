@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientTest\ClientTest.cs" />
+    <Compile Include="dbWinServiceTest\DbWinServiceTest.cs" />
     <Compile Include="SoariModelTest\DbSoariTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,7 +66,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="dbWinServiceTest\" />
     <Folder Include="JobTest\" />
   </ItemGroup>
   <ItemGroup>

@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BussinesLogic\dbService\ClientConfigurationBL.cs" />
     <Compile Include="BussinesLogic\NitBL.cs" />
     <Compile Include="DAO\NitsDao.cs" />
+    <Compile Include="DAO\dbService\ClientConfigurationDao.cs" />
     <Compile Include="Entities\ConectionEngine\Deal.cs" />
     <Compile Include="Entities\dbService\DbServiceContext.cs" />
     <Compile Include="Entities\dbService\FilterBalance.cs" />
@@ -62,10 +64,19 @@
     <Compile Include="Entities\dbService\ExecutionControl.cs" />
     <Compile Include="Entities\Soari\Nit.cs" />
     <Compile Include="Entities\Soari\SoaryContext.cs" />
+    <Compile Include="Facade\DbServiceFacade.cs" />
     <Compile Include="Facade\SoariFacade.cs" />
     <Compile Include="Migrations\201901220218183_Se añaden los onjetos de la base de datos del servicio.cs" />
     <Compile Include="Migrations\201901220218183_Se añaden los onjetos de la base de datos del servicio.Designer.cs">
       <DependentUpon>201901220218183_Se añaden los onjetos de la base de datos del servicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901240104575_SeAñadeConstraintParaClientConfiguration.cs" />
+    <Compile Include="Migrations\201901240104575_SeAñadeConstraintParaClientConfiguration.Designer.cs">
+      <DependentUpon>201901240104575_SeAñadeConstraintParaClientConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901240106425_SeAñadeConstraintParaClientConfiguration1.cs" />
+    <Compile Include="Migrations\201901240106425_SeAñadeConstraintParaClientConfiguration1.Designer.cs">
+      <DependentUpon>201901240106425_SeAñadeConstraintParaClientConfiguration1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +92,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201901220218183_Se añaden los onjetos de la base de datos del servicio.resx">
       <DependentUpon>201901220218183_Se añaden los onjetos de la base de datos del servicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901240104575_SeAñadeConstraintParaClientConfiguration.resx">
+      <DependentUpon>201901240104575_SeAñadeConstraintParaClientConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901240106425_SeAñadeConstraintParaClientConfiguration1.resx">
+      <DependentUpon>201901240106425_SeAñadeConstraintParaClientConfiguration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

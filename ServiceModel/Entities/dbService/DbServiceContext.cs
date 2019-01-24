@@ -91,6 +91,9 @@ namespace ServiceModel.Entities.dbService
 			modelBuilder.Entity<FilterBalance>().Property(p => p.SaldosMayores).HasPrecision(18, 2);
 
 			modelBuilder.Entity<FilterProducto>().Property(p => p.SaldosMayores).HasPrecision(18, 2);
+
+			modelBuilder.Entity<ClientConfiguration>().HasIndex(u => u.JobId).IsUnique();
+			modelBuilder.Entity<ClientConfiguration>().HasIndex(u => u.ClientName).IsUnique();
 		}
 	}
 }
