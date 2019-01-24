@@ -11,6 +11,7 @@ namespace Soari.WinService.Test.ClientTest
 	using Client.Partial;
 	using Client.Util;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using ServiceModel.Entities.ConectionEngine;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -228,6 +229,28 @@ namespace Soari.WinService.Test.ClientTest
 		}
 		#endregion
 
+		#region GetDataThroutDataBase
+		/// <summary>
+		/// Gets the transacciones test.
+		/// </summary>
+		[TestMethod]
+		public void GetTransaccionesByIdTest()
+		{
+			TransactionButler objTran = new TransactionButler("0001");
+
+			var data = objTran.Client().GetTransacciones(new FiltroTransacciones()
+			{
+				ClaveEntidad = dbServicePassword,
+				MovimientosDesde = DateTime.Parse("2018/01/01"),
+				MovimientosHasta = DateTime.Parse("2018/05/05")
+			});
+
+			if (!data.Any())
+				Assert.Inconclusive();
+		}
+		#endregion
+
+		#region General
 		/// <summary>
 		/// Gets the service method test.
 		/// </summary>
@@ -247,5 +270,6 @@ namespace Soari.WinService.Test.ClientTest
 			if (!methodNames.Any())
 				Assert.Inconclusive();
 		}
+		#endregion
 	}
 }

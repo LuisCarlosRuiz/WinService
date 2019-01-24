@@ -53,6 +53,7 @@
     <Compile Include="DAO\NitsDao.cs" />
     <Compile Include="DAO\dbService\ClientConfigurationDao.cs" />
     <Compile Include="Entities\ConectionEngine\Deal.cs" />
+    <Compile Include="Entities\ConectionEngine\TransactionButler.cs" />
     <Compile Include="Entities\dbService\DbServiceContext.cs" />
     <Compile Include="Entities\dbService\FilterBalance.cs" />
     <Compile Include="Entities\dbService\FilterTransaccion.cs" />
@@ -99,6 +100,12 @@
     <EmbeddedResource Include="Migrations\201901240106425_SeAñadeConstraintParaClientConfiguration1.resx">
       <DependentUpon>201901240106425_SeAñadeConstraintParaClientConfiguration1.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client\Soari.WinService.Client.csproj">
+      <Project>{98a7d260-a2f9-4c6e-8950-799724b7079c}</Project>
+      <Name>Soari.WinService.Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
