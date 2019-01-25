@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soari.WinService.Test", "So
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Soari.WinService.Setup", "Soari.WinService.Setup\Soari.WinService.Setup.vdproj", "{D096B55D-1253-445A-B842-4B70339AC851}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{D33185C7-58AD-48B7-BF09-6BFB52E350F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soari.WinService.Service", "Soari.WinService.Service\Soari.WinService.Service.csproj", "{D5AEB12E-AA44-4E61-A305-7B7AD9EF5F52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{79A56449-73EE-4E1B-B233-ACBF7E024278}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D096B55D-1253-445A-B842-4B70339AC851}.Debug|Any CPU.ActiveCfg = Release
 		{D096B55D-1253-445A-B842-4B70339AC851}.Release|Any CPU.ActiveCfg = Release
+		{D5AEB12E-AA44-4E61-A305-7B7AD9EF5F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5AEB12E-AA44-4E61-A305-7B7AD9EF5F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5AEB12E-AA44-4E61-A305-7B7AD9EF5F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5AEB12E-AA44-4E61-A305-7B7AD9EF5F52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 		{98A7D260-A2F9-4C6E-8950-799724B7079C} = {4E6205A7-6380-4929-9D87-E6D1D51AC3C5}
 		{79A56449-73EE-4E1B-B233-ACBF7E024278} = {4AD51B4D-A89D-401F-9817-FEEA1FC1799A}
 		{D096B55D-1253-445A-B842-4B70339AC851} = {BB1F054E-A691-40B9-B2E2-4310E0ACF836}
+		{D5AEB12E-AA44-4E61-A305-7B7AD9EF5F52} = {D33185C7-58AD-48B7-BF09-6BFB52E350F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F844BB2-D8D2-48C3-9857-A7F26FCCB433}

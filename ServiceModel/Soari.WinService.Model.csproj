@@ -121,6 +121,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncJobs\ServiceTaskSyncJob.cs" />
     <Compile Include="SyncJobs\SyncJob.cs" />
+    <Compile Include="SyncJobs\SyncJobScheduler.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
