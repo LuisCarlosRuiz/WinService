@@ -60,6 +60,7 @@
     <Compile Include="Entities\dbService\FilterAsociado.cs" />
     <Compile Include="Entities\dbService\FilterProducto.cs" />
     <Compile Include="Entities\dbService\Cuenta.cs" />
+    <Compile Include="Entities\dbService\MailConfiguration.cs" />
     <Compile Include="Entities\dbService\ServiceTask.cs" />
     <Compile Include="Entities\dbService\ClientConfiguration.cs" />
     <Compile Include="Entities\dbService\ExecutionControl.cs" />
@@ -78,6 +79,10 @@
     <Compile Include="Migrations\201901240106425_SeAñadeConstraintParaClientConfiguration1.cs" />
     <Compile Include="Migrations\201901240106425_SeAñadeConstraintParaClientConfiguration1.Designer.cs">
       <DependentUpon>201901240106425_SeAñadeConstraintParaClientConfiguration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901250203137_SeAñadeElObjetoMailConfiguration.cs" />
+    <Compile Include="Migrations\201901250203137_SeAñadeElObjetoMailConfiguration.Designer.cs">
+      <DependentUpon>201901250203137_SeAñadeElObjetoMailConfiguration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901240106425_SeAñadeConstraintParaClientConfiguration1.resx">
       <DependentUpon>201901240106425_SeAñadeConstraintParaClientConfiguration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901250203137_SeAñadeElObjetoMailConfiguration.resx">
+      <DependentUpon>201901250203137_SeAñadeElObjetoMailConfiguration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

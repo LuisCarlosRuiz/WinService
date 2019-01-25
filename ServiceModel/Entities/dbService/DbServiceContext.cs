@@ -77,6 +77,14 @@ namespace ServiceModel.Entities.dbService
 		public DbSet<FilterTransaccion> FilterTransaccion { get; set; }
 
 		/// <summary>
+		/// Gets or sets the mail configuration.
+		/// </summary>
+		/// <value>
+		/// The mail configuration.
+		/// </value>
+		public DbSet<MailConfiguration> MailConfiguration { get; set; }
+
+		/// <summary>
 		/// Gets or sets the service task.
 		/// </summary>
 		/// <value>
