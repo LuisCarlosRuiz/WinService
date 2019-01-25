@@ -43,17 +43,19 @@ namespace ServiceModel.Entities.dbService
 		/// <value>
 		/// The configuration identifier.
 		/// </value>
-		[Column("ConfigurationId", TypeName = "uniqueidentifier")]
-		public Guid ConfigurationId { get; set; }
+		[Column("Client", TypeName = "varchar")]
+		[MaxLength(100)]
+		public string Client { get; set; }
 
 		/// <summary>
-		/// Gets or sets the task identifier.
+		/// Gets or sets the task.
 		/// </summary>
 		/// <value>
-		/// The task identifier.
+		/// The task.
 		/// </value>
-		[Column("TaskId", TypeName = "uniqueidentifier")]
-		public Guid TaskId { get; set; }
+		[Column("Task", TypeName = "varchar")]
+		[MaxLength(50)]
+		public string Task { get; set; }
 
 		/// <summary>
 		/// Gets or sets the log.
@@ -64,23 +66,5 @@ namespace ServiceModel.Entities.dbService
 		[Column("Log", TypeName = "varchar")]
 		[MaxLength(2000)]
 		public string Log { get; set; }
-
-		/// <summary>
-		/// Gets or sets the service task.
-		/// </summary>
-		/// <value>
-		/// The service task.
-		/// </value>
-		[ForeignKey("TaskId")]
-		public ServiceTask serviceTask { get; set; }
-
-		/// <summary>
-		/// Gets or sets the client configuration.
-		/// </summary>
-		/// <value>
-		/// The client configuration.
-		/// </value>
-		[ForeignKey("ConfigurationId")]
-		public ClientConfiguration ClientConfiguration { get; set; }
 	}
 }

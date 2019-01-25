@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="ClientTest\ClientTest.cs" />
     <Compile Include="dbWinServiceTest\DbWinServiceTest.cs" />
+    <Compile Include="JobTest\SyncJobTest.cs" />
     <Compile Include="SoariModelTest\DbSoariTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,9 +66,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="JobTest\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Client\Soari.WinService.Client.csproj">
       <Project>{98a7d260-a2f9-4c6e-8950-799724b7079c}</Project>

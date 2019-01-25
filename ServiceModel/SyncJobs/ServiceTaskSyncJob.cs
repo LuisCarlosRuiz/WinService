@@ -9,21 +9,23 @@ namespace ServiceModel.SyncJobs
 {
 	using Client.Util;
 	using ServiceModel.Entities.dbService;
+	using ServiceModel.Entities.Partial;
 	using System;
 	using System.Collections.Generic;
+	using System.Data.Entity;
 	using System.Linq;
 
 	/// <summary>
 	/// the service task sync job
 	/// </summary>
-	public class ServiceTaskSyncJob
+	public class ServiceTaskSyncJob : SyncJob<ServiceTask>
 	{
 		private Global objGlobal;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ServiceTaskSyncJob"/> class.
 		/// </summary>
-		public ServiceTaskSyncJob(string _ClientId)
+		public ServiceTaskSyncJob()
 		{
 			objGlobal = new Global();
 		}
@@ -45,12 +47,37 @@ namespace ServiceModel.SyncJobs
 			return methodNames;
 		}
 
-		private async void InsertData()
+		/// <summary>
+		/// Inserts the data.
+		/// </summary>
+		public void InsertData()
 		{
-			using (var ctx = new DbServiceContext())
+			try
 			{
-				throw new NotImplementedException();
-				await ctx.SaveChangesAsync();
+				using (var ctx = new DbServiceContext())
+				{
+					var lstTask = ctx.ServiceTask.Select(q => q.TaskName).ToList();
+					var repository = new GenericEntity<ServiceTask>(ctx);
+
+					foreach (var item in GetData())
+					{
+						if (!lstTask.Contains(item))
+							repository.InsertEntity(new ServiceTask()
+							{
+								TaskId = Guid.NewGuid(),
+								TaskName = item
+							});
+
+					}
+
+					ctx.SaveChangesAsync();
+
+					ExecutionLog(string.Empty, TaskEnum.TaskInsert.ToString(), MessageEnum.Success.ToString());
+				}
+			}
+			catch (Exception ex)
+			{
+				ExecutionLog(string.Empty, TaskEnum.TaskInsert.ToString(), ex.ToString());
 			}
 		}
 	}
