@@ -89,6 +89,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Client\Soari.WinService.Client.csproj">
+      <Project>{98a7d260-a2f9-4c6e-8950-799724b7079c}</Project>
+      <Name>Soari.WinService.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceModel\Soari.WinService.Model.csproj">
       <Project>{da6ff7e6-eb94-4091-a06d-ea6a9f395c74}</Project>
       <Name>Soari.WinService.Model</Name>
