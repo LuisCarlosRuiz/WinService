@@ -8,6 +8,7 @@
 namespace ServiceModel.SyncJobs
 {
 	using Client.Util;
+	using Quartz;
 	using ServiceModel.Entities.dbService;
 	using ServiceModel.Entities.Partial;
 	using System;
@@ -50,34 +51,25 @@ namespace ServiceModel.SyncJobs
 		/// <summary>
 		/// Inserts the data.
 		/// </summary>
-		public void InsertData()
+		public override void InsertData()
 		{
-			try
+			using (var ctx = new DbServiceContext())
 			{
-				using (var ctx = new DbServiceContext())
+				var lstTask = ctx.ServiceTask.Select(q => q.TaskName).ToList();
+				var repository = new GenericEntity<ServiceTask>(ctx);
+
+				foreach (var item in GetData())
 				{
-					var lstTask = ctx.ServiceTask.Select(q => q.TaskName).ToList();
-					var repository = new GenericEntity<ServiceTask>(ctx);
+					if (!lstTask.Contains(item))
+						repository.InsertEntity(new ServiceTask()
+						{
+							TaskId = Guid.NewGuid(),
+							TaskName = item
+						});
 
-					foreach (var item in GetData())
-					{
-						if (!lstTask.Contains(item))
-							repository.InsertEntity(new ServiceTask()
-							{
-								TaskId = Guid.NewGuid(),
-								TaskName = item
-							});
-
-					}
-
-					ctx.SaveChangesAsync();
-
-					ExecutionLog(string.Empty, TaskEnum.TaskInsert.ToString(), MessageEnum.Success.ToString());
 				}
-			}
-			catch (Exception ex)
-			{
-				ExecutionLog(string.Empty, TaskEnum.TaskInsert.ToString(), ex.ToString());
+
+				ctx.SaveChangesAsync();
 			}
 		}
 	}

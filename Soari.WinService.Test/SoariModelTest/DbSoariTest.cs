@@ -5,7 +5,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Soari.WinService.Test.JobTest
+namespace Soari.WinService.Test.SoariModelTest
 {
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using ServiceModel.Facade;

@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // Luis Carlos Ruiz 
 // <summary>
-//   Defines the MailConfiguration type.
+//   Defines the UserAdmin type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -12,10 +12,10 @@ namespace ServiceModel.Entities.dbService
 	using System.ComponentModel.DataAnnotations.Schema;
 
 	/// <summary>
-	/// The mail configuration
+	/// The user admin 
 	/// </summary>
-	[Table("MailConfiguration")]
-	public class MailConfiguration
+	[Table("UserAdmin")]
+	internal class UserAdmin
 	{
 		/// <summary>
 		/// Gets or sets the mail identifier.
@@ -25,36 +25,28 @@ namespace ServiceModel.Entities.dbService
 		/// </value>
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		[Column("CuentaId")]
-		public Guid MailId { get; set; }
+		[Column("UserId")]
+		public Guid UserId { get; set; }
 
 		/// <summary>
-		/// Gets or sets the server.
+		/// Gets or sets the user code.
 		/// </summary>
 		/// <value>
-		/// The server.
+		/// The user code.
 		/// </value>
-		[Column("Host", TypeName = "varchar")]
-		[MaxLength(50)]
-		public string Host { get; set; }
+		[Column("UserCode", TypeName = "char")]
+		[MaxLength(4)]
+		public string UserCode { get; set; }
 
 		/// <summary>
-		/// Gets or sets the port.
+		/// Gets or sets the nombre integrado.
 		/// </summary>
 		/// <value>
-		/// The port.
+		/// The nombre integrado.
 		/// </value>
-		[Column("Port", TypeName = "int")]
-		public int Port { get; set; }
-
-		/// <summary>
-		/// Gets or sets the use credencials.
-		/// </summary>
-		/// <value>
-		/// The use credencials.
-		/// </value>
-		[Column("UseCredencials", TypeName = "tinyint")]
-		public byte UseCredentials { get; set; }
+		[Column("Name", TypeName = "varchar")]
+		[MaxLength(200)]
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Gets or sets the mail.
@@ -63,18 +55,8 @@ namespace ServiceModel.Entities.dbService
 		/// The mail.
 		/// </value>
 		[Column("Mail", TypeName = "varchar")]
-		[MaxLength(100)]
-		public string Mail { get; set; }
-
-		/// <summary>
-		/// Gets or sets the password.
-		/// </summary>
-		/// <value>
-		/// The password.
-		/// </value>
-		[Column("Password", TypeName = "varchar")]
 		[MaxLength(200)]
-		public string Password { get; set; }
+		public string Mail { get; set; }
 
 		/// <summary>
 		/// Gets or sets the state.

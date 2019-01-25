@@ -8,6 +8,8 @@
 namespace Soari.WinService.Test.JobTest
 {
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using Moq;
+	using Quartz;
 	using ServiceModel.SyncJobs;
 
 	/// <summary>
@@ -16,12 +18,15 @@ namespace Soari.WinService.Test.JobTest
 	[TestClass]
 	public class SyncJobTest
 	{
+		/// <summary>
+		/// Tasks the mock job.
+		/// </summary>
 		[TestMethod]
 		public void TaskJob()
 		{
-			ServiceTaskSyncJob Job = new ServiceTaskSyncJob();
-
-			Job.InsertData();
+			var job = new ServiceTaskSyncJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
 		}
 	}
 }

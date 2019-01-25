@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -43,9 +49,14 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Quartz, Version=2.3.1.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.3.1\lib\net40\Quartz.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,9 +66,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BussinesLogic\dbService\ClientConfigurationBL.cs" />
+    <Compile Include="BussinesLogic\dbService\MailConfigurationBL.cs" />
+    <Compile Include="BussinesLogic\dbService\UserAdminBL.cs" />
+    <Compile Include="BussinesLogic\General\MailManager.cs" />
     <Compile Include="BussinesLogic\NitBL.cs" />
+    <Compile Include="DAO\dbService\MailConfigurationDao.cs" />
     <Compile Include="DAO\NitsDao.cs" />
     <Compile Include="DAO\dbService\ClientConfigurationDao.cs" />
+    <Compile Include="DAO\dbService\UserAdminDao.cs" />
     <Compile Include="Entities\ConectionEngine\Deal.cs" />
     <Compile Include="Entities\ConectionEngine\TransactionButler.cs" />
     <Compile Include="Entities\dbService\DbServiceContext.cs" />
@@ -71,6 +87,7 @@
     <Compile Include="Entities\dbService\ServiceTask.cs" />
     <Compile Include="Entities\dbService\ClientConfiguration.cs" />
     <Compile Include="Entities\dbService\ExecutionControl.cs" />
+    <Compile Include="Entities\dbService\UserAdmin.cs" />
     <Compile Include="Entities\Partial\Enumerations.cs" />
     <Compile Include="Entities\Soari\Nit.cs" />
     <Compile Include="Entities\Soari\SoaryContext.cs" />
@@ -96,6 +113,10 @@
     <Compile Include="Migrations\201901250357385_SeModificanCamposDeTask.Designer.cs">
       <DependentUpon>201901250357385_SeModificanCamposDeTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901251500051_SeAñadeUserAdmin.cs" />
+    <Compile Include="Migrations\201901251500051_SeAñadeUserAdmin.Designer.cs">
+      <DependentUpon>201901251500051_SeAñadeUserAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncJobs\ServiceTaskSyncJob.cs" />
@@ -104,6 +125,9 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901250357385_SeModificanCamposDeTask.resx">
       <DependentUpon>201901250357385_SeModificanCamposDeTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901251500051_SeAñadeUserAdmin.resx">
+      <DependentUpon>201901251500051_SeAñadeUserAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
