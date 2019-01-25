@@ -12,6 +12,7 @@ namespace ServiceModel.BussinesLogic.General
 	using System.Net.Mail;
 	using System;
 	using System.Net;
+	using System.Linq;
 
 	/// <summary>
 	/// the mail manager
@@ -46,6 +47,9 @@ namespace ServiceModel.BussinesLogic.General
 		{
 			var Mail = GetMailByStateActive();
 
+			if (Mail == null)
+				throw new ArgumentNullException();
+
 			using (var msg = new MailMessage())
 			{
 				using (var ServidorCorreo = new SmtpClient())
@@ -72,6 +76,9 @@ namespace ServiceModel.BussinesLogic.General
 
 		internal void MailBuilder(string message, ExecutionControl executionControl, UserAdmin user)
 		{
+			if (executionControl == null || user == null || string.IsNullOrEmpty(message))
+				throw new NullReferenceException();
+
 			string header = $"[Importante] Mensaje de Soari.WinService - {message}";
 			string body = $@"<b>Hola {user.Name}</b>.
 							<br/><br/>

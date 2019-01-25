@@ -9,6 +9,7 @@ namespace ServiceModel.Entities.ConectionEngine
 {
 	using Client.Bussines;
 	using ServiceModel.Entities.dbService;
+	using System;
 	using System.Linq;
 
 	/// <summary>
@@ -37,6 +38,9 @@ namespace ServiceModel.Entities.ConectionEngine
 			{
 				objConfiguration = ctx.ClientConfiguration.Where(q => q.JobId == IdCliente).FirstOrDefault();
 			}
+
+			if (ValidarConexion(objConfiguration))
+				throw new NullReferenceException();
 
 			return new GetData(objConfiguration.ServiceUrl
 								, objConfiguration.ServiceUser

@@ -9,6 +9,7 @@ namespace ServiceModel.Entities.ConectionEngine
 {
 	using ServiceModel.Entities.dbService;
 	using ServiceModel.Entities.Soari;
+	using System;
 	using System.Linq;
 
 	/// <summary>
@@ -42,6 +43,8 @@ namespace ServiceModel.Entities.ConectionEngine
 				objConfiguration = ctx.ClientConfiguration.Where(q => q.JobId == IdCliente).FirstOrDefault();
 			}
 
+			if (ValidarConexion(objConfiguration))
+				throw new NullReferenceException();
 
 			return $@"Data Source={objConfiguration.DBServerName};
 					Initial Catalog={objConfiguration.DBName};

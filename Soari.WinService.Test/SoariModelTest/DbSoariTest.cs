@@ -9,7 +9,6 @@ namespace Soari.WinService.Test.SoariModelTest
 {
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using ServiceModel.Facade;
-	using System;
 	using System.Linq;
 
 	/// <summary>
