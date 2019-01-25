@@ -81,10 +81,10 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyncJobs\ServiceTaskSyncJob.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\Partial\" />
-    <Folder Include="SyncJobs\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

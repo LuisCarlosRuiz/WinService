@@ -229,7 +229,7 @@ namespace Soari.WinService.Test.ClientTest
 		}
 		#endregion
 
-		#region GetDataThroutDataBase
+		#region GetDataByClientId
 		/// <summary>
 		/// Gets the transacciones test.
 		/// </summary>
