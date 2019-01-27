@@ -131,5 +131,77 @@ namespace ServiceModel.Entities.Soari
 		/// The tipo identificacion.
 		/// </value>
 		public DbSet<TipoIdentificacion> TipoIdentificacion { get; set; }
+
+		/// <summary>
+		/// Gets or sets the ahorro.
+		/// </summary>
+		/// <value>
+		/// The ahorro.
+		/// </value>
+		public DbSet<Ahorro> Ahorro { get; set; }
+
+		/// <summary>
+		/// Gets or sets the aporte.
+		/// </summary>
+		/// <value>
+		/// The aporte.
+		/// </value>
+		public DbSet<Aporte> Aporte { get; set; }
+
+		/// <summary>
+		/// Gets or sets the credito.
+		/// </summary>
+		/// <value>
+		/// The credito.
+		/// </value>
+		public DbSet<Credito> Credito { get; set; }
+
+		/// <summary>
+		/// Gets or sets the estado ahorro.
+		/// </summary>
+		/// <value>
+		/// The estado ahorro.
+		/// </value>
+		public DbSet<EstadoAhorro> EstadoAhorro { get; set; }
+
+		/// <summary>
+		/// Gets or sets the tipo ahorro.
+		/// </summary>
+		/// <value>
+		/// The tipo ahorro.
+		/// </value>
+		public DbSet<TipoAhorro> TipoAhorro { get; set; }
+
+		/// <summary>
+		/// Gets or sets the tipo aporte.
+		/// </summary>
+		/// <value>
+		/// The tipo aporte.
+		/// </value>
+		public DbSet<TipoAporte> TipoAporte { get; set; }
+
+		/// <summary>
+		/// Gets or sets the tipo cuota.
+		/// </summary>
+		/// <value>
+		/// The tipo cuota.
+		/// </value>
+		public DbSet<TipoCuota> TipoCuota { get; set; }
+
+		/// <summary>
+		/// Gets or sets the tipo garantia.
+		/// </summary>
+		/// <value>
+		/// The tipo garantia.
+		/// </value>
+		public DbSet<TipoGarantia> TipoGarantia { get; set; }
+
+		/// <summary>
+		/// Gets or sets the tipo modalidad.
+		/// </summary>
+		/// <value>
+		/// The tipo modalidad.
+		/// </value>
+		public DbSet<TipoModalidad> TipoModalidad { get; set; }
 	}
 }
