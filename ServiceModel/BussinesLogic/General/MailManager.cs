@@ -67,7 +67,7 @@ namespace ServiceModel.BussinesLogic.General
 					ServidorCorreo.UseDefaultCredentials = Mail.UseCredentials == 1;
 					ServidorCorreo.Credentials = new NetworkCredential(Mail.Mail, Mail.Password);
 					ServidorCorreo.Port = Mail.Port;
-					ServidorCorreo.Send(msg);
+					//ServidorCorreo.Send(msg);
 					msg.Dispose();
 				}
 

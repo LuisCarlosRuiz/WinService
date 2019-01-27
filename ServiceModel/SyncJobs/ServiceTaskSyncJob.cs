@@ -68,7 +68,7 @@ namespace ServiceModel.SyncJobs
 							TaskName = item
 						});
 
-					ctx.SaveChangesAsync();
+					ctx.SaveChanges();
 				}
 			}
 		}
