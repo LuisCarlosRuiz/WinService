@@ -46,12 +46,12 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		private static void AddJobs()
 		{
-			var type = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.Namespace == "Opa.RiskManagerIntegration.Model.SyncJobs").ToList();
+			var type = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.Namespace == "ServiceModel.SyncJobs").ToList();
 			foreach (var t in type)
 			{
 				if (t.BaseType?.Name == typeof(SyncJob<>).Name)
 				{
-					var cronExp = ConfigurationManager.AppSettings[t.Name] ?? "0 03 14 1/1 * ? *";
+					var cronExp = ConfigurationManager.AppSettings[t.Name] ?? "0 44 16 / * ? *";
 					IJobDetail job = JobBuilder.Create(t).WithIdentity($"Task{t.Name}").Build();
 					ITrigger trigger = TriggerBuilder.Create().WithIdentity($"Trigger{t.Name}").WithCronSchedule(cronExp).Build();
 

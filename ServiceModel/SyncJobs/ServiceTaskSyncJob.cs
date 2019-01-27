@@ -53,13 +53,14 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		public override void InsertData()
 		{
-			using (var ctx = new DbServiceContext())
+			foreach (var item in GetData())
 			{
-				var lstTask = ctx.ServiceTask.Select(q => q.TaskName).ToList();
-				var repository = new GenericEntity<ServiceTask>(ctx);
-
-				foreach (var item in GetData())
+				using (var ctx = new DbServiceContext())
 				{
+					var lstTask = ctx.ServiceTask.Select(q => q.TaskName).ToList();
+
+					var repository = new GenericEntity<ServiceTask>(ctx);
+
 					if (!lstTask.Contains(item))
 						repository.InsertEntity(new ServiceTask()
 						{
@@ -67,9 +68,8 @@ namespace ServiceModel.SyncJobs
 							TaskName = item
 						});
 
+					ctx.SaveChangesAsync();
 				}
-
-				ctx.SaveChangesAsync();
 			}
 		}
 	}

@@ -28,5 +28,14 @@ namespace Soari.WinService.Test.JobTest
 			var mockContext = new Mock<IJobExecutionContext>().Object;
 			job.Execute(mockContext);
 		}
+
+		/// <summary>
+		/// The test start jobs.
+		/// </summary>
+		[TestMethod]
+		public void TestStartJobs()
+		{
+			SyncJobScheduler.Start();
+		}
 	}
 }

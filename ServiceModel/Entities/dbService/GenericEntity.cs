@@ -10,9 +10,7 @@ namespace ServiceModel.Entities.dbService
 	using System.Collections.Generic;
 	using System.ComponentModel.DataAnnotations.Schema;
 	using System.Data.Entity;
-	using System.Data.Entity.Core.Objects;
 	using System.Linq;
-	using System.Linq.Expressions;
 	using System.Reflection;
 	using EntityFramework.BulkInsert.Extensions;
 

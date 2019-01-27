@@ -12,8 +12,6 @@ namespace ServiceModel.SyncJobs
 	using ServiceModel.Entities.Partial;
 	using ServiceModel.BussinesLogic.dbService;
 	using ServiceModel.BussinesLogic.General;
-	using System.Threading;
-	using System.Threading.Tasks;
 	using System;
 
 	/// <summary>

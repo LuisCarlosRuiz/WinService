@@ -89,6 +89,19 @@
     <Compile Include="Entities\dbService\ExecutionControl.cs" />
     <Compile Include="Entities\dbService\UserAdmin.cs" />
     <Compile Include="Entities\Partial\Enumerations.cs" />
+    <Compile Include="Entities\Soari\Ciudad.cs" />
+    <Compile Include="Entities\Soari\Departamento.cs" />
+    <Compile Include="Entities\Soari\EstadoCivil.cs" />
+    <Compile Include="Entities\Soari\JornadaLaboral.cs" />
+    <Compile Include="Entities\Soari\NivelEstudio.cs" />
+    <Compile Include="Entities\Soari\Ocupacion.cs" />
+    <Compile Include="Entities\Soari\Pais.cs" />
+    <Compile Include="Entities\Soari\Agencia.cs" />
+    <Compile Include="Entities\Soari\ActividadEconomica.cs" />
+    <Compile Include="Entities\Soari\Genero.cs" />
+    <Compile Include="Entities\Soari\SectorEconomico.cs" />
+    <Compile Include="Entities\Soari\TipoContrato.cs" />
+    <Compile Include="Entities\Soari\TipoIdentificacion.cs" />
     <Compile Include="Entities\Soari\Nit.cs" />
     <Compile Include="Entities\Soari\SoaryContext.cs" />
     <Compile Include="Facade\DbServiceFacade.cs" />
@@ -125,7 +138,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
