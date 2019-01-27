@@ -91,6 +91,7 @@
     <Compile Include="Entities\Partial\Enumerations.cs" />
     <Compile Include="Entities\Soari\Ahorro.cs" />
     <Compile Include="Entities\Soari\Aporte.cs" />
+    <Compile Include="Entities\Soari\Canal.cs" />
     <Compile Include="Entities\Soari\Ciudad.cs" />
     <Compile Include="Entities\Soari\Credito.cs" />
     <Compile Include="Entities\Soari\Departamento.cs" />
@@ -113,6 +114,9 @@
     <Compile Include="Entities\Soari\Nit.cs" />
     <Compile Include="Entities\Soari\SoaryContext.cs" />
     <Compile Include="Entities\Soari\TipoModalidad.cs" />
+    <Compile Include="Entities\Soari\TipoProducto.cs" />
+    <Compile Include="Entities\Soari\TipoTransaccion.cs" />
+    <Compile Include="Entities\Soari\Transacciones.cs" />
     <Compile Include="Facade\DbServiceFacade.cs" />
     <Compile Include="Facade\SoariFacade.cs" />
     <Compile Include="Migrations\201901220218183_Se añaden los onjetos de la base de datos del servicio.cs" />

@@ -203,5 +203,37 @@ namespace ServiceModel.Entities.Soari
 		/// The tipo modalidad.
 		/// </value>
 		public DbSet<TipoModalidad> TipoModalidad { get; set; }
+
+		/// <summary>
+		/// Gets or sets the canal.
+		/// </summary>
+		/// <value>
+		/// The canal.
+		/// </value>
+		public DbSet<Canal> Canal { get; set; }
+
+		/// <summary>
+		/// Gets or sets the tipo producto.
+		/// </summary>
+		/// <value>
+		/// The tipo producto.
+		/// </value>
+		public DbSet<TipoProducto> TipoProducto { get; set; }
+
+		/// <summary>
+		/// Gets or sets the tipo transaccion.
+		/// </summary>
+		/// <value>
+		/// The tipo transaccion.
+		/// </value>
+		public DbSet<TipoTransaccion> TipoTransaccion { get; set; }
+
+		/// <summary>
+		/// Gets or sets the transacciones.
+		/// </summary>
+		/// <value>
+		/// The transacciones.
+		/// </value>
+		public DbSet<Transacciones> Transacciones { get; set; }
 	}
 }
