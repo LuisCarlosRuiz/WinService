@@ -57,6 +57,15 @@ namespace ServiceModel.Entities.dbService
 		public byte UseCredentials { get; set; }
 
 		/// <summary>
+		/// Gets or sets the enable SSL.
+		/// </summary>
+		/// <value>
+		/// The enable SSL.
+		/// </value>
+		[Column("EnableSsl", TypeName = "tinyint")]
+		public byte EnableSsl { get; set; }
+
+		/// <summary>
 		/// Gets or sets the mail.
 		/// </summary>
 		/// <value>

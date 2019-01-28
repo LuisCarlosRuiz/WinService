@@ -55,9 +55,9 @@ namespace Soari.WinService.Test.dbWinServiceTest
 		public void MailTest()
 		{
 			MailMessage msg = new MailMessage();
-			string Mail = "net.programador1@gmail.com";
+			string Mail = "sarcpruebas@gmail.com";
 			string mailTo = "luko.luis12@gmail.com";
-			string mailPassword = "Opa4*5as1,";
+			string mailPassword = "sarcpruebas1.";
 
 			SmtpClient ServidorCorreo = new SmtpClient();
 			msg.From = new MailAddress(Mail);
@@ -69,8 +69,8 @@ namespace Soari.WinService.Test.dbWinServiceTest
 			msg.Body = "Hola";
 
 			ServidorCorreo.Host = "smtp.gmail.com";
-			ServidorCorreo.EnableSsl = false;
-			ServidorCorreo.UseDefaultCredentials = false;
+			ServidorCorreo.EnableSsl = true;
+			ServidorCorreo.UseDefaultCredentials = true;
 			ServidorCorreo.Credentials = new NetworkCredential(Mail, mailPassword);
 			ServidorCorreo.Port = 25;
 			ServidorCorreo.Send(msg);

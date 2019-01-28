@@ -63,11 +63,11 @@ namespace ServiceModel.BussinesLogic.General
 					msg.Body = body;
 
 					ServidorCorreo.Host = Mail.Host;
-					ServidorCorreo.EnableSsl = Mail.UseCredentials == 1;
+					ServidorCorreo.EnableSsl = Mail.EnableSsl == 1;
 					ServidorCorreo.UseDefaultCredentials = Mail.UseCredentials == 1;
 					ServidorCorreo.Credentials = new NetworkCredential(Mail.Mail, Mail.Password);
 					ServidorCorreo.Port = Mail.Port;
-					//ServidorCorreo.Send(msg);
+					ServidorCorreo.Send(msg);
 					msg.Dispose();
 				}
 
@@ -91,7 +91,7 @@ namespace ServiceModel.BussinesLogic.General
 							Mensaje: <br/>
 							{executionControl.Log}
 							<br/><br/>
-							Este correo es solo de salido, no responder.";
+							Este correo es solo de salida, no responder.";
 
 			SendMailByDefault(header, body, user.Mail);
 		}

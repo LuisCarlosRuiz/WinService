@@ -27,14 +27,15 @@ namespace ServiceModel.SyncJobs
 		/// <param name="mockContext">The mock context.</param>
 		public void Execute(IJobExecutionContext mockContext)
 		{
+			string clientName = string.Empty;
 			try
 			{
 				InsertData();
-				ExecutionLog(string.Empty, TaskEnum.TaskInsert.ToString(), MessageEnum.Success.ToString(), false);
+				ExecutionLog(clientName, TaskEnum.TaskInsert.ToString(), MessageEnum.Success.ToString(), false);
 			}
 			catch (Exception ex)
 			{
-				ExecutionLog(string.Empty, TaskEnum.TaskInsert.ToString(), ex.ToString(), true);
+				ExecutionLog(clientName, TaskEnum.TaskInsert.ToString(), ex.ToString(), true);
 			}
 		}
 
