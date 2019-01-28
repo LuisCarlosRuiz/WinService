@@ -50,6 +50,8 @@ namespace ServiceModel.BussinesLogic.General
 			if (Mail == null)
 				throw new ArgumentNullException();
 
+			string Mailpss = new AesManager().Decrypt(Mail.Password);
+
 			using (var msg = new MailMessage())
 			{
 				using (var ServidorCorreo = new SmtpClient())
@@ -65,7 +67,7 @@ namespace ServiceModel.BussinesLogic.General
 					ServidorCorreo.Host = Mail.Host;
 					ServidorCorreo.EnableSsl = Mail.EnableSsl == 1;
 					ServidorCorreo.UseDefaultCredentials = Mail.UseCredentials == 1;
-					ServidorCorreo.Credentials = new NetworkCredential(Mail.Mail, Mail.Password);
+					ServidorCorreo.Credentials = new NetworkCredential(Mail.Mail, Mailpss);
 					ServidorCorreo.Port = Mail.Port;
 					ServidorCorreo.Send(msg);
 					msg.Dispose();

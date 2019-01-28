@@ -9,6 +9,7 @@ namespace ServiceModel.Entities.ConectionEngine
 {
 	using ServiceModel.Entities.dbService;
 	using ServiceModel.Entities.Soari;
+	using ServiceModel.BussinesLogic.General;
 	using System;
 	using System.Linq;
 
@@ -43,14 +44,16 @@ namespace ServiceModel.Entities.ConectionEngine
 				objConfiguration = ctx.ClientConfiguration.Where(q => q.JobId == IdCliente).FirstOrDefault();
 			}
 
-			if (ValidarConexion(objConfiguration))
+			if (!ValidarConexion(objConfiguration))
 				throw new NullReferenceException();
+
+			string DataBasePss = new AesManager().Decrypt(objConfiguration.DBPassword);
 
 			return $@"Data Source={objConfiguration.DBServerName};
 					Initial Catalog={objConfiguration.DBName};
 					Persist Security Info=True;
 					User ID={objConfiguration.DBUser};
-					Password={objConfiguration.DBPassword}";
+					Password={DataBasePss}";
 		}
 
 		/// <summary>

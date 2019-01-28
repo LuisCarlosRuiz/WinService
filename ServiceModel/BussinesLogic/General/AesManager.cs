@@ -29,7 +29,7 @@ namespace ServiceModel.BussinesLogic.General
 		/// <param name="args">The arguments.</param>
 		public AesManager()
 		{
-			string simpleKey = ConfigurationManager.AppSettings["HashKey"];
+			string simpleKey = ConfigurationManager.AppSettings["HashKey"] ?? string.Empty;
 			string key64 = System.Convert.ToBase64String((
 			new SHA512CryptoServiceProvider())
 			.ComputeHash(Encoding.UTF8.GetBytes(simpleKey)))

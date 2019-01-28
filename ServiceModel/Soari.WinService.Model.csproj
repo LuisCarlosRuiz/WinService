@@ -148,6 +148,14 @@
     <Compile Include="Migrations\201901282029327_SeModificaMailConfiguration.Designer.cs">
       <DependentUpon>201901282029327_SeModificaMailConfiguration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901282219166_SeModificaClientConfiguration.cs" />
+    <Compile Include="Migrations\201901282219166_SeModificaClientConfiguration.Designer.cs">
+      <DependentUpon>201901282219166_SeModificaClientConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901282220449_SeModificaClientConfiguration1.cs" />
+    <Compile Include="Migrations\201901282220449_SeModificaClientConfiguration1.Designer.cs">
+      <DependentUpon>201901282220449_SeModificaClientConfiguration1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncJobs\ServiceTaskSyncJob.cs" />
@@ -185,6 +193,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901282029327_SeModificaMailConfiguration.resx">
       <DependentUpon>201901282029327_SeModificaMailConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901282219166_SeModificaClientConfiguration.resx">
+      <DependentUpon>201901282219166_SeModificaClientConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901282220449_SeModificaClientConfiguration1.resx">
+      <DependentUpon>201901282220449_SeModificaClientConfiguration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

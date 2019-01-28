@@ -8,6 +8,7 @@
 namespace ServiceModel.Entities.ConectionEngine
 {
 	using Client.Bussines;
+	using ServiceModel.BussinesLogic.General;
 	using ServiceModel.Entities.dbService;
 	using System;
 	using System.Linq;
@@ -39,12 +40,14 @@ namespace ServiceModel.Entities.ConectionEngine
 				objConfiguration = ctx.ClientConfiguration.Where(q => q.JobId == IdCliente).FirstOrDefault();
 			}
 
-			if (ValidarConexion(objConfiguration))
+			string ServicePassword = new AesManager().Decrypt(objConfiguration.ServicePassword);
+
+			if (!ValidarConexion(objConfiguration))
 				throw new NullReferenceException();
 
 			return new GetData(objConfiguration.ServiceUrl
 								, objConfiguration.ServiceUser
-								, objConfiguration.ServicePassword);
+								, ServicePassword);
 		}
 
 		private bool ValidarConexion(ClientConfiguration objConfiguration)

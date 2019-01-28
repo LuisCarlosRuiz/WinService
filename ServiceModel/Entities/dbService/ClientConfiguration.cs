@@ -75,7 +75,7 @@ namespace ServiceModel.Entities.dbService
 		/// The database password.
 		/// </value>
 		[Column("DBPassword", TypeName = "varchar")]
-		[MaxLength(20)]
+		[MaxLength(200)]
 		public string DBPassword { get; set; }
 
 		/// <summary>
@@ -105,7 +105,7 @@ namespace ServiceModel.Entities.dbService
 		/// The service password.
 		/// </value>
 		[Column("ServicePassword", TypeName = "varchar")]
-		[MaxLength(20)]
+		[MaxLength(200)]
 		public string ServicePassword { get; set; }
 
 		/// <summary>
@@ -115,7 +115,7 @@ namespace ServiceModel.Entities.dbService
 		/// The servicedb password.
 		/// </value>
 		[Column("ServicedbPassword", TypeName = "varchar")]
-		[MaxLength(20)]
+		[MaxLength(200)]
 		public string ServicedbPassword { get; set; }
 
 		/// <summary>
