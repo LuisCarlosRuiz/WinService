@@ -8,6 +8,7 @@
 namespace Soari.WinService.Test.dbWinServiceTest
 {
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using ServiceModel.BussinesLogic.General;
 	using ServiceModel.Facade;
 	using System.Linq;
 	using System.Net;
@@ -75,6 +76,21 @@ namespace Soari.WinService.Test.dbWinServiceTest
 			ServidorCorreo.Port = 25;
 			ServidorCorreo.Send(msg);
 			msg.Dispose();
+		}
+
+		/// <summary>
+		/// Aeses the manager test.
+		/// </summary>
+		[TestMethod]
+		public void AesManagerTest()
+		{
+			AesManager msg = new AesManager();
+
+			string EncryptedText = msg.Encrypt("contraseña");
+			string DecryptedText = msg.Decrypt(EncryptedText);
+
+			if (string.IsNullOrEmpty(EncryptedText) || string.IsNullOrEmpty(DecryptedText))
+				Assert.Inconclusive();
 		}
 		#endregion
 	}

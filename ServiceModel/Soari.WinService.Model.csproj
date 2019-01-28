@@ -68,6 +68,7 @@
     <Compile Include="BussinesLogic\dbService\ClientConfigurationBL.cs" />
     <Compile Include="BussinesLogic\dbService\MailConfigurationBL.cs" />
     <Compile Include="BussinesLogic\dbService\UserAdminBL.cs" />
+    <Compile Include="BussinesLogic\General\AesManager.cs" />
     <Compile Include="BussinesLogic\General\MailManager.cs" />
     <Compile Include="BussinesLogic\NitBL.cs" />
     <Compile Include="DAO\dbService\MailConfigurationDao.cs" />
