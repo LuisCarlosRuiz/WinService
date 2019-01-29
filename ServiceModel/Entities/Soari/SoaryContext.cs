@@ -10,7 +10,7 @@ using System.Data.Entity.Infrastructure;
 
 namespace ServiceModel.Entities.Soari
 {
-	internal class SoaryContext : DbContext
+	public class SoaryContext : DbContext
 	{
 
 		public SoaryContext(string connString) : base(connString)

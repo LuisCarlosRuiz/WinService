@@ -16,7 +16,7 @@ namespace ServiceModel.Entities.ConectionEngine
 	/// <summary>
 	/// The  distributor of connections to database
 	/// </summary>
-	internal class Deal
+	public class Deal
 	{
 		private string IdCliente;
 
@@ -61,7 +61,7 @@ namespace ServiceModel.Entities.ConectionEngine
 		/// </summary>
 		/// <param name="objConfiguration">The object configuration.</param>
 		/// <returns></returns>
-		public bool ValidarConexion(ClientConfiguration objConfiguration)
+		private bool ValidarConexion(ClientConfiguration objConfiguration)
 		{
 			if (objConfiguration != null && objConfiguration.State == "A")
 				if (!string.IsNullOrEmpty(objConfiguration.DBServerName)

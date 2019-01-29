@@ -11,6 +11,7 @@ namespace ServiceModel.Entities.dbService
 	using System.ComponentModel.DataAnnotations.Schema;
 	using System.Data.Entity;
 	using System.Linq;
+	using System.Linq.Expressions;
 	using System.Reflection;
 	using EntityFramework.BulkInsert.Extensions;
 
@@ -74,23 +75,148 @@ namespace ServiceModel.Entities.dbService
 		/// <summary>
 		/// The get entity.
 		/// </summary>
+		/// <param name="orderBy">
+		/// The order by.
+		/// </param>
+		/// <param name="take">
+		/// The take.
+		/// </param>
+		/// <param name="skip">
+		/// The skip.
+		/// </param>
 		/// <returns>
 		/// The <see cref="IQueryable"/>.
 		/// </returns>
-		public IQueryable<TEntity> GetEntity()
+		public IQueryable<TEntity> GetEntity(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, int take, int skip)
 		{
-			return this.dbSet.AsQueryable();
+			return orderBy.Invoke(this.dbSet).Skip(skip).Take(take).AsQueryable();
 		}
 
 		/// <summary>
-		/// The insert entity.
+		/// The get entity.
 		/// </summary>
-		/// <param name="entity">
-		/// The entity.
+		/// <param name="filter">
+		/// The filter.
 		/// </param>
-		public void InsertEntity(TEntity entity)
+		/// <param name="orderBy">
+		/// The order by.
+		/// </param>
+		/// <param name="take">
+		/// The take.
+		/// </param>
+		/// <param name="skip">
+		/// The skip.
+		/// </param>
+		/// <param name="include">
+		/// The include.
+		/// </param>
+		/// <returns>
+		/// The <see cref="IQueryable"/>.
+		/// </returns>
+		public IQueryable<TEntity> GetEntity(
+			Expression<Func<TEntity, bool>> filter,
+			Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy,
+			int take,
+			int skip,
+			string include)
 		{
-			this.dbSet.Add(entity);
+			IQueryable<TEntity> query = this.dbSet;
+
+			query = query.Where(filter);
+
+			foreach (var includeProperty in include.Split(
+				new char[] { ',' },
+				StringSplitOptions.RemoveEmptyEntries))
+			{
+				query = query.Include(includeProperty);
+			}
+
+			return orderBy.Invoke(query).Skip(skip).Take(take).AsQueryable();
+		}
+
+		/// <summary>
+		/// The get entity.
+		/// </summary>
+		/// <param name="filter">
+		/// The filter.
+		/// </param>
+		/// <param name="orderBy">
+		/// The order by.
+		/// </param>
+		/// <param name="take">
+		/// The take.
+		/// </param>
+		/// <param name="skip">
+		/// The skip.
+		/// </param>
+		/// <returns>
+		/// The <see cref="IQueryable"/>.
+		/// </returns>
+		public IQueryable<TEntity> GetEntity(
+			Expression<Func<TEntity, bool>> filter,
+			Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy,
+			int take,
+			int skip)
+		{
+			IQueryable<TEntity> query = this.dbSet;
+
+			query = query.Where(filter);
+
+			return orderBy.Invoke(query).Skip(skip).Take(take).AsQueryable();
+		}
+
+		/// <summary>
+		/// The get entity.
+		/// </summary>
+		/// <param name="filter">
+		/// The filter.
+		/// </param>
+		/// <returns>
+		/// The <see cref="TEntity"/>.
+		/// </returns>
+		public IQueryable<TEntity> GetEntity(Expression<Func<TEntity, bool>> filter)
+		{
+			IQueryable<TEntity> query = this.dbSet;
+
+			query = query.Where(filter);
+
+			return query.AsQueryable();
+		}
+
+		/// <summary>
+		/// The get entity.
+		/// </summary>
+		/// <param name="orderBy">
+		/// The order by.
+		/// </param>
+		/// <param name="take">
+		/// The take.
+		/// </param>
+		/// <param name="skip">
+		/// The skip.
+		/// </param>
+		/// <param name="include">
+		/// The include.
+		/// </param>
+		/// <returns>
+		/// The <see cref="IQueryable"/>.
+		/// </returns>
+		public IQueryable<TEntity> GetEntity(
+			Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy,
+			int take,
+			int skip,
+			string include)
+		{
+			IQueryable<TEntity> query = this.dbSet;
+
+			foreach (var includeProperty in include.Split(
+				new char[] { ',' },
+				StringSplitOptions.RemoveEmptyEntries))
+			{
+				query = query.Include(includeProperty);
+			}
+
+			return orderBy.Invoke(query).Skip(skip).Take(take).AsQueryable();
 		}
 
 		/// <summary>
@@ -114,6 +240,28 @@ namespace ServiceModel.Entities.dbService
 			}
 
 			return query.AsQueryable();
+		}
+
+		/// <summary>
+		/// The get entity.
+		/// </summary>
+		/// <returns>
+		/// The <see cref="IQueryable"/>.
+		/// </returns>
+		public IQueryable<TEntity> GetEntity()
+		{
+			return this.dbSet.AsQueryable();
+		}
+
+		/// <summary>
+		/// The insert entity.
+		/// </summary>
+		/// <param name="entity">
+		/// The entity.
+		/// </param>
+		public void InsertEntity(TEntity entity)
+		{
+			this.dbSet.Add(entity);
 		}
 	}
 }
