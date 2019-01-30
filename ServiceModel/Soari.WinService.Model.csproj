@@ -94,12 +94,15 @@
     <Compile Include="Entities\Soari\Aporte.cs" />
     <Compile Include="Entities\Soari\Canal.cs" />
     <Compile Include="Entities\Soari\Ciudad.cs" />
+    <Compile Include="Entities\Soari\Contabilidad.cs" />
     <Compile Include="Entities\Soari\Credito.cs" />
+    <Compile Include="Entities\Soari\CuotaExtra.cs" />
     <Compile Include="Entities\Soari\Departamento.cs" />
     <Compile Include="Entities\Soari\EstadoAhorro.cs" />
     <Compile Include="Entities\Soari\EstadoCivil.cs" />
     <Compile Include="Entities\Soari\JornadaLaboral.cs" />
     <Compile Include="Entities\Soari\NivelEstudio.cs" />
+    <Compile Include="Entities\Soari\NovedadVaria.cs" />
     <Compile Include="Entities\Soari\Ocupacion.cs" />
     <Compile Include="Entities\Soari\Pais.cs" />
     <Compile Include="Entities\Soari\Agencia.cs" />
