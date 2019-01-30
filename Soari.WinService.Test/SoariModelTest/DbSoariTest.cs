@@ -89,5 +89,28 @@ namespace Soari.WinService.Test.SoariModelTest
 				Assert.Inconclusive();
 			}
 		}
+
+		/// <summary>
+		/// Gets the contabilidad test.
+		/// </summary>
+		[TestMethod]
+		public void GetContabilidadTest()
+		{
+			List<Contabilidad> data;
+
+			using (var ctx = new Deal("0001").DbSoaryContext())
+			{
+				var repository = new GenericEntity<Contabilidad>(ctx);
+				data = repository.GetEntity(q => q.OrderBy(d => d.NumeroCuenta)
+							, 1000, 0,
+							@"Agencia"
+							).ToList();
+			}
+
+			if (!data.Any())
+			{
+				Assert.Inconclusive();
+			}
+		}
 	}
 }

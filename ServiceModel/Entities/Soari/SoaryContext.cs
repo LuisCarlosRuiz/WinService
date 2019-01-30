@@ -5,6 +5,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using ServiceModel.Migrations;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 

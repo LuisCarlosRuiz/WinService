@@ -14,7 +14,7 @@ namespace ServiceModel.Entities.Soari
 	//// <summary>
 	//// the Cuota Extra
 	//// </summary>
-	[Table("tblContabilidad")]
+	[Table("tblCuotaExtra")]
 	public class CuotaExtra
 	{
 		/// <summary>

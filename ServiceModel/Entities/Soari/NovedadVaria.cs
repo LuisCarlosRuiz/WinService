@@ -14,7 +14,7 @@ namespace ServiceModel.Entities.Soari
 	//// <summary>
 	//// the Novedades Varias
 	//// </summary>
-	[Table("tblContabilidad")]
+	[Table("tblNovedadVaria")]
 	public class NovedadVaria
 	{
 		/// <summary>

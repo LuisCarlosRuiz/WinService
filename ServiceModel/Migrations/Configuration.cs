@@ -7,12 +7,10 @@
 
 namespace ServiceModel.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
+	using ServiceModel.Entities.dbService;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ServiceModel.Entities.dbService.DbServiceContext>
+	internal sealed class Configuration : DbMigrationsConfiguration<DbServiceContext>
     {
         public Configuration()
         {

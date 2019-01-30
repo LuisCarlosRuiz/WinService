@@ -100,7 +100,6 @@ namespace ServiceModel.Entities.dbService
 		/// </value>
 		public DbSet<UserAdmin> UserAdmin { get; set; }
 
-
 		/// <summary>
 		/// This method is called when the model for a derived context has been initialized, but
 		/// before the model has been locked down and used to initialize the context.  The default
