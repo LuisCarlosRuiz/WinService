@@ -14,7 +14,7 @@ namespace ServiceModel.Entities.Soari
 	//// <summary>
 	//// the Ahorro
 	//// </summary>
-	[Table("tblEstadosAhorros")]
+	[Table("tblAhorros")] 
 	public class Ahorro
 	{
 		/// <summary>

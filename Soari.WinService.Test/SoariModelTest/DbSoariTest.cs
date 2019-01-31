@@ -112,5 +112,113 @@ namespace Soari.WinService.Test.SoariModelTest
 				Assert.Inconclusive();
 			}
 		}
+
+		/// <summary>
+		/// Gets the cuota extra test.
+		/// </summary>
+		[TestMethod]
+		public void GetCuotaExtraTest()
+		{
+			List<CuotaExtra> data;
+
+			using (var ctx = new Deal("0001").DbSoaryContext())
+			{
+				var repository = new GenericEntity<CuotaExtra>(ctx);
+				data = repository.GetEntity(q => q.OrderBy(d => d.Pagare)
+							, 1000, 0).ToList();
+			}
+
+			if (!data.Any())
+			{
+				Assert.Inconclusive();
+			}
+		}
+
+		/// <summary>
+		/// Gets the novedad varia test.
+		/// </summary>
+		[TestMethod]
+		public void GetNovedadVariaTest()
+		{
+			List<NovedadVaria> data;
+
+			using (var ctx = new Deal("0001").DbSoaryContext())
+			{
+				var repository = new GenericEntity<NovedadVaria>(ctx);
+				data = repository.GetEntity(q => q.OrderBy(d => d.Consecutivo)
+							, 1000, 0).ToList();
+			}
+
+			if (!data.Any())
+			{
+				Assert.Inconclusive();
+			}
+		}
+
+		/// <summary>
+		/// Gets the ahorro test.
+		/// </summary>
+		[TestMethod]
+		public void GetAhorroTest()
+		{
+			List<Ahorro> data;
+
+			using (var ctx = new Deal("0001").DbSoaryContext())
+			{
+				var repository = new GenericEntity<Ahorro>(ctx);
+				data = repository.GetEntity(q => q.OrderBy(d => d.Agencia.intId)
+							, 1000, 0,
+							@"TipoAhorro, Agencia, EstadoAhorro").ToList();
+			}
+
+			if (!data.Any())
+			{
+				Assert.Inconclusive();
+			}
+		}
+
+		/// <summary>
+		/// Gets the aporte test.
+		/// </summary>
+		[TestMethod]
+		public void GetAporteTest()
+		{
+			List<Aporte> data;
+
+			using (var ctx = new Deal("0001").DbSoaryContext())
+			{
+				var repository = new GenericEntity<Aporte>(ctx);
+				data = repository.GetEntity(q => q.OrderBy(d => d.Agencia.intId)
+							, 1000, 0,
+							@"Agencia, TipoAporte").ToList();
+			}
+
+			if (!data.Any())
+			{
+				Assert.Inconclusive();
+			}
+		}
+
+		/// <summary>
+		/// Gets the transacciones test.
+		/// </summary>
+		[TestMethod]
+		public void GetTransaccionesTest()
+		{
+			List<Transacciones> data;
+
+			using (var ctx = new Deal("0001").DbSoaryContext())
+			{
+				var repository = new GenericEntity<Transacciones>(ctx);
+				data = repository.GetEntity(q => q.OrderBy(d => d.Agencia.intId)
+							, 1000, 0,
+							@"Agencia, TipoProducto, TipoTransaccion, Canal").ToList();
+			}
+
+			if (!data.Any())
+			{
+				Assert.Inconclusive();
+			}
+		}
 	}
 }
