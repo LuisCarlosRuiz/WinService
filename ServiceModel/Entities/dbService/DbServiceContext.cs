@@ -101,6 +101,14 @@ namespace ServiceModel.Entities.dbService
 		public DbSet<UserAdmin> UserAdmin { get; set; }
 
 		/// <summary>
+		/// Gets or sets the scheduler.
+		/// </summary>
+		/// <value>
+		/// The scheduler.
+		/// </value>
+		public DbSet<Scheduler> Scheduler { get; set; }
+
+		/// <summary>
 		/// This method is called when the model for a derived context has been initialized, but
 		/// before the model has been locked down and used to initialize the context.  The default
 		/// implementation of this method does nothing, but it can be overridden in a derived class
@@ -127,6 +135,8 @@ namespace ServiceModel.Entities.dbService
 			modelBuilder.Entity<ClientConfiguration>().HasIndex(u => u.ClientName).IsUnique();
 
 			modelBuilder.Entity <UserAdmin>().HasIndex(u => u.UserCode).IsUnique();
+
+			modelBuilder.Entity <Scheduler>().HasIndex(u => u.Consecutive).IsUnique();
 		}
 	}
 }
