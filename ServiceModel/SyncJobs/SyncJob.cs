@@ -13,6 +13,7 @@ namespace ServiceModel.SyncJobs
 	using ServiceModel.BussinesLogic.dbService;
 	using ServiceModel.BussinesLogic.General;
 	using System;
+	using System.Linq;
 
 	/// <summary>
 	/// the sync job 
@@ -66,6 +67,11 @@ namespace ServiceModel.SyncJobs
 			}
 		}
 
+		/// <summary>
+		/// Sends the mail.
+		/// </summary>
+		/// <param name="mesage">The mesage.</param>
+		/// <param name="executionControl">The execution control.</param>
 		public void SendMail(MessageEnum mesage, ExecutionControl executionControl)
 		{
 			var lstUser = new UserAdminBL().GetListUserAdminByStateActive();
@@ -73,6 +79,28 @@ namespace ServiceModel.SyncJobs
 			foreach (var item in lstUser)
 			{
 				new MailManager().MailBuilder(mesage.ToString(), executionControl, item);
+			}
+		}
+
+		/// <summary>
+		/// Gets the identifier cliente.
+		/// </summary>
+		/// <returns></returns>
+		public string GetClientId(string JobName)
+		{
+			using (var ctx = new DbServiceContext())
+			{
+				var scheduler = ctx.Scheduler.Where(q => q.TaskName == JobName && q.Status == "1")
+					.OrderBy(q => q.Consecutive).FirstOrDefault();
+
+				if (scheduler == null)
+					throw new Exception();
+
+				scheduler.Status = "0";
+				new GenericEntity<Scheduler>(ctx).UpdateEntity(scheduler);
+				ctx.SaveChanges();
+
+				return scheduler.ClientId;
 			}
 		}
 	}

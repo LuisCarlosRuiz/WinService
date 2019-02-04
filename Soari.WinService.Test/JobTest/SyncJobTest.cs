@@ -22,10 +22,21 @@ namespace Soari.WinService.Test.JobTest
 	public class SyncJobTest
 	{
 		/// <summary>
+		/// Moderators the synchronize job test.
+		/// </summary>
+		[TestMethod]
+		public void ModeratorSyncJobTest()
+		{
+			var job = new ModeratorSyncJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
+		}
+
+		/// <summary>
 		/// Tasks the mock job.
 		/// </summary>
 		[TestMethod]
-		public void TaskJob()
+		public void TaskJobTest()
 		{
 			var job = new ServiceTaskSyncJob();
 			var mockContext = new Mock<IJobExecutionContext>().Object;

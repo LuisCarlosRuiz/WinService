@@ -40,15 +40,15 @@ namespace ServiceModel.SyncJobs
 		{
 			sf = new StdSchedulerFactory();
 			scheduler = sf.GetScheduler();
-			AddJobs();
+			ManageJobs();
 
 			scheduler?.Start();
 		}
 
 		/// <summary>
-		/// The add jobs.
+		/// Manages the jobs.
 		/// </summary>
-		private static void AddJobs()
+		private static void ManageJobs()
 		{
 			TruncateScheduler();
 
@@ -57,21 +57,35 @@ namespace ServiceModel.SyncJobs
 			{
 				if (t.BaseType?.Name == typeof(SyncJob<>).Name)
 				{
-					foreach (var jobItem in GetJob(t.Name))
-					{
-						SaveScheduler(jobItem);
+					if (t.Name == "ModeratorSyncJob")
+						AddJob(t, t.Name, ConfigurationManager.AppSettings[t.Name] ?? "0 59 23 1/1 * ? *");
+					else
+						foreach (var jobItem in GetJob(t.Name))
+						{
+							SaveScheduler(jobItem);
 
-						string tName = $"{jobItem.Concecutivo}-{jobItem.TaskName}.{jobItem.ClientId}";
+							string tName = $"{jobItem.Concecutivo}-{jobItem.TaskName}.{jobItem.ClientId}";
+							var cronExp = jobItem?.CronExpression ?? "0 44 16 / * ? *";
 
-						var cronExp = jobItem?.CronExpression ?? "0 44 16 / * ? *";
-						IJobDetail job = JobBuilder.Create(t).WithIdentity($"Task{tName}").Build();
-						ITrigger trigger = TriggerBuilder.Create().WithIdentity($"Trigger{tName}")
-											.WithCronSchedule(cronExp).Build();
-
-						scheduler.ScheduleJob(job, trigger);
-					}
+							AddJob(t, tName, cronExp);
+						}
 				}
 			}
+		}
+
+		/// <summary>
+		/// Adds the job.
+		/// </summary>
+		/// <param name="t">The t.</param>
+		/// <param name="tName">Name of the t.</param>
+		/// <param name="cronExp">The cron exp.</param>
+		public static void AddJob(Type t, string tName, string cronExp)
+		{
+			IJobDetail job = JobBuilder.Create(t).WithIdentity($"Task{tName}").Build();
+			ITrigger trigger = TriggerBuilder.Create().WithIdentity($"Trigger{tName}")
+								.WithCronSchedule(cronExp).Build();
+
+			scheduler.ScheduleJob(job, trigger);
 		}
 
 		/// <summary>

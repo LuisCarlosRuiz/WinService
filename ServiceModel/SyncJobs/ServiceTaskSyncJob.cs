@@ -8,12 +8,9 @@
 namespace ServiceModel.SyncJobs
 {
 	using Client.Util;
-	using Quartz;
 	using ServiceModel.Entities.dbService;
-	using ServiceModel.Entities.Partial;
 	using System;
 	using System.Collections.Generic;
-	using System.Data.Entity;
 	using System.Linq;
 
 	/// <summary>
@@ -22,12 +19,14 @@ namespace ServiceModel.SyncJobs
 	public class ServiceTaskSyncJob : SyncJob<ServiceTask>
 	{
 		private Global objGlobal;
+		private string ClientId;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ServiceTaskSyncJob"/> class.
 		/// </summary>
 		public ServiceTaskSyncJob()
 		{
+			ClientId = GetClientId(this.GetType().Name);
 			objGlobal = new Global();
 		}
 
