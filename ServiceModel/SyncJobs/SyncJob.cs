@@ -82,11 +82,44 @@ namespace ServiceModel.SyncJobs
 			}
 		}
 
+		internal ServiceTask GetTaskId(string TaskName)
+		{
+			using (var ctx = new DbServiceContext())
+			{
+				return ctx.ServiceTask.Where(q => q.TaskName == TaskName).FirstOrDefault();
+			}
+		}
+
+		internal ClientConfiguration GetClientConfiguration(string clientId)
+		{
+			using (var ctx = new DbServiceContext())
+			{
+				AesManager msg = new AesManager();
+				var client = ctx.ClientConfiguration.Where(q => q.JobId == clientId
+				&& q.State == "A").FirstOrDefault();
+
+				return new ClientConfiguration {
+					ClientName = client.ClientName,
+					ConfigurationId = client.ConfigurationId,
+					JobId = client.JobId,
+					DBName = client.DBName,
+					DBPassword = msg.Decrypt(client.DBPassword),
+					DBServerName = client.DBServerName,
+					DBUser = client.DBUser,
+					ServicedbPassword = msg.Decrypt(client.ServicedbPassword),
+					ServicePassword = msg.Decrypt(client.ServicePassword),
+					ServiceUrl = client.ServiceUrl,
+					ServiceUser = client.ServiceUser,
+					State = client.State
+				};
+			}
+		}
+
 		/// <summary>
 		/// Gets the identifier cliente.
 		/// </summary>
 		/// <returns></returns>
-		public string GetClientId(string JobName)
+		internal string GetClientId(string JobName)
 		{
 			using (var ctx = new DbServiceContext())
 			{
@@ -101,6 +134,22 @@ namespace ServiceModel.SyncJobs
 				ctx.SaveChanges();
 
 				return scheduler.ClientId;
+			}
+		}
+
+		/// <summary>
+		/// Gets the product filter.
+		/// </summary>
+		/// <param name="filtroProducto">The filtro producto.</param>
+		/// <returns></returns>
+		internal FilterProducto GetProductFilter(Guid ConfigurationId, string TaskName)
+		{
+			Guid TaskId = GetTaskId(TaskName).TaskId;
+
+			using (var ctx = new DbServiceContext())
+			{
+				return ctx.FilterProducto.Where(q => q.ConfigurationId == ConfigurationId &&
+									q.TaskId == TaskId).FirstOrDefault();
 			}
 		}
 	}

@@ -44,6 +44,17 @@ namespace Soari.WinService.Test.JobTest
 		}
 
 		/// <summary>
+		/// Creditoes the syn job test.
+		/// </summary>
+		[TestMethod]
+		public void CreditoSynJobTest()
+		{
+			var job = new CreditoSynJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
+		}
+
+		/// <summary>
 		/// The test start jobs.
 		/// </summary>
 		[TestMethod]
