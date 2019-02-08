@@ -122,6 +122,7 @@
       <xs:element minOccurs="0" name="NombreSegmento" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NombreZona" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Nombres" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumPersonasACargo" type="xs:int" />
       <xs:element minOccurs="0" name="OtroGasto" type="xs:decimal" />
       <xs:element minOccurs="0" name="OtrosIngresos" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="PaisDocumentoNombre" nillable="true" type="xs:string" />
@@ -129,6 +130,7 @@
       <xs:element minOccurs="0" name="PaisResidenciaNombre" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Pensiones" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="PersonaExpuesta" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PersonasACargo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PrimerApellido" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Refrigerio" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Salario" type="xs:decimal" />

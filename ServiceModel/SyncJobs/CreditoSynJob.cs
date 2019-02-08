@@ -39,9 +39,12 @@ namespace ServiceModel.SyncJobs
 		private CreditoSOARIPartial[] GetServiceData()
 		{
 			if (string.IsNullOrEmpty(ClientId))
-				throw new NullReferenceException("No se encontro id del cliente");
+				throw new NullReferenceException("50006 - No se encontro id del cliente");
 
 			var client = GetClientConfiguration(ClientId);
+
+			clientName = client.ClientName;
+			TaskName = ServiceTaskName.ObtenerAsociado.ToString();
 
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);

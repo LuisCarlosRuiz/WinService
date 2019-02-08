@@ -1157,6 +1157,9 @@ namespace Client.SoapiClient {
         private string NombresField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumPersonasACargoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal OtroGastoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1176,6 +1179,9 @@ namespace Client.SoapiClient {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PersonaExpuestaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PersonasACargoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PrimerApellidoField;
@@ -1777,6 +1783,19 @@ namespace Client.SoapiClient {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumPersonasACargo {
+            get {
+                return this.NumPersonasACargoField;
+            }
+            set {
+                if ((this.NumPersonasACargoField.Equals(value) != true)) {
+                    this.NumPersonasACargoField = value;
+                    this.RaisePropertyChanged("NumPersonasACargo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public decimal OtroGasto {
             get {
                 return this.OtroGastoField;
@@ -1863,6 +1882,19 @@ namespace Client.SoapiClient {
                 if ((object.ReferenceEquals(this.PersonaExpuestaField, value) != true)) {
                     this.PersonaExpuestaField = value;
                     this.RaisePropertyChanged("PersonaExpuesta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PersonasACargo {
+            get {
+                return this.PersonasACargoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PersonasACargoField, value) != true)) {
+                    this.PersonasACargoField = value;
+                    this.RaisePropertyChanged("PersonasACargo");
                 }
             }
         }

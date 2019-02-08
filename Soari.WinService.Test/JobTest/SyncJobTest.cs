@@ -55,6 +55,28 @@ namespace Soari.WinService.Test.JobTest
 		}
 
 		/// <summary>
+		/// Creditoes the syn job test.
+		/// </summary>
+		[TestMethod]
+		public void NitSyncJobTest()
+		{
+			var job = new NitSyncJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
+		}
+
+		/// <summary>
+		/// Contabilidads the synchronize job test.
+		/// </summary>
+		[TestMethod]
+		public void ContabilidadSyncJobTest()
+		{
+			var job = new ContabilidadSyncJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
+		}
+
+		/// <summary>
 		/// The test start jobs.
 		/// </summary>
 		[TestMethod]

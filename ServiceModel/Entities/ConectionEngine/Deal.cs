@@ -45,7 +45,7 @@ namespace ServiceModel.Entities.ConectionEngine
 			}
 
 			if (!ValidarConexion(objConfiguration))
-				throw new NullReferenceException();
+				throw new NullReferenceException("50003 - Hacen falta parametros para conectar a la base de datos");
 
 			string DataBasePss = new AesManager().Decrypt(objConfiguration.DBPassword);
 

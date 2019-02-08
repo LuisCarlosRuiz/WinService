@@ -160,7 +160,7 @@ namespace ServiceModel.Entities.Soari
 		/// <value>
 		/// The string empleado.
 		/// </value>
-		public char strEmpleado { get; set; }
+		public string strEmpleado { get; set; }
 
 		/// <summary>
 		/// Gets or sets the identifier tipo contrato.
@@ -280,7 +280,7 @@ namespace ServiceModel.Entities.Soari
 		/// <value>
 		/// The string pe ps.
 		/// </value>
-		public char strPEPs { get; set; }
+		public string strPEPs { get; set; }
 
 		/// <summary>
 		/// Gets or sets the string exonerado.
@@ -288,7 +288,7 @@ namespace ServiceModel.Entities.Soari
 		/// <value>
 		/// The string exonerado.
 		/// </value>
-		public char strExonerado { get; set; }
+		public string strExonerado { get; set; }
 
 		/// <summary>
 		/// Gets or sets the number score central riesgo.

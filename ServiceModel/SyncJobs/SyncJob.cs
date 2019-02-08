@@ -9,11 +9,12 @@ namespace ServiceModel.SyncJobs
 {
 	using Quartz;
 	using ServiceModel.Entities.dbService;
-	using ServiceModel.Entities.Partial;
+	using Partial = ServiceModel.Entities.Partial;
 	using ServiceModel.BussinesLogic.dbService;
 	using ServiceModel.BussinesLogic.General;
 	using System;
 	using System.Linq;
+	using System.Collections.Generic;
 
 	/// <summary>
 	/// the sync job 
@@ -21,6 +22,8 @@ namespace ServiceModel.SyncJobs
 	public abstract class SyncJob<TEntity> : IJob
 	{
 		public abstract void InsertData();
+		public string TaskName;
+		public string clientName;
 
 		/// <summary>
 		/// Executes the specified mock context.
@@ -28,15 +31,14 @@ namespace ServiceModel.SyncJobs
 		/// <param name="mockContext">The mock context.</param>
 		public void Execute(IJobExecutionContext mockContext)
 		{
-			string clientName = string.Empty;
 			try
 			{
 				InsertData();
-				ExecutionLog(clientName, TaskEnum.TaskInsert.ToString(), MessageEnum.Success.ToString(), false);
+				ExecutionLog(clientName ?? string.Empty, TaskName ?? string.Empty, Partial.MessageEnum.Success.ToString(), false);
 			}
 			catch (Exception ex)
 			{
-				ExecutionLog(clientName, TaskEnum.TaskInsert.ToString(), ex.ToString(), true);
+				ExecutionLog(clientName ?? string.Empty, TaskName ?? string.Empty, ex.ToString(), true);
 			}
 		}
 
@@ -59,7 +61,7 @@ namespace ServiceModel.SyncJobs
 				};
 
 				if (sendMail)
-					SendMail(MessageEnum.FatalError, executionControl);
+					SendMail(Partial.MessageEnum.FatalError, executionControl);
 
 				repository.InsertEntity(executionControl);
 
@@ -72,7 +74,7 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		/// <param name="mesage">The mesage.</param>
 		/// <param name="executionControl">The execution control.</param>
-		public void SendMail(MessageEnum mesage, ExecutionControl executionControl)
+		public void SendMail(Partial.MessageEnum mesage, ExecutionControl executionControl)
 		{
 			var lstUser = new UserAdminBL().GetListUserAdminByStateActive();
 
@@ -98,7 +100,8 @@ namespace ServiceModel.SyncJobs
 				var client = ctx.ClientConfiguration.Where(q => q.JobId == clientId
 				&& q.State == "A").FirstOrDefault();
 
-				return new ClientConfiguration {
+				return new ClientConfiguration
+				{
 					ClientName = client.ClientName,
 					ConfigurationId = client.ConfigurationId,
 					JobId = client.JobId,
@@ -150,6 +153,32 @@ namespace ServiceModel.SyncJobs
 			{
 				return ctx.FilterProducto.Where(q => q.ConfigurationId == ConfigurationId &&
 									q.TaskId == TaskId).FirstOrDefault();
+			}
+		}
+
+		/// <summary>
+		/// Gets the product filter.
+		/// </summary>
+		/// <param name="filtroProducto">The filtro producto.</param>
+		/// <returns></returns>
+		internal FilterAsociado GetAsociadoFilter(Guid ConfigurationId)
+		{
+			using (var ctx = new DbServiceContext())
+			{
+				return ctx.FilterAsociado.Where(q => q.ConfigurationId == ConfigurationId).FirstOrDefault();
+			}
+		}
+
+		/// <summary>
+		/// Gets the balance filter.
+		/// </summary>
+		/// <param name="ConfigurationId">The configuration identifier.</param>
+		/// <returns></returns>
+		internal List<Cuenta> GetBalanceFilter(Guid ConfigurationId)
+		{
+			using (var ctx = new DbServiceContext())
+			{
+				return ctx.Cuenta.Include("FilterBalance").Where(q => q.FilterBalance.ConfiguracionId == ConfigurationId).ToList();
 			}
 		}
 	}

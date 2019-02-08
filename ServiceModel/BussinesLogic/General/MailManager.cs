@@ -76,10 +76,17 @@ namespace ServiceModel.BussinesLogic.General
 			}
 		}
 
+		/// <summary>
+		/// Mails the builder.
+		/// </summary>
+		/// <param name="message">The message.</param>
+		/// <param name="executionControl">The execution control.</param>
+		/// <param name="user">The user.</param>
+		/// <exception cref="NullReferenceException">50002 - Hacen falta parametros para el envio de correos</exception>
 		internal void MailBuilder(string message, ExecutionControl executionControl, UserAdmin user)
 		{
 			if (executionControl == null || user == null || string.IsNullOrEmpty(message))
-				throw new NullReferenceException();
+				throw new NullReferenceException("50002 - Hacen falta parametros para el envio de correos");
 
 			string header = $"[Importante] Mensaje de Soari.WinService - {message}";
 			string body = $@"<b>Hola {user.Name}</b>.

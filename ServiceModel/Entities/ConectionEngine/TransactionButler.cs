@@ -43,7 +43,7 @@ namespace ServiceModel.Entities.ConectionEngine
 			string ServicePassword = new AesManager().Decrypt(objConfiguration.ServicePassword);
 
 			if (!ValidarConexion(objConfiguration))
-				throw new NullReferenceException();
+				throw new NullReferenceException("50004 - Hacen falta parametros para conectar al servicio");
 
 			return new GetData(objConfiguration.ServiceUrl
 								, objConfiguration.ServiceUser

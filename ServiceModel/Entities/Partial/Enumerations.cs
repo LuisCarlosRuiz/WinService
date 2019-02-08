@@ -7,16 +7,6 @@
 
 namespace ServiceModel.Entities.Partial
 {
-	/// <summary>
-	/// The tak enumeration
-	/// </summary>
-	public enum TaskEnum
-	{
-		/// <summary>
-		/// The task insert
-		/// </summary>
-		TaskInsert
-	}
 
 	/// <summary>
 	/// the message enumeration
@@ -36,6 +26,11 @@ namespace ServiceModel.Entities.Partial
 
 	public enum ServiceTaskName
 	{
+		/// <summary>
+		/// The task insert
+		/// </summary>
+		TaskInsert,
+
 		/// <summary>
 		/// The get last synchronize
 		/// </summary>
