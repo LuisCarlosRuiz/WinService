@@ -67,6 +67,11 @@ namespace ServiceModel.SyncJobs
 			var hData = new HomologationData(ClientId);
 			var hAgencia = hData.GetHomologationAgencia();
 			var hciudad = hData.GetHomologationCiudad();
+			var hPais = hData.GetHomologationPais();
+			var hTipoContrato = hData.GetHomologationTipoContrato();
+			var hDepartamento = hData.GetHomologationDepartamento();
+			var hGenero = hData.GetHomologationGenero();
+			var hTipoIdentificacion = hData.GetHomologationTipoIdentificacion();
 
 			IEnumerable<Nit> insertData = GetServiceData()
 				.Select(q => new Nit
@@ -92,10 +97,19 @@ namespace ServiceModel.SyncJobs
 					strPEPs = q.PersonaExpuesta,
 					strCodigoEmpresaTrabajo = q.CodidoEmpresaLabora,
 					idAgencia = hAgencia.Where(x => x.strEquivalenciaOPA == q.CodigoAgencia.ToString())
-								.FirstOrDefault().intId,
-					idCiudad = hciudad.Where(x => x.strNombreCiudad == q.CiudadResidenciaNombre.ToString())
-								.FirstOrDefault().intId, //Pendiente pod codigo de ciudad
-
+								?.FirstOrDefault()?.intId ?? 0,
+					idCiudad = hciudad.Where(x => x.strEquivalenciaOPA == q.CiudadResidenciaNombre.ToString())
+								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo  
+					idPais = hPais.Where(x => x.strEquivalenciaOPA == q.PaisResidenciaNombre.ToString())
+								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo  
+					idTipoContrato = hTipoContrato.Where(x => x.strEquivalenciaOPA == q.TipoContrato.ToString())
+								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo  
+					idDepartamento = hDepartamento.Where(x => x.strEquivalenciaOPA == q.NombreDepartamentoResidencia.ToString())
+								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo
+					idGenero = hGenero.Where(x => x.strEquivalenciaOPA == q.Sexo.ToString())
+								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo
+					idTipoIdentificacion = hTipoIdentificacion.Where(x => x.strEquivalenciaOPA == q.TipoIdentificacion.ToString())
+								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo
 				});
 			BulkInsert(insertData);
 		}

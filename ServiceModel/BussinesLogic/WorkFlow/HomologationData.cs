@@ -40,7 +40,7 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 		public List<Agencia> GetHomologationAgencia()
 		{
 			if (string.IsNullOrEmpty(idClient))
-				throw new NullReferenceException("50000  - Falta un parametro para la consulta de agencia");
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
 
 			using (var ctx = new Deal(idClient).DbSoaryContext())
 			{
@@ -57,7 +57,7 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 		public List<Ciudad> GetHomologationCiudad()
 		{
 			if (string.IsNullOrEmpty(idClient))
-				throw new NullReferenceException("50001  - Falta un parametro para la consulta de ciudad");
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
 
 			using (var ctx = new Deal(idClient).DbSoaryContext())
 			{
@@ -65,5 +65,84 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 			}
 		}
 
+		/// <summary>
+		/// Gets the homologation tipo contrato.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50010  - Falta un parametro para la consulta</exception>
+		internal List<TipoContrato> GetHomologationTipoContrato()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.TipoContrato.ToList();
+			}
+		}
+
+		/// <summary>
+		/// Gets the homologation tipo identificacion.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
+		internal List<TipoIdentificacion> GetHomologationTipoIdentificacion()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.TipoIdentificacion.ToList();
+			}
+		}
+
+		/// <summary>
+		/// Gets the homologation genero.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50012  - Falta un parametro para la consulta</exception>
+		internal List<Genero> GetHomologationGenero()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.Genero.ToList();
+			}
+		}
+
+		/// <summary>
+		/// Gets the homologation departamento.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50011  - Falta un parametro para la consulta</exception>
+		internal List<Departamento> GetHomologationDepartamento()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.Departamento.ToList();
+			}
+		}
+
+		/// <summary>
+		/// Gets the homologation pais.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
+		internal List<Pais> GetHomologationPais()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.Pais.ToList();
+			}
+		}
 	}
 }
