@@ -12,6 +12,7 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 	using Client.Bussines;
 	using Client.SoapiClient;
 	using System.Collections.Generic;
+	using System;
 
 
 	/// <summary>
@@ -29,8 +30,8 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 		/// <param name="cuenta">The cuenta.</param>
 		public GetClientData(ClientConfiguration _client, List<Cuenta> _cuenta)
 		{
-			_client = client;
-			_cuenta = cuenta;
+			client = _client;
+			cuenta = _cuenta;
 		}
 
 		/// <summary>
@@ -41,14 +42,17 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);
 
-			return obj.GetBalance(new Client.Partial.FiltroBalance()
+			var data = obj.GetBalance(new Client.Partial.FiltroBalance()
 			{
 				ClaveEntidad = client.ServicedbPassword,
-				SaldosMayores = long.Parse(cuenta.Select(q => q.FilterBalance.SaldosMayores.ToString()).FirstOrDefault()),
+				SaldosMayores = long.Parse(cuenta.Select(
+								q => Math.Round(q.FilterBalance.SaldosMayores)
+								.ToString()).FirstOrDefault()),
 				Anio = cuenta.Select(q => q.FilterBalance.Ano).FirstOrDefault(),
 				Mes = cuenta.Select(q => q.FilterBalance.Mes).FirstOrDefault(),
 				CodigoCuentas = cuenta.Select(q => q.CodigoCuenta).ToArray()
 			});
+			return data;
 		}
 	}
 }

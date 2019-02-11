@@ -130,7 +130,7 @@ namespace ServiceModel.SyncJobs
 					.OrderBy(q => q.Consecutive).FirstOrDefault();
 
 				if (scheduler == null)
-					throw new Exception();
+					throw new NullReferenceException("50008 - No hay tareas asignadas al job");
 
 				scheduler.Status = "0";
 				new GenericEntity<Scheduler>(ctx).UpdateEntity(scheduler);

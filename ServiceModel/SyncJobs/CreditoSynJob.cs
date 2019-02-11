@@ -44,7 +44,7 @@ namespace ServiceModel.SyncJobs
 			var client = GetClientConfiguration(ClientId);
 
 			clientName = client.ClientName;
-			TaskName = ServiceTaskName.ObtenerAsociado.ToString();
+			TaskName = ServiceTaskName.ObtenerCreditos.ToString();
 
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);

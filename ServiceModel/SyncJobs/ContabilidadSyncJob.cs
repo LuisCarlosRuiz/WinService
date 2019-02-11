@@ -45,23 +45,27 @@ namespace ServiceModel.SyncJobs
 			var client = GetClientConfiguration(ClientId);
 
 			clientName = client.ClientName;
-			TaskName = ServiceTaskName.ObtenerAsociado.ToString();
+			TaskName = ServiceTaskName.ObtenerBalanceAgencia.ToString();
 
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);
 
-			var filtro = GetBalanceFilter(client.ConfigurationId);
+			var filter = GetBalanceFilter(client.ConfigurationId);
 
-			GetClientData = new GetClientData(client, filtro);
+			GetClientData = new GetClientData(client, filter);		
 
-			return obj.GetBalanceAgencia(new Client.Partial.FiltroBalance()
+			var data = obj.GetBalanceAgencia(new Client.Partial.FiltroBalance()
 			{
 				ClaveEntidad = client.ServicedbPassword,
-				SaldosMayores = long.Parse(filtro.Select(q => q.FilterBalance.SaldosMayores.ToString()).FirstOrDefault()),
-				Anio = filtro.Select(q => q.FilterBalance.Ano).FirstOrDefault(),
-				Mes = filtro.Select(q => q.FilterBalance.Mes).FirstOrDefault(),
-				CodigoCuentas = filtro.Select(q => q.CodigoCuenta).ToArray()
+				SaldosMayores = long.Parse(filter.Select(
+								q => Math.Round(q.FilterBalance.SaldosMayores)
+								.ToString()).FirstOrDefault()),
+				Anio = filter.Select(q => q.FilterBalance.Ano).FirstOrDefault(),
+				Mes = filter.Select(q => q.FilterBalance.Mes).FirstOrDefault(),
+				CodigoCuentas = filter.Select(q => q.CodigoCuenta).ToArray()
 			});
+
+			return data;
 		}
 
 		/// <summary>
@@ -72,16 +76,18 @@ namespace ServiceModel.SyncJobs
 			var hdata = new HomologationData(ClientId);
 			var hagencia = hdata.GetHomologationAgencia();
 
-			IEnumerable<Contabilidad> insertData = GetServiceData()
+			var insertData = GetServiceData()
 				.Select(q => new Contabilidad
 				{
 					NumeroCuenta = q.CodigoCuenta,
 					FechaSaldo = q.FechaCorte,
 					SaldoCuenta = q.SaldoCuenta,
-					IdAgencia = hagencia.Where(x => x.strEquivalenciaOPA == q.CodigoAgencia)
-								.FirstOrDefault().intId,
+					IdAgencia = hagencia.Where(
+								x => x.strEquivalenciaOPA ==
+								(q?.CodigoAgencia ?? string.Empty))
+								?.FirstOrDefault().intId ?? 0,
 					NombreCuenta = GetNombreCuenta(q.CodigoCuenta)
-				});
+				}).ToList();
 			BulkInsert(insertData);
 		}
 
@@ -102,7 +108,7 @@ namespace ServiceModel.SyncJobs
 		/// Bulks the insert.
 		/// </summary>
 		/// <param name="processData">The process data.</param>
-		private void BulkInsert(IEnumerable<Contabilidad> processData)
+		private void BulkInsert(List<Contabilidad> processData)
 		{
 			using (var ctx = new Deal(ClientId).DbSoaryContext())
 			{

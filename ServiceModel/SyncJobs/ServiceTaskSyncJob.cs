@@ -9,6 +9,7 @@ namespace ServiceModel.SyncJobs
 {
 	using Client.Util;
 	using ServiceModel.Entities.dbService;
+	using ServiceModel.Entities.Partial;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -38,6 +39,9 @@ namespace ServiceModel.SyncJobs
 		{
 			var methodList = objGlobal.GetServiceAtributes().Where(q => !q.Name.Contains("Async"));
 			List<string> methodNames = new List<string>();
+
+			clientName = string.Empty;
+			TaskName = ServiceTaskName.TaskInsert.ToString();
 
 			foreach (var item in methodList)
 			{
