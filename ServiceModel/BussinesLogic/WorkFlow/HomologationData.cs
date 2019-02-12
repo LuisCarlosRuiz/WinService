@@ -65,6 +65,28 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 			}
 		}
 
+		internal List<TipoGarantia> GetHomologationTipoGarantia()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.TipoGarantia.ToList();
+			}
+		}
+
+		internal List<TipoModalidad> GetHomologationModalidad()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.TipoModalidad.ToList();
+			}
+		}
+
 		/// <summary>
 		/// Gets the homologation tipo contrato.
 		/// </summary>
@@ -142,6 +164,21 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 			using (var ctx = new Deal(idClient).DbSoaryContext())
 			{
 				return ctx.Pais.ToList();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TipoCuota">The type of the ipo cuota.</typeparam>
+		internal List<TipoCuota> GetHomologationTipoCuota()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.TipoCuota.ToList();
 			}
 		}
 	}

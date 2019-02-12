@@ -98,18 +98,18 @@ namespace ServiceModel.SyncJobs
 					strCodigoEmpresaTrabajo = q.CodidoEmpresaLabora,
 					idAgencia = hAgencia.Where(x => x.strEquivalenciaOPA == q.CodigoAgencia.ToString())
 								?.FirstOrDefault()?.intId ?? 0,
-					idCiudad = hciudad.Where(x => x.strEquivalenciaOPA == q.CiudadResidenciaNombre.ToString())
-								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo  
-					idPais = hPais.Where(x => x.strEquivalenciaOPA == q.PaisResidenciaNombre.ToString())
-								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo  
-					idTipoContrato = hTipoContrato.Where(x => x.strEquivalenciaOPA == q.TipoContrato.ToString())
-								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo  
-					idDepartamento = hDepartamento.Where(x => x.strEquivalenciaOPA == q.NombreDepartamentoResidencia.ToString())
-								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo
-					idGenero = hGenero.Where(x => x.strEquivalenciaOPA == q.Sexo.ToString())
-								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo
-					idTipoIdentificacion = hTipoIdentificacion.Where(x => x.strEquivalenciaOPA == q.TipoIdentificacion.ToString())
-								?.FirstOrDefault()?.intId ?? 0, //Pendiente por codigo
+					idCiudad = hciudad.Where(x => x.strNombreCiudad == q.CiudadResidenciaNombre.ToString())
+								?.FirstOrDefault()?.intId ?? 0,
+					idPais = hPais.Where(x => x.strNombrePais == q.PaisResidenciaNombre.ToString())
+								?.FirstOrDefault()?.intId ?? 0,
+					idTipoContrato = hTipoContrato.Where(x => x.strNombreTipoContrato == q.TipoContrato.ToString())
+								?.FirstOrDefault()?.intId ?? 0,
+					idDepartamento = hDepartamento.Where(x => x.strNombreDepartamento == q.NombreDepartamentoResidencia.ToString())
+								?.FirstOrDefault()?.intId ?? 0,
+					idGenero = hGenero.Where(x => x.strNombreGenero == q.Sexo.ToString())
+								?.FirstOrDefault()?.intId ?? 0,
+					idTipoIdentificacion = hTipoIdentificacion.Where(x => x.strNombreTipoIdentificacion == q.TipoIdentificacion.ToString())
+								?.FirstOrDefault()?.intId ?? 0,					
 				});
 			BulkInsert(insertData);
 		}

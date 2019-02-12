@@ -16,6 +16,7 @@ namespace ServiceModel.SyncJobs
 	using ServiceModel.Entities.Partial;
 	using ServiceModel.Entities.ConectionEngine;
 	using System.Collections.Generic;
+	using ServiceModel.BussinesLogic.WorkFlow;
 
 	/// <summary>
 	/// The credito Sync Job
@@ -63,6 +64,12 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		public override void InsertData()
 		{
+			var hData = new HomologationData(ClientId);
+			var hTipoCuota = hData.GetHomologationTipoCuota();
+			var hAgencia = hData.GetHomologationAgencia();
+			var hTipoGarantia = hData.GetHomologationTipoGarantia();
+			var hModalidad = hData.GetHomologationModalidad();
+
 			IEnumerable<Credito> insertData = GetServiceData()
 				.Select(q => new Credito
 				{
@@ -88,7 +95,19 @@ namespace ServiceModel.SyncJobs
 					numPlazo = q.PlazoCredito,
 					numProvisionCapital = q.Provision,
 					numProvisionInteres = q.ProvisionInteres,
-					numNit = q.CedulaAsociado
+					numNit = q.CedulaAsociado,
+					numCapitalProyectado = 0, //Calculado
+					idTipoCuotaCredito = hTipoCuota.Where(x => x.strNombreTipoCuotaCredito == q.TipoCuota)
+								?.FirstOrDefault()?.intId ?? 0,
+					idAgencia = hAgencia.Where(x => x.strNombreAgencia == q.Agencia)
+								?.FirstOrDefault()?.intId ?? 0,
+					idTipoGarantia = hTipoGarantia.Where(x => x.strNombreTipoGarantia == q.ClaseGarantia)
+								?.FirstOrDefault()?.intId ?? 0,
+					idTipoModalidadCredito = hModalidad.Where(x => x.strNombreTipoModalidadCredito == q.ModalidadInteres)
+								?.FirstOrDefault()?.intId ?? 0,
+					numAño = q.FechaDesembolso.Year,
+					numTasaNominalPeriodica = 0, //Calculado
+					dtmFechaProximoPago = DateTime.Now, //Calculado
 				});
 			BulkInsert(insertData);
 		}

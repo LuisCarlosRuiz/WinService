@@ -113,6 +113,7 @@ namespace ServiceModel.SyncJobs
 			using (var ctx = new Deal(ClientId).DbSoaryContext())
 			{
 				var repository = new GenericEntity<Contabilidad>(ctx);
+				repository.Truncate();
 				repository.BulkInsert(processData);
 			}
 		}
