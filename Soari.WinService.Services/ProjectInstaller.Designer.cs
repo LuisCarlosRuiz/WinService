@@ -36,12 +36,14 @@
 			this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.NetworkService;
 			this.serviceProcessInstaller1.Password = null;
 			this.serviceProcessInstaller1.Username = null;
+			this.serviceProcessInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceProcessInstaller1_AfterInstall);
 			// 
 			// serviceInstaller1
 			// 
-			this.serviceInstaller1.Description = "Servicio para gestionar las transacciones entre SOAPi y SOARI";
+			this.serviceInstaller1.Description = "Servicio transaccional de datos entre SOAPi y SOARI";
 			this.serviceInstaller1.DisplayName = "SoariWinService";
 			this.serviceInstaller1.ServiceName = "Soari Data Transfer";
+			this.serviceInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
 			// 
 			// ProjectInstaller
 			// 
