@@ -65,6 +65,81 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 			}
 		}
 
+		/// <summary>
+		/// Gets the homologation tipo aporte.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
+		internal List<TipoAporte> GetHomologationTipoAporte()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.TipoAporte.ToList();
+			}
+		}
+
+		internal List<Ocupacion> GetHomologationOcupacion()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.Ocupacion.ToList();
+			}
+		}
+
+		/// <summary>
+		/// Gets the homologation nivel estudios.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
+		internal List<NivelEstudio> GetHomologationNivelEstudios()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.NivelEstudio.ToList();
+			}
+		}
+
+		/// <summary>
+		/// Gets the homologation estado civil.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
+		internal List<EstadoCivil> GetHomologationEstadoCivil()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.EstadoCivil.ToList();
+			}
+		}
+
+		/// <summary>
+		/// Gets the homologation actividad economica.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
+		internal List<ActividadEconomica> GetHomologationActividadEconomica()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.ActividadEconomica.ToList();
+			}
+		}
+
 		internal List<TipoGarantia> GetHomologationTipoGarantia()
 		{
 			if (string.IsNullOrEmpty(idClient))

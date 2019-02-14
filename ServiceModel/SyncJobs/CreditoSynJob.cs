@@ -50,7 +50,7 @@ namespace ServiceModel.SyncJobs
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);
 
-			var filtro = GetProductFilter(client.ConfigurationId, ServiceTaskName.ObtenerCreditos.ToString());
+			var filtro = GetProductFilter(client.ConfigurationId, TaskName);
 
 			return obj.GetCredito(new Client.Partial.FiltroProducto()
 			{
@@ -107,7 +107,7 @@ namespace ServiceModel.SyncJobs
 								?.FirstOrDefault()?.intId ?? 0,
 					numAño = q.FechaDesembolso.Year,
 					numTasaNominalPeriodica = 0, //Calculado
-					dtmFechaProximoPago = DateTime.Now, //Calculado
+					dtmFechaProximoPago = DateTime.Now, //Calculado					
 				});
 			BulkInsert(insertData);
 		}

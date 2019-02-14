@@ -72,6 +72,9 @@ namespace ServiceModel.SyncJobs
 			var hDepartamento = hData.GetHomologationDepartamento();
 			var hGenero = hData.GetHomologationGenero();
 			var hTipoIdentificacion = hData.GetHomologationTipoIdentificacion();
+			var hActividadEconimica = hData.GetHomologationActividadEconomica();
+			var hEstadoCivil = hData.GetHomologationEstadoCivil();
+			var hNivelEstudios = hData.GetHomologationNivelEstudios();
 
 			IEnumerable<Nit> insertData = GetServiceData()
 				.Select(q => new Nit
@@ -109,7 +112,10 @@ namespace ServiceModel.SyncJobs
 					idGenero = hGenero.Where(x => x.strNombreGenero == q.Sexo.ToString())
 								?.FirstOrDefault()?.intId ?? 0,
 					idTipoIdentificacion = hTipoIdentificacion.Where(x => x.strNombreTipoIdentificacion == q.TipoIdentificacion.ToString())
-								?.FirstOrDefault()?.intId ?? 0,					
+								?.FirstOrDefault()?.intId ?? 0,
+					idActividadEconomica = (int)GetHomologation(hActividadEconimica, q.CodigoCIIU, "strEquivalenciaOPA", "intId"),
+					idEstadoCivil = (int)GetHomologation(hEstadoCivil, q.EstadoCivil, "strNombreEstadoCivil", "intId"),
+					idNivelEstudio = (int)GetHomologation(hNivelEstudios, q.Estudios, "strNombreNivelEstudio", "intId")					
 				});
 			BulkInsert(insertData);
 		}

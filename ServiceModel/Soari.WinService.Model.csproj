@@ -169,6 +169,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyncJobs\AporteSyncJob.cs" />
     <Compile Include="SyncJobs\ContabilidadSyncJob.cs" />
     <Compile Include="SyncJobs\CreditoSynJob.cs" />
     <Compile Include="SyncJobs\ModeratorSyncJob.cs" />
