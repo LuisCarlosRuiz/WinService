@@ -82,10 +82,7 @@ namespace ServiceModel.SyncJobs
 					NumeroCuenta = q.CodigoCuenta,
 					FechaSaldo = q.FechaCorte,
 					SaldoCuenta = q.SaldoCuenta,
-					IdAgencia = hagencia.Where(
-								x => x.strEquivalenciaOPA ==
-								(q?.CodigoAgencia ?? string.Empty))
-								?.FirstOrDefault().intId ?? 0,
+					IdAgencia = (int)GetHomologation(hagencia, q.CodigoAgencia, "strEquivalenciaOPA", "intId"),
 					NombreCuenta = GetNombreCuenta(q.CodigoCuenta)
 				}).ToList();
 			BulkInsert(insertData);

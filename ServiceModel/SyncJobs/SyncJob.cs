@@ -181,5 +181,52 @@ namespace ServiceModel.SyncJobs
 				return ctx.Cuenta.Include("FilterBalance").Where(q => q.FilterBalance.ConfiguracionId == ConfigurationId).ToList();
 			}
 		}
+
+		/// <summary>
+		/// return the homologation.
+		/// </summary>
+		/// <param name="entity">The entity.</param>
+		/// <param name="HomologationKeyValue">The homologation key value.</param>
+		/// <param name="homologationKeyName">Name of the homologation key.</param>
+		/// <param name="valueKeyToReturn">The value key to return.</param>
+		/// <returns></returns>
+		public object GetHomologation(IEnumerable<object> entity, object HomologationKeyValue, string homologationKeyName, string valueKeyToReturn)
+		{
+			var data = entity.Where(
+				x => x.GetType().GetProperties().Where(q => q.Name == homologationKeyName) == HomologationKeyValue)
+				.FirstOrDefault().GetType().GetProperties()
+				.Where(q => q.Name == valueKeyToReturn).FirstOrDefault().GetValue(entity, null);
+
+			if (data == null)
+				HomologationCatch(HomologationKeyValue.ToString(), entity.GetType().Name);
+
+			return data;
+		}
+
+		/// <summary>
+		/// Catch de homologacion event and save the log.
+		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <param name="table">The table.</param>
+		/// <returns></returns>
+		internal void HomologationCatch(string value, string table)
+		{
+			using (var ctx = new DbServiceContext())
+			{
+				var repository = new GenericEntity<ExecutionControl>(ctx);
+
+				var data = new ExecutionControl
+				{
+					ExecutionId = new Guid(),
+					Client = clientName,
+					ExecutionDate = DateTime.Now,
+					Task = $"Homologacion-({typeof(TEntity).GetType().Name})",
+					Log = $"No es posible homologar el valor [{value}] en la tabla [{table}]."
+				};
+
+				repository.InsertEntity(data);
+				ctx.SaveChanges();
+			}
+		}
 	}
 }

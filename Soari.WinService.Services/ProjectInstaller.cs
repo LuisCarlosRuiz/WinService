@@ -7,13 +7,15 @@
 
 namespace Soari.WinService.Services
 {
-	using System.ServiceProcess;
+	using System.ComponentModel;
+	using System.Configuration.Install;
 
 	/// <summary>
 	/// the project instaler
 	/// </summary>
 	/// <seealso cref="System.ServiceProcess.ServiceBase" />
-	partial class ProjectInstaller : System.Configuration.Install.Installer
+	[RunInstaller(true)]
+	partial class ProjectInstaller : Installer
 	{
 		public ProjectInstaller()
 		{

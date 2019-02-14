@@ -40,7 +40,7 @@
 			// 
 			// serviceInstaller1
 			// 
-			this.serviceInstaller1.Description = "Servicio transaccional de datos entre SOAPi y SOARI";
+			this.serviceInstaller1.Description = "Servicio transaccional de datos entre SOAPI y SOARI";
 			this.serviceInstaller1.DisplayName = "SoariWinService";
 			this.serviceInstaller1.ServiceName = "Soari Data Transfer";
 			this.serviceInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
