@@ -140,6 +140,11 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 			}
 		}
 
+		/// <summary>
+		/// Gets the homologation tipo garantia.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
 		internal List<TipoGarantia> GetHomologationTipoGarantia()
 		{
 			if (string.IsNullOrEmpty(idClient))
@@ -151,6 +156,11 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 			}
 		}
 
+		/// <summary>
+		/// Gets the homologation modalidad.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
 		internal List<TipoModalidad> GetHomologationModalidad()
 		{
 			if (string.IsNullOrEmpty(idClient))
