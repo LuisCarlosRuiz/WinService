@@ -66,6 +66,38 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 		}
 
 		/// <summary>
+		/// Gets the homologation tipo ahorro.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
+		internal List<TipoAhorro> GetHomologationTipoAhorro()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.TipoAhorro.ToList();
+			}
+		}
+
+		/// <summary>
+		/// Gets the homologation estado ahorro.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
+		internal List<EstadoAhorro> GetHomologationEstadoAhorro()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.EstadoAhorro.ToList();
+			}
+		}
+
+		/// <summary>
 		/// Gets the homologation tipo aporte.
 		/// </summary>
 		/// <returns></returns>

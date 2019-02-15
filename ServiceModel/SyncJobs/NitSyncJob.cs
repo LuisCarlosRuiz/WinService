@@ -142,6 +142,10 @@ namespace ServiceModel.SyncJobs
 					q.GastoTransporte;
 		}
 
+		/// <summary>
+		/// Bulks the insert.
+		/// </summary>
+		/// <param name="processData">The process data.</param>
 		private void BulkInsert(IEnumerable<Nit> processData)
 		{
 			using (var ctx = new Deal(ClientId).DbSoaryContext())

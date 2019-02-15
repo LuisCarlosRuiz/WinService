@@ -86,4 +86,27 @@ namespace ServiceModel.Entities.Partial
 		/// </summary>
 		ObtenerTransacciones
 	}
+
+	public enum TipoAhorro
+	{
+		/// <summary>
+		/// The ahorro contractual
+		/// </summary>
+		AhorroContractual,
+
+		/// <summary>
+		/// The ahorro temino
+		/// </summary>
+		AhorroTemino,
+
+		/// <summary>
+		/// The ahorro vista
+		/// </summary>
+		AhorroVista,
+
+		/// <summary>
+		/// The ahorro permanente
+		/// </summary>
+		AhorroPermanente
+	}
 }
