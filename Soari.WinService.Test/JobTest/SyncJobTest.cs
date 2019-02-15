@@ -88,6 +88,50 @@ namespace Soari.WinService.Test.JobTest
 		}
 
 		/// <summary>
+		/// Ahorroes the contractual synchronize job test.
+		/// </summary>
+		[TestMethod]
+		public void AhorroContractualSyncJobTest()
+		{
+			var job = new AhorroContractualSyncJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
+		}
+
+		/// <summary>
+		/// Ahorroes the vista synchronize job test.
+		/// </summary>
+		[TestMethod]
+		public void AhorroVistaSyncJobTest()
+		{
+			var job = new AhorroVistaSyncJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
+		}
+
+		/// <summary>
+		/// Ahorroes the termino synchronize job test.
+		/// </summary>
+		[TestMethod]
+		public void AhorroTerminoSyncJobTest()
+		{
+			var job = new AhorroTerminoSyncJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
+		}
+
+		/// <summary>
+		/// Cuotases the extra synchronize job test.
+		/// </summary>
+		[TestMethod]
+		public void CuotasExtraSyncJobTest()
+		{
+			var job = new CuotasExtraSyncJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
+		}
+
+		/// <summary>
 		/// The test start jobs.
 		/// </summary>
 		[TestMethod]

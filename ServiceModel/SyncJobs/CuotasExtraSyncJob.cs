@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // Luis Carlos Ruiz 
 // <summary>
-//   Defines the ServiceTaskSyncJob type.
+//   Defines the CuotasExtraSyncJob type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -19,17 +19,17 @@ namespace ServiceModel.SyncJobs
 	using ServiceModel.BussinesLogic.WorkFlow;
 
 	/// <summary>
-	/// The credito Sync Job
+	/// The Cuotas Extra Sync Job Sync Job
 	/// </summary>
-	/// <seealso cref="ServiceModel.SyncJobs.SyncJob{ServiceModel.Entities.Soari.Credito}" />
-	public class CreditoSynJob : SyncJob<Credito>
+	/// <seealso cref="ServiceModel.SyncJobs.SyncJob{ServiceModel.Entities.Soari.CuotaExtra}" />
+	public class CuotasExtraSyncJob : SyncJob<CuotaExtra>
 	{
 		private string ClientId;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="CreditoSynJob"/> class.
 		/// </summary>
-		public CreditoSynJob()
+		public CuotasExtraSyncJob()
 		{
 			ClientId = GetClientId(this.GetType().Name);
 		}
@@ -70,49 +70,28 @@ namespace ServiceModel.SyncJobs
 			var hTipoGarantia = hData.GetHomologationTipoGarantia();
 			var hModalidad = hData.GetHomologationModalidad();
 
-			IEnumerable<Credito> insertData = GetServiceData()
-				.Select(q => new Credito
+			var lstcreditos = GetServiceData().Where(q => q.CuotasExtrasCreditoRepository.Count() > 0).Select(k => k.CuotasExtrasCreditoRepository);
+
+			foreach (var credito in lstcreditos)
+			{
+				IEnumerable<CuotaExtra> insertData = credito
+				.Select(q => new CuotaExtra
 				{
-					numAnualidad = q.AnualidadCredito,
-					dtmFechaDesembolso = q.FechaDesembolso,
-					dtmFechaVencimiento = q.FechaVencimiento,
-					numAlturaCuota = q.AlturaCredito,
-					numDiasMora = q.DiasMora,
-					numInteresCorriente = q.InteresCorriente,
-					numInteresMora = q.InteresMora,
-					numInteresCorrienteContingente = q.InteresCorrienteContingente,
-					numInteresMoraContingente = q.InteresMoraContingente,
-					numMontoInicial = q.CapitalInicial,
-					strCategoriaFinal = q.CategoriaFinal,
-					strLinea = q.CodigoLinea,
-					strDestino = q.NombreDestino,
-					strPagare = q.Pagare.ToString(),
-					numValorGarantia = q.ValorGarantia,
-					numTasaEfectiva = q.TasaEfectiva,
-					numPeriodicidad = q.PeriodoCapital,
-					numSaldoCapital = q.SaldoCapital,
-					numSaldoAlDia = q.SaldoPonerseDia,
-					numPlazo = q.PlazoCredito,
-					numProvisionCapital = q.Provision,
-					numProvisionInteres = q.ProvisionInteres,
-					numNit = q.CedulaAsociado,
-					numCapitalProyectado = 0, //Calculado
-					idTipoCuotaCredito = (int)GetHomologation(hTipoCuota, q.TipoCuota, "strNombreTipoCuotaCredito", "intId"),
-					idAgencia = (int)GetHomologation(hAgencia, q.Agencia, "strNombreAgencia", "intId"),
-					idTipoGarantia = (int)GetHomologation(hTipoGarantia, q.ClaseGarantia, "strNombreTipoGarantia", "intId"),
-					idTipoModalidadCredito = (int)GetHomologation(hModalidad, q.ModalidadInteres, "strNombreTipoModalidadCredito", "intId"),
-					numAño = q.FechaDesembolso.Year,
-					numTasaNominalPeriodica = 0, //Calculado
-					dtmFechaProximoPago = DateTime.Now, //Calculado
+					Pagada = q.Pagado,
+					Pagare = q.NumeroCredito.ToString(),
+					Plazo = q.Plazo,
+					ValorPresente = q.ValorCuota, //Pendiente de revisar
+					ValorFuturo = q.TotalCuota //Pendiente de revisar
 				});
-			BulkInsert(insertData);
+				BulkInsert(insertData);
+			}
 		}
 
-		private void BulkInsert(IEnumerable<Credito> processData)
+		private void BulkInsert(IEnumerable<CuotaExtra> processData)
 		{
 			using (var ctx = new Deal(ClientId).DbSoaryContext())
 			{
-				var repository = new GenericEntity<Credito>(ctx);
+				var repository = new GenericEntity<CuotaExtra>(ctx);
 				repository.BulkInsert(processData);
 			}
 		}

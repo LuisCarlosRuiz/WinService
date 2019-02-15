@@ -175,6 +175,7 @@
     <Compile Include="SyncJobs\AporteSyncJob.cs" />
     <Compile Include="SyncJobs\ContabilidadSyncJob.cs" />
     <Compile Include="SyncJobs\CreditoSynJob.cs" />
+    <Compile Include="SyncJobs\CuotasExtraSyncJob.cs" />
     <Compile Include="SyncJobs\ModeratorSyncJob.cs" />
     <Compile Include="SyncJobs\NitSyncJob.cs" />
     <Compile Include="SyncJobs\ServiceTaskSyncJob.cs" />

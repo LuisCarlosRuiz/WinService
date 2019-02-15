@@ -22,7 +22,7 @@ namespace ServiceModel.SyncJobs
 	/// <summary>
 	/// The ahorro a termino Sync job
 	/// </summary>
-	class AhorroTerminoSyncJob : SyncJob<Ahorro>
+	public class AhorroTerminoSyncJob : SyncJob<Ahorro>
 	{
 		private string ClientId;
 
