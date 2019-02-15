@@ -99,20 +99,13 @@ namespace ServiceModel.SyncJobs
 					strZona = q.NombreZona,
 					strPEPs = q.PersonaExpuesta,
 					strCodigoEmpresaTrabajo = q.CodidoEmpresaLabora,
-					idAgencia = hAgencia.Where(x => x.strEquivalenciaOPA == q.CodigoAgencia.ToString())
-								?.FirstOrDefault()?.intId ?? 0,
-					idCiudad = hciudad.Where(x => x.strNombreCiudad == q.CiudadResidenciaNombre.ToString())
-								?.FirstOrDefault()?.intId ?? 0,
-					idPais = hPais.Where(x => x.strNombrePais == q.PaisResidenciaNombre.ToString())
-								?.FirstOrDefault()?.intId ?? 0,
-					idTipoContrato = hTipoContrato.Where(x => x.strNombreTipoContrato == q.TipoContrato.ToString())
-								?.FirstOrDefault()?.intId ?? 0,
-					idDepartamento = hDepartamento.Where(x => x.strNombreDepartamento == q.NombreDepartamentoResidencia.ToString())
-								?.FirstOrDefault()?.intId ?? 0,
-					idGenero = hGenero.Where(x => x.strNombreGenero == q.Sexo.ToString())
-								?.FirstOrDefault()?.intId ?? 0,
-					idTipoIdentificacion = hTipoIdentificacion.Where(x => x.strNombreTipoIdentificacion == q.TipoIdentificacion.ToString())
-								?.FirstOrDefault()?.intId ?? 0,
+					idAgencia = (int)GetHomologation(hAgencia, q.CodigoAgencia, "strEquivalenciaOPA", "intId"),
+					idCiudad = (int)GetHomologation(hciudad, q.CiudadResidenciaNombre, "strNombreCiudad", "intId"),
+					idPais = (int)GetHomologation(hPais, q.PaisResidenciaNombre, "strNombrePais", "intId"),
+					idTipoContrato = (int)GetHomologation(hTipoContrato, q.TipoContrato, "strNombreTipoContrato", "intId"),
+					idDepartamento = (int)GetHomologation(hDepartamento, q.NombreDepartamentoResidencia, "strNombreDepartamento", "intId"),
+					idGenero = (int)GetHomologation(hGenero, q.Sexo, "strNombreGenero", "intId"),
+					idTipoIdentificacion = (int)GetHomologation(hTipoIdentificacion, q.TipoIdentificacion, "strNombreTipoIdentificacion", "intId"),
 					idActividadEconomica = (int)GetHomologation(hActividadEconimica, q.CodigoCIIU, "strEquivalenciaOPA", "intId"),
 					idEstadoCivil = (int)GetHomologation(hEstadoCivil, q.EstadoCivil, "strNombreEstadoCivil", "intId"),
 					idNivelEstudio = (int)GetHomologation(hNivelEstudios, q.Estudios, "strNombreNivelEstudio", "intId")					

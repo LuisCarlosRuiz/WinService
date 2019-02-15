@@ -52,10 +52,13 @@ namespace ServiceModel.SyncJobs
 
 			var filter = GetProductFilter(client.ConfigurationId, TaskName);
 
+			if (filter == null)
+				throw new NullReferenceException("No se encontro un filtro para este producto");
+
 			var data = obj.GetAporte(new Client.Partial.FiltroProducto()
 			{
 				ClaveEntidad = client.ServicedbPassword,
-				SaldosMayores = long.Parse(filter.SaldosMayores.ToString())				
+				SaldosMayores = long.Parse(Math.Round(filter.SaldosMayores).ToString())				
 			});
 
 			return data;
@@ -67,7 +70,7 @@ namespace ServiceModel.SyncJobs
 		public override void InsertData()
 		{
 			var hdata = new HomologationData(ClientId);
-			var hagencia = hdata.GetHomologationAgencia();
+			var hAgencia = hdata.GetHomologationAgencia();
 			var hTipoAporte = hdata.GetHomologationTipoAporte();
 
 			var insertData = GetServiceData()
@@ -81,8 +84,8 @@ namespace ServiceModel.SyncJobs
 					strNumeroCuenta = q.NumeroCuentaAporte,
 					strLinea =q.CodigoLinea,
 					numValorRevalorizacion = 0,
-					idAgencia = (int)GetHomologation(hagencia, q.Agencia, "strNombreAgencia", "intId"),
-					idTipoAporte = (int)GetHomologation(hTipoAporte, q.Agencia, "strNombreTipoAporte", "intId")
+					idAgencia = (int)GetHomologation(hAgencia, q.Agencia, "strNombreAgencia", "intId"),
+					idTipoAporte = (int)GetHomologation(hTipoAporte, q.TipoAporte, "strNombreTipoAporte", "intId")
 				}).ToList();
 			BulkInsert(insertData);
 		}

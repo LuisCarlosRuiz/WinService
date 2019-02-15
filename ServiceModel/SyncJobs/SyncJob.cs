@@ -15,6 +15,7 @@ namespace ServiceModel.SyncJobs
 	using System;
 	using System.Linq;
 	using System.Collections.Generic;
+	using System.Reflection;
 
 	/// <summary>
 	/// the sync job 
@@ -192,24 +193,28 @@ namespace ServiceModel.SyncJobs
 		/// <returns></returns>
 		public object GetHomologation(IEnumerable<object> entity, object HomologationKeyValue, string homologationKeyName, string valueKeyToReturn)
 		{
-			var data = entity.Where(
-				x => x.GetType().GetProperties().Where(q => q.Name == homologationKeyName) == HomologationKeyValue)
-				.FirstOrDefault().GetType().GetProperties()
-				.Where(q => q.Name == valueKeyToReturn).FirstOrDefault().GetValue(entity, null);
+			var entityType = entity.FirstOrDefault().GetType();
+			var type = entity.FirstOrDefault().GetType().GetProperty(homologationKeyName);
+
+			var data = entity
+				.Where(x => x.GetType().GetProperty(homologationKeyName)
+				.GetValue(x).ToString() == HomologationKeyValue.ToString())
+				.Select(q => q.GetType().GetProperty(valueKeyToReturn)
+				.GetValue(q)).FirstOrDefault();
 
 			if (data == null)
-				HomologationCatch(HomologationKeyValue.ToString(), entity.GetType().Name);
+				HomologationNull(HomologationKeyValue.ToString(), entityType.Name, type.Name);
 
-			return data;
+			return data ?? 0;
 		}
 
 		/// <summary>
-		/// Catch de homologacion event and save the log.
+		/// Catch the homologacion event and save the log when is null.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <param name="table">The table.</param>
-		/// <returns></returns>
-		internal void HomologationCatch(string value, string table)
+		/// <param name="type">The type.</param>
+		internal void HomologationNull(string value, string table, string type)
 		{
 			using (var ctx = new DbServiceContext())
 			{
@@ -220,8 +225,8 @@ namespace ServiceModel.SyncJobs
 					ExecutionId = new Guid(),
 					Client = clientName,
 					ExecutionDate = DateTime.Now,
-					Task = $"Homologacion-({typeof(TEntity).GetType().Name})",
-					Log = $"No es posible homologar el valor [{value}] en la tabla [{table}]."
+					Task = $"Homologacion-({TaskName})",
+					Log = $@"No es posible homologar el valor [{value}] en el campo [{type}] de la tabla [{table}]."
 				};
 
 				repository.InsertEntity(data);

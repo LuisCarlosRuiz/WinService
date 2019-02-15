@@ -97,14 +97,10 @@ namespace ServiceModel.SyncJobs
 					numProvisionInteres = q.ProvisionInteres,
 					numNit = q.CedulaAsociado,
 					numCapitalProyectado = 0, //Calculado
-					idTipoCuotaCredito = hTipoCuota.Where(x => x.strNombreTipoCuotaCredito == q.TipoCuota)
-								?.FirstOrDefault()?.intId ?? 0,
-					idAgencia = hAgencia.Where(x => x.strNombreAgencia == q.Agencia)
-								?.FirstOrDefault()?.intId ?? 0,
-					idTipoGarantia = hTipoGarantia.Where(x => x.strNombreTipoGarantia == q.ClaseGarantia)
-								?.FirstOrDefault()?.intId ?? 0,
-					idTipoModalidadCredito = hModalidad.Where(x => x.strNombreTipoModalidadCredito == q.ModalidadInteres)
-								?.FirstOrDefault()?.intId ?? 0,
+					idTipoCuotaCredito = (int)GetHomologation(hTipoCuota, q.TipoCuota, "strNombreTipoCuotaCredito", "intId"),
+					idAgencia = (int)GetHomologation(hAgencia, q.Agencia, "strNombreAgencia", "intId"),
+					idTipoGarantia = (int)GetHomologation(hTipoGarantia, q.ClaseGarantia, "strNombreTipoGarantia", "intId"),
+					idTipoModalidadCredito = (int)GetHomologation(hModalidad, q.ModalidadInteres, "strNombreTipoModalidadCredito", "intId"),
 					numAño = q.FechaDesembolso.Year,
 					numTasaNominalPeriodica = 0, //Calculado
 					dtmFechaProximoPago = DateTime.Now, //Calculado					

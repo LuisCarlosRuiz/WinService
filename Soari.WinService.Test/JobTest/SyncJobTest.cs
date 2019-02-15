@@ -66,6 +66,17 @@ namespace Soari.WinService.Test.JobTest
 		}
 
 		/// <summary>
+		/// Aportes the synchronize job test.
+		/// </summary>
+		[TestMethod]
+		public void AporteSyncJobTest()
+		{
+			var job = new AporteSyncJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
+		}
+
+		/// <summary>
 		/// Contabilidads the synchronize job test.
 		/// </summary>
 		[TestMethod]
