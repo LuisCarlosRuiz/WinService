@@ -64,12 +64,6 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		public override void InsertData()
 		{
-			var hData = new HomologationData(ClientId);
-			var hTipoCuota = hData.GetHomologationTipoCuota();
-			var hAgencia = hData.GetHomologationAgencia();
-			var hTipoGarantia = hData.GetHomologationTipoGarantia();
-			var hModalidad = hData.GetHomologationModalidad();
-
 			var lstcreditos = GetServiceData().Where(q => q.CuotasExtrasCreditoRepository.Count() > 0).Select(k => k.CuotasExtrasCreditoRepository);
 
 			foreach (var credito in lstcreditos)
@@ -81,7 +75,8 @@ namespace ServiceModel.SyncJobs
 					Pagare = q.NumeroCredito.ToString(),
 					Plazo = q.Plazo,
 					ValorPresente = q.ValorCuota, //Pendiente de revisar
-					ValorFuturo = q.TotalCuota //Pendiente de revisar
+					ValorFuturo = q.TotalCuota, //Pendiente de revisar
+					//FechaPago = //Calculado
 				});
 				BulkInsert(insertData);
 			}
