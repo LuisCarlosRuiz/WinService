@@ -88,6 +88,28 @@ namespace Soari.WinService.Test.JobTest
 		}
 
 		/// <summary>
+		/// Transaccions the synchronize job test.
+		/// </summary>
+		[TestMethod]
+		public void TransaccionSyncJobTest()
+		{
+			var job = new TransaccionSyncJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
+		}
+
+		/// <summary>
+		/// Novedads the synchronize job test.
+		/// </summary>
+		[TestMethod]
+		public void NovedadSyncJobTest()
+		{
+			var job = new NovedadSyncJob();
+			var mockContext = new Mock<IJobExecutionContext>().Object;
+			job.Execute(mockContext);
+		}
+
+		/// <summary>
 		/// Ahorroes the contractual synchronize job test.
 		/// </summary>
 		[TestMethod]
