@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // Luis Carlos Ruiz 
 // <summary>
-//   Defines the AhorroTerminoSyncJob type.
+//   Defines the TransaccionSyncJob type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -17,19 +17,18 @@ namespace ServiceModel.SyncJobs
 	using System.Collections.Generic;
 	using ServiceModel.Entities.Partial;
 	using ServiceModel.BussinesLogic.WorkFlow;
-	using Partial = Entities.Partial;
 
 	/// <summary>
-	/// The ahorro a termino Sync job
+	/// The transacciones Sync job
 	/// </summary>
-	public class AhorroTerminoSyncJob : SyncJob<Ahorro>
+	public class TransaccionSyncJob : SyncJob<NovedadVaria>
 	{
 		private string ClientId;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AhorroTerminoSyncJob"/> class.
+		/// Initializes a new instance of the <see cref="TransaccionSyncJob"/> class.
 		/// </summary>
-		public AhorroTerminoSyncJob()
+		public TransaccionSyncJob()
 		{
 			ClientId = GetClientId(this.GetType().Name);
 		}
@@ -37,7 +36,7 @@ namespace ServiceModel.SyncJobs
 		/// <summary>
 		/// Gets the data.
 		/// </summary>
-		private AhorroTerminoSOARIPartial[] GetServiceData()
+		private TransaccionesSOARIPartial[] GetServiceData()
 		{
 			if (string.IsNullOrEmpty(ClientId))
 				throw new NullReferenceException("50009 - No se encontro id del cliente");
@@ -45,20 +44,21 @@ namespace ServiceModel.SyncJobs
 			var client = GetClientConfiguration(ClientId);
 
 			clientName = client.ClientName;
-			TaskName = ServiceTaskName.ObtenerAhorroTermino.ToString();
+			TaskName = ServiceTaskName.ObtenerTransacciones.ToString();
 
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);
 
-			var filter = GetProductFilter(client.ConfigurationId, TaskName);
+			var filter = GetTransaccionFilter(client.ConfigurationId);
 
 			if (filter == null)
 				throw new NullReferenceException("No se encontro un filtro para este producto");
 
-			var data = obj.GetAhorroTermino(new Client.Partial.FiltroProducto()
+			var data = obj.GetTransacciones(new Client.Partial.FiltroTransacciones()
 			{
 				ClaveEntidad = client.ServicedbPassword,
-				SaldosMayores = long.Parse(Math.Round(filter.SaldosMayores).ToString())
+				MovimientosDesde = filter.MovimientosDesde,
+				MovimientosHasta = filter.MovimientosHasta
 			});
 
 			return data;
@@ -69,27 +69,25 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		public override void InsertData()
 		{
-			var hdata = new HomologationData(ClientId);
-			var hAgencia = hdata.GetHomologationAgencia();
-			var hTipoAhorro = hdata.GetHomologationTipoAhorro();
+			var hData = new HomologationData(ClientId);
+			var hAgencia = hData.GetHomologationAgencia();
+			var hTipoProducto = hData.GetHomologationTipoProductoTransaccion();
+			var hTipoTransaccion = hData.GetHomologationTipoTransaccion();
 
 			var insertData = GetServiceData()
-				.Select(q => new Ahorro
+				.Select(q => new Transacciones
 				{
-					dtmFechaApertura = q.FechaInicio,
-					numInteresDisponible = q.InteresDisponible,
-					numInteresesCausados = q.InteresCausado,
-					numNit = long.Parse(q.Identificacion),
-					numSaldoAhorro = q.ValorDeposito,
-					strLinea = q.CodLinea,
-					numTasaEfectiva = q.TasaInteres,
-					numPlazo = q.Plazo,
-					dtmFechaVencimiento = q.FechaVencimiento,
-					numPeriodoPagoInteres = q.PeriodoInteres,					
-					numTasaNominalPeriodica = 0, //Calculado
-					strCuenta = q.NumeroDeposito,
-					idAgencia = (int)GetHomologation(hAgencia, q.Agencia, "strNombreAgencia", "intId"),
-					idTipoAhorro = (int)GetHomologation(hTipoAhorro, Partial.TipoAhorro.AhorroTemino.ToString(), "strNombreTipoAhorro", "intId"),
+					idAgencia = (int)GetHomologation(hAgencia, q.CodigoOficina, "strEquivalenciaOPA", "intId"),
+					idTipoProducto = (int)GetHomologation(hTipoProducto, q.TipoProducto, "strNombreTipoProducto", "intId"),
+					idTipoTransaccion = (int)GetHomologation(hTipoTransaccion, q.TipoTransaccion, "strNombreTipoTransaccion", "intId"),
+					numNit = long.Parse(q.IdentificacionTitular),
+					strLineaProducto = q.CodigoLinea,
+					strNumeroCuenta = q.NumeroProducto,
+					strNumeroRecibo = q.NumeroTransaccion,
+					numValorEfectivo = q.ValorTransaccion,
+					strOperadorTransaccion = q.NombreEjecutor,
+					strLugarTransaccion = q.LugarTransaccion,
+					dtmFechaHora = q.FechaTransaccion
 				}).ToList();
 
 			BulkInsert(insertData);
@@ -99,11 +97,11 @@ namespace ServiceModel.SyncJobs
 		/// Bulks the insert.
 		/// </summary>
 		/// <param name="processData">The process data.</param>
-		private void BulkInsert(List<Ahorro> processData)
+		private void BulkInsert(List<Transacciones> processData)
 		{
 			using (var ctx = new Deal(ClientId).DbSoaryContext())
 			{
-				var repository = new GenericEntity<Ahorro>(ctx);
+				var repository = new GenericEntity<Transacciones>(ctx);
 				repository.Truncate();
 				repository.BulkInsert(processData);
 			}

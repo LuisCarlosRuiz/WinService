@@ -171,6 +171,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncJobs\AhorroContractualSyncJob.cs" />
     <Compile Include="SyncJobs\AhorroTerminoSyncJob.cs" />
+    <Compile Include="SyncJobs\TransaccionSyncJob.cs" />
     <Compile Include="SyncJobs\NovedadSyncJob.cs" />
     <Compile Include="SyncJobs\AhorroVistaSyncJob.cs" />
     <Compile Include="SyncJobs\AporteSyncJob.cs" />

@@ -27,7 +27,7 @@ namespace ServiceModel.SyncJobs
 		private string ClientId;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AporteSyncJob"/> class.
+		/// Initializes a new instance of the <see cref="AhorroVistaSyncJob"/> class.
 		/// </summary>
 		public AhorroVistaSyncJob()
 		{

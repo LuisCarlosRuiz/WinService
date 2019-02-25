@@ -16,8 +16,6 @@ namespace ServiceModel.SyncJobs
 	using ServiceModel.Entities.ConectionEngine;
 	using System.Collections.Generic;
 	using ServiceModel.Entities.Partial;
-	using ServiceModel.BussinesLogic.WorkFlow;
-	using Partial = Entities.Partial;
 
 	/// <summary>
 	/// The novedades varias Sync job
@@ -27,7 +25,7 @@ namespace ServiceModel.SyncJobs
 		private string ClientId;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AporteSyncJob"/> class.
+		/// Initializes a new instance of the <see cref="NovedadSyncJob"/> class.
 		/// </summary>
 		public NovedadSyncJob()
 		{

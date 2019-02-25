@@ -66,6 +66,38 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 		}
 
 		/// <summary>
+		/// Gets the homologation tipo producto transaccion.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
+		internal List<TipoProducto> GetHomologationTipoProductoTransaccion()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.TipoProducto.ToList();
+			}
+		}
+
+		/// <summary>
+		/// Gets the homologation tipo transaccion.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NullReferenceException">50001  - Falta un parametro para la consulta</exception>
+		internal List<TipoTransaccion> GetHomologationTipoTransaccion()
+		{
+			if (string.IsNullOrEmpty(idClient))
+				throw new NullReferenceException("50001  - Falta un parametro para la consulta");
+
+			using (var ctx = new Deal(idClient).DbSoaryContext())
+			{
+				return ctx.TipoTransaccion.ToList();
+			}
+		}
+
+		/// <summary>
 		/// Gets the homologation tipo ahorro.
 		/// </summary>
 		/// <returns></returns>

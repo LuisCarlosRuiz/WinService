@@ -184,6 +184,19 @@ namespace ServiceModel.SyncJobs
 		}
 
 		/// <summary>
+		/// Gets the transaccion filter.
+		/// </summary>
+		/// <param name="ConfigurationId">The configuration identifier.</param>
+		/// <returns></returns>
+		internal FilterTransaccion GetTransaccionFilter(Guid ConfigurationId)
+		{
+			using (var ctx = new DbServiceContext())
+			{
+				return ctx.FilterTransaccion.Where(q => q.ConfigurationId == ConfigurationId).FirstOrDefault();
+			}
+		}
+
+		/// <summary>
 		/// return the homologation.
 		/// </summary>
 		/// <param name="entity">The entity.</param>
