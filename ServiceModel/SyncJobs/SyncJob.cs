@@ -15,7 +15,7 @@ namespace ServiceModel.SyncJobs
 	using System;
 	using System.Linq;
 	using System.Collections.Generic;
-	using System.Reflection;
+	using ServiceModel.Entities.ConectionEngine;
 
 	/// <summary>
 	/// the sync job 
@@ -216,7 +216,9 @@ namespace ServiceModel.SyncJobs
 				.GetValue(q)).FirstOrDefault();
 
 			if (data == null)
-				HomologationNull(HomologationKeyValue.ToString(), entityType.Name, type.Name);
+			{
+				LogHomologationNull(HomologationKeyValue.ToString(), entityType.Name, type.Name);
+			}
 
 			return data ?? 0;
 		}
@@ -227,7 +229,7 @@ namespace ServiceModel.SyncJobs
 		/// <param name="value">The value.</param>
 		/// <param name="table">The table.</param>
 		/// <param name="type">The type.</param>
-		internal void HomologationNull(string value, string table, string type)
+		internal void LogHomologationNull(string value, string table, string type)
 		{
 			using (var ctx = new DbServiceContext())
 			{

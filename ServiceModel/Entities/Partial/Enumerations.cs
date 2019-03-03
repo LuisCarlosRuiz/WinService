@@ -109,4 +109,10 @@ namespace ServiceModel.Entities.Partial
 		/// </summary>
 		AhorroPermanente
 	}
+
+	public enum EstadoAporte
+	{
+		A = 1,
+		I = 0
+	}
 }

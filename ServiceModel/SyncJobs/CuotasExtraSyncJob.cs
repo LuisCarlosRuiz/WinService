@@ -52,11 +52,12 @@ namespace ServiceModel.SyncJobs
 
 			var filtro = GetProductFilter(client.ConfigurationId, TaskName);
 
-			return obj.GetCredito(new Client.Partial.FiltroProducto()
+			var data = obj.GetCredito(new Client.Partial.FiltroProducto()
 			{
 				ClaveEntidad = client.ServicedbPassword,
 				SaldosMayores = (long)filtro.SaldosMayores
 			});
+			return data;
 		}
 
 		/// <summary>
@@ -76,7 +77,7 @@ namespace ServiceModel.SyncJobs
 					Plazo = q.Plazo,
 					ValorPresente = q.ValorCuota, //Pendiente de revisar
 					ValorFuturo = q.TotalCuota, //Pendiente de revisar
-					//FechaPago = //Calculado
+					FechaPago = DateTime.Parse("01/01/1900") //simulado y por calcular
 				});
 				BulkInsert(insertData);
 			}

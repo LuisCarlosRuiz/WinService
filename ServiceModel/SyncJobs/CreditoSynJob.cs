@@ -52,11 +52,13 @@ namespace ServiceModel.SyncJobs
 
 			var filtro = GetProductFilter(client.ConfigurationId, TaskName);
 
-			return obj.GetCredito(new Client.Partial.FiltroProducto()
+			var data = obj.GetCredito(new Client.Partial.FiltroProducto()
 			{
 				ClaveEntidad = client.ServicedbPassword,
 				SaldosMayores = (long)filtro.SaldosMayores
 			});
+
+			return data;
 		}
 
 		/// <summary>
@@ -83,6 +85,7 @@ namespace ServiceModel.SyncJobs
 					numInteresCorrienteContingente = q.InteresCorrienteContingente,
 					numInteresMoraContingente = q.InteresMoraContingente,
 					numMontoInicial = q.CapitalInicial,
+					strCategoria = string.Empty,
 					strCategoriaFinal = q.CategoriaFinal,
 					strLinea = q.CodigoLinea,
 					strDestino = q.NombreDestino,

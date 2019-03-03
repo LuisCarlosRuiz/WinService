@@ -77,11 +77,11 @@ namespace ServiceModel.SyncJobs
 				{
 					dtmFechaApertura = q.FechaApertura,
 					numCuotaAhorro = q.ValorAporte,
-					numEstado = int.Parse(q.Estado), //Pendiente por revisar
+					numEstado = (int)Enum.Parse(typeof(EstadoAporte), q.Estado),
 					numNit = long.Parse(q.Identificacion),
 					numSaldoAporte = q.SaldoAhorro,
 					strNumeroCuenta = q.NumeroCuentaAporte,
-					strLinea =q.CodigoLinea,
+					strLinea = q.CodigoLinea,
 					numValorRevalorizacion = 0,
 					idAgencia = (int)GetHomologation(hAgencia, q.Agencia, "strNombreAgencia", "intId"),
 					idTipoAporte = (int)GetHomologation(hTipoAporte, q.TipoAporte, "strNombreTipoAporte", "intId")
@@ -98,7 +98,6 @@ namespace ServiceModel.SyncJobs
 			using (var ctx = new Deal(ClientId).DbSoaryContext())
 			{
 				var repository = new GenericEntity<Aporte>(ctx);
-				repository.Truncate();
 				repository.BulkInsert(processData);
 			}
 		}

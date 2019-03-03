@@ -44,7 +44,8 @@ namespace ServiceModel.BussinesLogic.WorkFlow
 
 			using (var ctx = new Deal(idClient).DbSoaryContext())
 			{
-				return ctx.Agencia.ToList();
+				var data = ctx.Agencia.ToList();
+				return data;
 			}
 		}
 
