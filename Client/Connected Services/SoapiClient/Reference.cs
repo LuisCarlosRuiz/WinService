@@ -1049,6 +1049,9 @@ namespace Client.SoapiClient {
         private long CedulaAsociadoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CelularField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CiudadResidenciaNombreField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1067,7 +1070,13 @@ namespace Client.SoapiClient {
         private System.Nullable<decimal> ComisionesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DireccionResidenciaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<decimal> DividendosField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmpleadoField;
@@ -1205,6 +1214,9 @@ namespace Client.SoapiClient {
         private System.Nullable<decimal> SueldoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TelefonoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TipoContratoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1315,6 +1327,19 @@ namespace Client.SoapiClient {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Celular {
+            get {
+                return this.CelularField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CelularField, value) != true)) {
+                    this.CelularField = value;
+                    this.RaisePropertyChanged("Celular");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string CiudadResidenciaNombre {
             get {
                 return this.CiudadResidenciaNombreField;
@@ -1393,6 +1418,19 @@ namespace Client.SoapiClient {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DireccionResidencia {
+            get {
+                return this.DireccionResidenciaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DireccionResidenciaField, value) != true)) {
+                    this.DireccionResidenciaField = value;
+                    this.RaisePropertyChanged("DireccionResidencia");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Nullable<decimal> Dividendos {
             get {
                 return this.DividendosField;
@@ -1401,6 +1439,19 @@ namespace Client.SoapiClient {
                 if ((this.DividendosField.Equals(value) != true)) {
                     this.DividendosField = value;
                     this.RaisePropertyChanged("Dividendos");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
                 }
             }
         }
@@ -1986,6 +2037,19 @@ namespace Client.SoapiClient {
                 if ((this.SueldoField.Equals(value) != true)) {
                     this.SueldoField = value;
                     this.RaisePropertyChanged("Sueldo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Telefono {
+            get {
+                return this.TelefonoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TelefonoField, value) != true)) {
+                    this.TelefonoField = value;
+                    this.RaisePropertyChanged("Telefono");
                 }
             }
         }

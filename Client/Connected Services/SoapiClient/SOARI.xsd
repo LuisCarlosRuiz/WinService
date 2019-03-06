@@ -86,13 +86,16 @@
       <xs:element minOccurs="0" name="Cargo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CargoNombre" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CedulaAsociado" type="xs:long" />
+      <xs:element minOccurs="0" name="Celular" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CiudadResidenciaNombre" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CodidoEmpresaLabora" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CodidoEmpresaPagadora" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CodigoAgencia" type="xs:int" />
       <xs:element minOccurs="0" name="CodigoCIIU" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Comisiones" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="DireccionResidencia" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Dividendos" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Empleado" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EstadoCivil" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Estrato" nillable="true" type="xs:string" />
@@ -138,6 +141,7 @@
       <xs:element minOccurs="0" name="Sexo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SubsidioLocalizacion" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Sueldo" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Telefono" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TipoContrato" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TipoIdentificacion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UtilidadNegocio" nillable="true" type="xs:decimal" />

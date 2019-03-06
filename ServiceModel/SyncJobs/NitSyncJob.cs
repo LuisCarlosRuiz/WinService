@@ -81,9 +81,9 @@ namespace ServiceModel.SyncJobs
 			IEnumerable<Nit> insertData = GetServiceData()
 				.Select(q => new Nit
 				{
-					numNit = q.CedulaAsociado,
+					numNit = q?.CedulaAsociado ?? 0,
 					dtmFechaIngreso = q.FechaIngresoEntidad,
-					numEstrato = int.Parse(q.Estrato),
+					numEstrato = !string.IsNullOrEmpty(q.Estrato) ? int.Parse(q.Estrato) : 0,
 					numNivelIngresos = 0, //Calculado
 					numPersonasCargo = q.NumPersonasACargo,
 					numSalario = q.Salario,
@@ -96,22 +96,29 @@ namespace ServiceModel.SyncJobs
 					strNombreIntegrado = $"{q.Nombres} {q.PrimerApellido} {q.SegundoApellido}",
 					strPrimerApellido = q.PrimerApellido,
 					strSegundoApellido = q.SegundoApellido,
-					strPrimerNombre = q?.Nombres?.Split(' ')?[0] ?? string.Empty,
-					//strSegundoNombre = q?.Nombres?.Split(' ')?[1] ?? string.Empty,
+					strPrimerNombre = q.Nombres.Split(' ').Count() > 0 ?
+										q?.Nombres.Split(' ')[0] : string.Empty,
+					strSegundoNombre = q.Nombres.Split(' ').Count() > 1 ?
+										q?.Nombres.Split(' ')[1] : string.Empty,
 					strZona = q.NombreZona,
-					//strPEPs = q.PersonaExpuesta,
-					//strCodigoEmpresaTrabajo = q.CodidoEmpresaLabora,
-					//idAgencia = (int)GetHomologation(hAgencia, q.CodigoAgencia, "strEquivalenciaOPA", "intId"),
-					//idCiudad = (int)GetHomologation(hciudad, q.CiudadResidenciaNombre, "strNombreCiudad", "intId"),
-					//idPais = (int)GetHomologation(hPais, q.PaisResidenciaNombre, "strNombrePais", "intId"),
-					//idTipoContrato = (int)GetHomologation(hTipoContrato, q.TipoContrato, "strNombreTipoContrato", "intId"),
-					//idDepartamento = (int)GetHomologation(hDepartamento, q.NombreDepartamentoResidencia, "strNombreDepartamento", "intId"),
-					//idGenero = (int)GetHomologation(hGenero, q.Sexo, "strNombreGenero", "intId"),
-					//idTipoIdentificacion = (int)GetHomologation(hTipoIdentificacion, q.TipoIdentificacion, "strNombreTipoIdentificacion", "intId"),
-					//idActividadEconomica = (int)GetHomologation(hActividadEconimica, q.CodigoCIIU, "strEquivalenciaOPA", "intId"),
-					//idEstadoCivil = (int)GetHomologation(hEstadoCivil, q.EstadoCivil, "strNombreEstadoCivil", "intId"),
-					//idNivelEstudio = (int)GetHomologation(hNivelEstudios, q.Estudios, "strNombreNivelEstudio", "intId")
+					strPEPs = q.PersonaExpuesta,
+					strExonerado = string.Empty, //No se cuenta en el servicio
+					strEmail = q.Email,
+					strDireccion = q.DireccionResidencia,
+					strTelefono = q.Telefono,
+					strCodigoEmpresaTrabajo = q.CodidoEmpresaLabora,
+					idAgencia = (int)GetHomologation(hAgencia, q.CodigoAgencia, "strEquivalenciaOPA", "intId"),
+					idCiudad = (int)GetHomologation(hciudad, q.CiudadResidenciaNombre, "strNombreCiudad", "intId"),
+					idPais = (int)GetHomologation(hPais, q.PaisResidenciaNombre, "strNombrePais", "intId"),
+					idTipoContrato = (int)GetHomologation(hTipoContrato, q.TipoContrato, "strNombreTipoContrato", "intId"),
+					idDepartamento = (int)GetHomologation(hDepartamento, q.NombreDepartamentoResidencia, "strNombreDepartamento", "intId"),
+					idGenero = (int)GetHomologation(hGenero, q.Sexo, "strNombreGenero", "intId"),
+					idTipoIdentificacion = (int)GetHomologation(hTipoIdentificacion, q.TipoIdentificacion, "strNombreTipoIdentificacion", "intId"),
+					idActividadEconomica = (int)GetHomologation(hActividadEconimica, q.CodigoCIIU, "strEquivalenciaOPA", "intId"),
+					idEstadoCivil = (int)GetHomologation(hEstadoCivil, q.EstadoCivil, "strNombreEstadoCivil", "intId"),
+					idNivelEstudio = (int)GetHomologation(hNivelEstudios, q.Estudios, "strNombreNivelEstudio", "intId")
 				});
+
 			BulkInsert(insertData);
 		}
 

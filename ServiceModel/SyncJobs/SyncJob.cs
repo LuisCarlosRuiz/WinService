@@ -209,6 +209,9 @@ namespace ServiceModel.SyncJobs
 			var entityType = entity.FirstOrDefault().GetType();
 			var type = entity.FirstOrDefault().GetType().GetProperty(homologationKeyName);
 
+			if (HomologationKeyValue == null || string.IsNullOrEmpty(HomologationKeyValue.ToString()))
+				return 0;
+
 			var data = entity
 				.Where(x => x.GetType().GetProperty(homologationKeyName)
 				.GetValue(x).ToString() == HomologationKeyValue.ToString())
