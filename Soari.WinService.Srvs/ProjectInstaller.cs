@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Configuration.Install;
+using ServiceModel.SyncJobs;
 
 namespace Soari.WinService.Srvs
 {

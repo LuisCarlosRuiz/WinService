@@ -131,12 +131,12 @@ namespace ServiceModel.Entities.dbService
 
 			modelBuilder.Entity<FilterProducto>().Property(p => p.SaldosMayores).HasPrecision(18, 2);
 
-			modelBuilder.Entity<ClientConfiguration>().HasIndex(u => u.JobId).IsUnique();
-			modelBuilder.Entity<ClientConfiguration>().HasIndex(u => u.ClientName).IsUnique();
+			//modelBuilder.Entity<ClientConfiguration>().HasIndex(u => u.JobId).IsUnique();
+			//modelBuilder.Entity<ClientConfiguration>().HasIndex(u => u.ClientName).IsUnique();
 
-			modelBuilder.Entity <UserAdmin>().HasIndex(u => u.UserCode).IsUnique();
+			//modelBuilder.Entity<UserAdmin>().HasIndex(u => u.UserCode).IsUnique();
 
-			modelBuilder.Entity <Scheduler>().HasIndex(u => u.Consecutive).IsUnique();
+			//modelBuilder.Entity<Scheduler>().HasIndex(u => u.Consecutive).IsUnique();
 		}
 	}
 }

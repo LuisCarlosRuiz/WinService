@@ -1,4 +1,7 @@
 ﻿using System.ServiceProcess;
+using System.Data.Entity;
+using System.Data.Entity.SqlServer;
+using ServiceModel.SyncJobs;
 
 namespace Soari.WinService.Srvs
 {
