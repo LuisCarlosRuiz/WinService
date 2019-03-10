@@ -127,7 +127,7 @@ namespace ServiceModel.SyncJobs
 
 				var scheduler = new Scheduler
 				{
-					SchedulerId = new Guid(),
+					SchedulerId = Guid.NewGuid(),
 					ClientId = job.ClientId,
 					Consecutive = int.Parse(job.Concecutivo),
 					Status = "1",
