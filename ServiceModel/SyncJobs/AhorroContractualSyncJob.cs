@@ -105,7 +105,6 @@ namespace ServiceModel.SyncJobs
 			using (var ctx = new Deal(ClientId).DbSoaryContext())
 			{
 				var repository = new GenericEntity<Ahorro>(ctx);
-				repository.Truncate();
 				repository.BulkInsert(processData);
 			}
 		}

@@ -87,6 +87,9 @@ namespace ServiceModel.SyncJobs
 					numTasaEfectiva = q.TasaCaptacion,
 					numTasaNominalPeriodica = 0, //Calculado
 					strCuenta = q.NumeroDeposito,
+					numAño = q.FechaUtlimaTransaccion.Year,
+					numPeriodo = (int)q.PeriodoLiquida,
+					dtmFechaVencimiento = DateTime.Parse("01/01/1900"), //Simulado
 					idAgencia = (int)GetHomologation(hAgencia, q.Agencia, "strNombreAgencia", "intId"),
 					idTipoAhorro = (int)GetHomologation(hTipoAhorro, Partial.TipoAhorro.AhorroVista.ToString(), "strNombreTipoAhorro", "intId"),
 					idEstadoAhorro = (int)GetHomologation(hEstado, q.Estado, "strNombreEstadoAhorro", "intId")
@@ -104,7 +107,6 @@ namespace ServiceModel.SyncJobs
 			using (var ctx = new Deal(ClientId).DbSoaryContext())
 			{
 				var repository = new GenericEntity<Ahorro>(ctx);
-				repository.Truncate();
 				repository.BulkInsert(processData);
 			}
 		}
