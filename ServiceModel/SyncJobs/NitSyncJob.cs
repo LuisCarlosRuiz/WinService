@@ -78,7 +78,9 @@ namespace ServiceModel.SyncJobs
 			var hEstadoCivil = hData.GetHomologationEstadoCivil();
 			var hNivelEstudios = hData.GetHomologationNivelEstudios();
 
-			IEnumerable<Nit> insertData = GetServiceData()
+			var data = GetServiceData();
+
+			List<Nit> insertData = data
 				.Select(q => new Nit
 				{
 					numNit = q?.CedulaAsociado ?? 0,
@@ -117,7 +119,7 @@ namespace ServiceModel.SyncJobs
 					idActividadEconomica = (int)GetHomologation(hActividadEconimica, q.CodigoCIIU, "strEquivalenciaOPA", "intId"),
 					idEstadoCivil = (int)GetHomologation(hEstadoCivil, q.EstadoCivil, "strNombreEstadoCivil", "intId"),
 					idNivelEstudio = (int)GetHomologation(hNivelEstudios, q.Estudios, "strNombreNivelEstudio", "intId")
-				});
+				}).ToList();
 
 			BulkInsert(insertData);
 		}

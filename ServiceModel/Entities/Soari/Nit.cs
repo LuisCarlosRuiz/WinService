@@ -23,7 +23,6 @@ namespace ServiceModel.Entities.Soari
 		//// <value>
 		//// The number nit.
 		//// </value>
-		[Key]
 		public long numNit { get; set; }
 
 		/// <summary>
@@ -40,6 +39,7 @@ namespace ServiceModel.Entities.Soari
 		/// <value>
 		/// The string nombre integrado.
 		/// </value>
+		[Key]
 		public string strNombreIntegrado { get; set; }
 
 		/// <summary>
@@ -329,122 +329,5 @@ namespace ServiceModel.Entities.Soari
 		/// The string direccion.
 		/// </value>
 		public string strDireccion { get; set; }
-
-		/// <summary>
-		/// Gets or sets the tipo identificacion.
-		/// </summary>
-		/// <value>
-		/// The tipo identificacion.
-		/// </value>
-		[ForeignKey("idTipoIdentificacion")]
-		public TipoIdentificacion TipoIdentificacion { get; set; }
-
-		/// <summary>
-		/// Gets or sets the actividad economica.
-		/// </summary>
-		/// <value>
-		/// The actividad economica.
-		/// </value>
-		[ForeignKey("idActividadEconomica")]
-		public ActividadEconomica ActividadEconomica { get; set; }
-
-		/// <summary>
-		/// Gets or sets the agencia.
-		/// </summary>
-		/// <value>
-		/// The agencia.
-		/// </value>
-		[ForeignKey("idAgencia")]
-		public Agencia Agencia { get; set; }
-
-		/// <summary>
-		/// Gets or sets the pais.
-		/// </summary>
-		/// <value>
-		/// The pais.
-		/// </value>
-		[ForeignKey("idPais")]
-		public Pais Pais { get; set; }
-
-		/// <summary>
-		/// Gets or sets the departamento.
-		/// </summary>
-		/// <value>
-		/// The departamento.
-		/// </value>
-		[ForeignKey("idDepartamento")]
-		public Departamento Departamento { get; set; }
-
-		/// <summary>
-		/// Gets or sets the ciudad.
-		/// </summary>
-		/// <value>
-		/// The ciudad.
-		/// </value>
-		[ForeignKey("idCiudad")]
-		public Ciudad Ciudad { get; set; }
-
-		/// <summary>
-		/// Gets or sets the genero.
-		/// </summary>
-		/// <value>
-		/// The genero.
-		/// </value>
-		[ForeignKey("idGenero")]
-		public Genero Genero { get; set; }
-
-		/// <summary>
-		/// Gets or sets the tipo contrato.
-		/// </summary>
-		/// <value>
-		/// The tipo contrato.
-		/// </value>
-		[ForeignKey("idTipoContrato")]
-		public TipoContrato TipoContrato { get; set; }
-
-		/// <summary>
-		/// Gets or sets the nivel estudio.
-		/// </summary>
-		/// <value>
-		/// The nivel estudio.
-		/// </value>
-		[ForeignKey("idNivelEstudio")]
-		public NivelEstudio NivelEstudio { get; set; }
-
-		/// <summary>
-		/// Gets or sets the estado civil.
-		/// </summary>
-		/// <value>
-		/// The estado civil.
-		/// </value>
-		[ForeignKey("idEstadoCivil")]
-		public EstadoCivil EstadoCivil { get; set; }
-
-		/// <summary>
-		/// Gets or sets the ocupacion.
-		/// </summary>
-		/// <value>
-		/// The ocupacion.
-		/// </value>
-		[ForeignKey("idOcupacion")]
-		public Ocupacion Ocupacion { get; set; }
-
-		/// <summary>
-		/// Gets or sets the sector economico.
-		/// </summary>
-		/// <value>
-		/// The sector economico.
-		/// </value>
-		[ForeignKey("idSectorEconomico")]
-		public SectorEconomico SectorEconomico { get; set; }
-
-		/// <summary>
-		/// Gets or sets the jornada laboral.
-		/// </summary>
-		/// <value>
-		/// The jornada laboral.
-		/// </value>
-		[ForeignKey("idJornadaLaboral")]
-		public JornadaLaboral JornadaLaboral { get; set; }
 	}
 }
