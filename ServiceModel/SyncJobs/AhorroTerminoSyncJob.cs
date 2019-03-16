@@ -15,8 +15,6 @@ namespace ServiceModel.SyncJobs
 	using Client.SoapiClient;
 	using ServiceModel.Entities.ConectionEngine;
 	using System.Collections.Generic;
-	using ServiceModel.Entities.Partial;
-	using ServiceModel.BussinesLogic.WorkFlow;
 	using Partial = Entities.Partial;
 
 	/// <summary>
@@ -44,9 +42,6 @@ namespace ServiceModel.SyncJobs
 
 			var client = GetClientConfiguration(ClientId);
 
-			clientName = client.ClientName;
-			TaskName = ServiceTaskName.ObtenerAhorroTermino.ToString();
-
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);
 
@@ -69,9 +64,13 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		public override void InsertData()
 		{
-			var hdata = new HomologationData(ClientId);
-			var hAgencia = hdata.GetHomologationAgencia();
-			var hTipoAhorro = hdata.GetHomologationTipoAhorro();
+			var client = GetClientConfiguration(ClientId);
+
+			clientName = client.ClientName;
+			TaskName = Partial.ServiceTaskName.ObtenerAhorroTermino.ToString();
+
+			var hAgencia = new Homologation<Agencia>(ClientId, TaskName, clientName);
+			var hTipoAhorro = new Homologation<TipoAhorro>(ClientId, TaskName, clientName);
 
 			var insertData = GetServiceData()
 				.Select(q => new Ahorro
@@ -88,8 +87,8 @@ namespace ServiceModel.SyncJobs
 					numPeriodoPagoInteres = q.PeriodoInteres,					
 					numTasaNominalPeriodica = 0, //Calculado
 					strCuenta = q.NumeroDeposito,
-					idAgencia = (int)GetHomologation(hAgencia, q.Agencia, "strNombreAgencia", "intId"),
-					idTipoAhorro = (int)GetHomologation(hTipoAhorro, Partial.TipoAhorro.AhorroTemino.ToString(), "strNombreTipoAhorro", "intId"),
+					idAgencia = (int)hAgencia.GetHomologation(q.Agencia, "strNombreAgencia", "intId"),
+					idTipoAhorro = (int)hTipoAhorro.GetHomologation(Partial.TipoAhorro.AhorroTemino.ToString(), "strNombreTipoAhorro", "intId"),
 				}).ToList();
 
 			BulkInsert(insertData);

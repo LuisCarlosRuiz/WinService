@@ -43,9 +43,6 @@ namespace ServiceModel.SyncJobs
 
 			var client = GetClientConfiguration(ClientId);
 
-			clientName = client.ClientName;
-			TaskName = ServiceTaskName.ObtenerAporte.ToString();
-
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);
 
@@ -68,9 +65,13 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		public override void InsertData()
 		{
-			var hdata = new HomologationData(ClientId);
-			var hAgencia = hdata.GetHomologationAgencia();
-			var hTipoAporte = hdata.GetHomologationTipoAporte();
+			var client = GetClientConfiguration(ClientId);
+
+			clientName = client.ClientName;
+			TaskName = ServiceTaskName.ObtenerAporte.ToString();
+
+			var hAgencia = new Homologation<Agencia>(ClientId, TaskName, clientName);
+			var hTipoAporte = new Homologation<TipoAporte>(ClientId, TaskName, clientName);
 
 			var insertData = GetServiceData()
 				.Select(q => new Aporte
@@ -83,8 +84,8 @@ namespace ServiceModel.SyncJobs
 					strNumeroCuenta = q.NumeroCuentaAporte,
 					strLinea = q.CodigoLinea,
 					numValorRevalorizacion = 0,
-					idAgencia = (int)GetHomologation(hAgencia, q.Agencia, "strNombreAgencia", "intId"),
-					idTipoAporte = (int)GetHomologation(hTipoAporte, q.TipoAporte, "strNombreTipoAporte", "intId")
+					idAgencia = (int)hAgencia.GetHomologation(q.Agencia, "strNombreAgencia", "intId"),
+					idTipoAporte = (int)hTipoAporte.GetHomologation(q.TipoAporte, "strNombreTipoAporte", "intId")
 				}).ToList();
 			BulkInsert(insertData);
 		}

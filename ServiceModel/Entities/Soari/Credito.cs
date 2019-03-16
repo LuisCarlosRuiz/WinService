@@ -298,41 +298,5 @@ namespace ServiceModel.Entities.Soari
 		/// The number valor cuota.
 		/// </value>
 		public decimal numValorCuota { get; set; }
-
-		/// <summary>
-		/// Gets or sets the agencia.
-		/// </summary>
-		/// <value>
-		/// The agencia.
-		/// </value>
-		[ForeignKey("idAgencia")]
-		public Agencia Agencia { get; set; }
-
-		/// <summary>
-		/// Gets or sets the tipo garantia.
-		/// </summary>
-		/// <value>
-		/// The tipo garantia.
-		/// </value>
-		[ForeignKey("idTipoGarantia")]
-		public TipoGarantia TipoGarantia { get; set; }
-
-		/// <summary>
-		/// Gets or sets the tipo cuota.
-		/// </summary>
-		/// <value>
-		/// The tipo cuota.
-		/// </value>
-		[ForeignKey("idTipoCuotaCredito")]
-		public TipoCuota TipoCuota { get; set; }
-
-		/// <summary>
-		/// Gets or sets the tipo modalidad.
-		/// </summary>
-		/// <value>
-		/// The tipo modalidad.
-		/// </value>
-		[ForeignKey("idTipoModalidadCredito")]
-		public TipoModalidad TipoModalidad { get; set; }
 	}
 }

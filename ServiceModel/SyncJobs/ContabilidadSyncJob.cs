@@ -44,9 +44,6 @@ namespace ServiceModel.SyncJobs
 
 			var client = GetClientConfiguration(ClientId);
 
-			clientName = client.ClientName;
-			TaskName = ServiceTaskName.ObtenerBalanceAgencia.ToString();
-
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);
 
@@ -73,8 +70,11 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		public override void InsertData()
 		{
-			var hdata = new HomologationData(ClientId);
-			var hagencia = hdata.GetHomologationAgencia();
+			var client = GetClientConfiguration(ClientId);
+			clientName = client.ClientName;
+			TaskName = ServiceTaskName.ObtenerBalanceAgencia.ToString();
+
+			var hAgencia = new Homologation<Agencia>(ClientId, TaskName, clientName);
 
 			var insertData = GetServiceData()
 				.Select(q => new Contabilidad
@@ -82,7 +82,7 @@ namespace ServiceModel.SyncJobs
 					NumeroCuenta = q.CodigoCuenta,
 					FechaSaldo = q.FechaCorte,
 					SaldoCuenta = q.SaldoCuenta,
-					IdAgencia = (int)GetHomologation(hagencia, q.CodigoAgencia, "strEquivalenciaOPA", "intId"),
+					IdAgencia = (int)hAgencia.GetHomologation(q.CodigoAgencia, "strEquivalenciaOPA", "intId"),
 					NombreCuenta = GetNombreCuenta(q.CodigoCuenta)
 				}).ToList();
 			BulkInsert(insertData);

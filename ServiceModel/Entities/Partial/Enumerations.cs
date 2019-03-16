@@ -21,7 +21,12 @@ namespace ServiceModel.Entities.Partial
 		/// <summary>
 		/// The fatal error
 		/// </summary>
-		FatalError
+		FatalError,
+
+		/// <summary>
+		/// The homologation error
+		/// </summary>
+		HomologationError
 	}
 
 	public enum ServiceTaskName

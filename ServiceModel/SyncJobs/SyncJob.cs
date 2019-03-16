@@ -16,6 +16,8 @@ namespace ServiceModel.SyncJobs
 	using System.Linq;
 	using System.Collections.Generic;
 	using ServiceModel.Entities.ConectionEngine;
+	using System.Data.Entity;
+	using ServiceModel.Entities.Soari;
 
 	/// <summary>
 	/// the sync job 
@@ -35,56 +37,19 @@ namespace ServiceModel.SyncJobs
 			try
 			{
 				InsertData();
-				ExecutionLog(clientName ?? string.Empty, TaskName ?? string.Empty, Partial.MessageEnum.Success.ToString(), false);
+				new LogManager().ExecutionLog(clientName ?? string.Empty, TaskName ?? string.Empty, Partial.MessageEnum.Success.ToString(), false, Partial.MessageEnum.Success);
 			}
 			catch (Exception ex)
 			{
-				ExecutionLog(clientName ?? string.Empty, TaskName ?? string.Empty, ex.ToString(), true);
+				new LogManager().ExecutionLog(clientName ?? string.Empty, TaskName ?? string.Empty, ex.ToString(), true, Partial.MessageEnum.FatalError);
 			}
 		}
 
 		/// <summary>
-		/// The log last execution.
+		/// Gets the task identifier.
 		/// </summary>
-		public void ExecutionLog(string Client, string Task, string Log, bool sendMail)
-		{
-			using (var ctx = new DbServiceContext())
-			{
-				var repository = new GenericEntity<ExecutionControl>(ctx);
-
-				var executionControl = new ExecutionControl()
-				{
-					Task = Task,
-					ExecutionDate = DateTime.Now,
-					ExecutionId = Guid.NewGuid(),
-					Log = Log,
-					Client = Client
-				};
-
-				if (sendMail)
-					SendMail(Partial.MessageEnum.FatalError, executionControl);
-
-				repository.InsertEntity(executionControl);
-
-				ctx.SaveChanges();
-			}
-		}
-
-		/// <summary>
-		/// Sends the mail.
-		/// </summary>
-		/// <param name="mesage">The mesage.</param>
-		/// <param name="executionControl">The execution control.</param>
-		public void SendMail(Partial.MessageEnum mesage, ExecutionControl executionControl)
-		{
-			var lstUser = new UserAdminBL().GetListUserAdminByStateActive();
-
-			foreach (var item in lstUser)
-			{
-				new MailManager().MailBuilder(mesage.ToString(), executionControl, item);
-			}
-		}
-
+		/// <param name="TaskName">Name of the task.</param>
+		/// <returns></returns>
 		internal ServiceTask GetTaskId(string TaskName)
 		{
 			using (var ctx = new DbServiceContext())
@@ -93,6 +58,11 @@ namespace ServiceModel.SyncJobs
 			}
 		}
 
+		/// <summary>
+		/// Gets the client configuration.
+		/// </summary>
+		/// <param name="clientId">The client identifier.</param>
+		/// <returns></returns>
 		internal ClientConfiguration GetClientConfiguration(string clientId)
 		{
 			using (var ctx = new DbServiceContext())
@@ -193,62 +163,6 @@ namespace ServiceModel.SyncJobs
 			using (var ctx = new DbServiceContext())
 			{
 				return ctx.FilterTransaccion.Where(q => q.ConfigurationId == ConfigurationId).FirstOrDefault();
-			}
-		}
-
-		/// <summary>
-		/// return the homologation.
-		/// </summary>
-		/// <param name="entity">The entity.</param>
-		/// <param name="HomologationKeyValue">The homologation key value.</param>
-		/// <param name="homologationKeyName">Name of the homologation key.</param>
-		/// <param name="valueKeyToReturn">The value key to return.</param>
-		/// <returns></returns>
-		public object GetHomologation(IEnumerable<object> entity, object HomologationKeyValue, string homologationKeyName, string valueKeyToReturn)
-		{
-			var entityType = entity.FirstOrDefault().GetType();
-			var type = entity.FirstOrDefault().GetType().GetProperty(homologationKeyName);
-
-			if (HomologationKeyValue == null || string.IsNullOrEmpty(HomologationKeyValue.ToString()))
-				return 0;
-
-			var data = entity
-				.Where(x => x.GetType().GetProperty(homologationKeyName)
-				.GetValue(x).ToString() == HomologationKeyValue.ToString())
-				.Select(q => q.GetType().GetProperty(valueKeyToReturn)
-				.GetValue(q)).FirstOrDefault();
-
-			if (data == null)
-			{
-				LogHomologationNull(HomologationKeyValue.ToString(), entityType.Name, type.Name);
-			}
-
-			return data ?? 0;
-		}
-
-		/// <summary>
-		/// Catch the homologacion event and save the log when is null.
-		/// </summary>
-		/// <param name="value">The value.</param>
-		/// <param name="table">The table.</param>
-		/// <param name="type">The type.</param>
-		internal void LogHomologationNull(string value, string table, string type)
-		{
-			using (var ctx = new DbServiceContext())
-			{
-				var repository = new GenericEntity<ExecutionControl>(ctx);
-
-				var data = new ExecutionControl
-				{
-					ExecutionId = new Guid(),
-					Client = clientName,
-					ExecutionDate = DateTime.Now,
-					Task = $"Homologacion-({TaskName})",
-					Log = $@"No es posible homologar el valor [{value}] en el campo [{type}] de la tabla [{table}]."
-				};
-
-				repository.InsertEntity(data);
-				ctx.SaveChanges();
 			}
 		}
 	}

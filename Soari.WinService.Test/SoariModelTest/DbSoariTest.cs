@@ -166,7 +166,7 @@ namespace Soari.WinService.Test.SoariModelTest
 			using (var ctx = new Deal("0001").DbSoaryContext())
 			{
 				var repository = new GenericEntity<Ahorro>(ctx);
-				data = repository.GetEntity(q => q.OrderBy(d => d.Agencia.intId)
+				data = repository.GetEntity(q => q.OrderBy(d => d.dtmFechaApertura)
 							, 1000, 0,
 							@"TipoAhorro, Agencia, EstadoAhorro").ToList();
 			}
@@ -188,7 +188,7 @@ namespace Soari.WinService.Test.SoariModelTest
 			using (var ctx = new Deal("0001").DbSoaryContext())
 			{
 				var repository = new GenericEntity<Aporte>(ctx);
-				data = repository.GetEntity(q => q.OrderBy(d => d.Agencia.intId)
+				data = repository.GetEntity(q => q.OrderBy(d => d.dtmFechaApertura)
 							, 1000, 0,
 							@"Agencia, TipoAporte").ToList();
 			}
@@ -210,7 +210,7 @@ namespace Soari.WinService.Test.SoariModelTest
 			using (var ctx = new Deal("0001").DbSoaryContext())
 			{
 				var repository = new GenericEntity<Transacciones>(ctx);
-				data = repository.GetEntity(q => q.OrderBy(d => d.Agencia.intId)
+				data = repository.GetEntity(q => q.OrderBy(d => d.dtmFechaHora)
 							, 1000, 0,
 							@"Agencia, TipoProducto, TipoTransaccion, Canal").ToList();
 			}

@@ -44,9 +44,6 @@ namespace ServiceModel.SyncJobs
 
 			var client = GetClientConfiguration(ClientId);
 
-			clientName = client.ClientName;
-			TaskName = ServiceTaskName.ObtenerAsociado.ToString();
-
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);
 
@@ -66,17 +63,21 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		public override void InsertData()
 		{
-			var hData = new HomologationData(ClientId);
-			var hAgencia = hData.GetHomologationAgencia();
-			var hciudad = hData.GetHomologationCiudad();
-			var hPais = hData.GetHomologationPais();
-			var hTipoContrato = hData.GetHomologationTipoContrato();
-			var hDepartamento = hData.GetHomologationDepartamento();
-			var hGenero = hData.GetHomologationGenero();
-			var hTipoIdentificacion = hData.GetHomologationTipoIdentificacion();
-			var hActividadEconimica = hData.GetHomologationActividadEconomica();
-			var hEstadoCivil = hData.GetHomologationEstadoCivil();
-			var hNivelEstudios = hData.GetHomologationNivelEstudios();
+			var client = GetClientConfiguration(ClientId);
+
+			clientName = client.ClientName;
+			TaskName = ServiceTaskName.ObtenerAsociado.ToString();
+
+			var hAgencia = new Homologation<Agencia>(ClientId, TaskName, clientName);
+			var hciudad = new Homologation<Ciudad>(ClientId, TaskName, clientName);
+			var hPais = new Homologation<Pais>(ClientId, TaskName, clientName);
+			var hTipoContrato = new Homologation<TipoContrato>(ClientId, TaskName, clientName);
+			var hDepartamento = new Homologation<Departamento>(ClientId, TaskName, clientName);
+			var hGenero = new Homologation<Genero>(ClientId, TaskName, clientName);
+			var hTipoIdentificacion = new Homologation<TipoIdentificacion>(ClientId, TaskName, clientName);
+			var hActividadEconimica = new Homologation<ActividadEconomica>(ClientId, TaskName, clientName);
+			var hEstadoCivil = new Homologation<EstadoCivil>(ClientId, TaskName, clientName);
+			var hNivelEstudios = new Homologation<NivelEstudio>(ClientId, TaskName, clientName);
 
 			var data = GetServiceData();
 
@@ -109,16 +110,16 @@ namespace ServiceModel.SyncJobs
 					strDireccion = q.DireccionResidencia,
 					strTelefono = q.Telefono,
 					strCodigoEmpresaTrabajo = q.CodidoEmpresaLabora,
-					idAgencia = (int)GetHomologation(hAgencia, q.CodigoAgencia, "strEquivalenciaOPA", "intId"),
-					idCiudad = (int)GetHomologation(hciudad, q.CiudadResidenciaNombre, "strNombreCiudad", "intId"),
-					idPais = (int)GetHomologation(hPais, q.PaisResidenciaNombre, "strNombrePais", "intId"),
-					idTipoContrato = (int)GetHomologation(hTipoContrato, q.TipoContrato, "strNombreTipoContrato", "intId"),
-					idDepartamento = (int)GetHomologation(hDepartamento, q.NombreDepartamentoResidencia, "strNombreDepartamento", "intId"),
-					idGenero = (int)GetHomologation(hGenero, q.Sexo, "strNombreGenero", "intId"),
-					idTipoIdentificacion = (int)GetHomologation(hTipoIdentificacion, q.TipoIdentificacion, "strNombreTipoIdentificacion", "intId"),
-					idActividadEconomica = (int)GetHomologation(hActividadEconimica, q.CodigoCIIU, "strEquivalenciaOPA", "intId"),
-					idEstadoCivil = (int)GetHomologation(hEstadoCivil, q.EstadoCivil, "strNombreEstadoCivil", "intId"),
-					idNivelEstudio = (int)GetHomologation(hNivelEstudios, q.Estudios, "strNombreNivelEstudio", "intId")
+					idAgencia = (int)hAgencia.GetHomologation(q.CodigoAgencia, "strEquivalenciaOPA", "intId"),
+					idCiudad = (int)hciudad.GetHomologation(q.CiudadResidenciaNombre, "strNombreCiudad", "intId"),
+					idPais = (int)hPais.GetHomologation(q.PaisResidenciaNombre, "strNombrePais", "intId"),
+					idTipoContrato = (int)hTipoContrato.GetHomologation(q.TipoContrato, "strNombreTipoContrato", "intId"),
+					idDepartamento = (int)hDepartamento.GetHomologation(q.NombreDepartamentoResidencia, "strNombreDepartamento", "intId"),
+					idGenero = (int)hGenero.GetHomologation(q.Sexo, "strNombreGenero", "intId"),
+					idTipoIdentificacion = (int)hTipoIdentificacion.GetHomologation(q.TipoIdentificacion, "strNombreTipoIdentificacion", "intId"),
+					idActividadEconomica = (int)hActividadEconimica.GetHomologation(q.CodigoCIIU, "strEquivalenciaOPA", "intId"),
+					idEstadoCivil = (int)hEstadoCivil.GetHomologation(q.EstadoCivil, "strNombreEstadoCivil", "intId"),
+					idNivelEstudio = (int)hNivelEstudios.GetHomologation(q.Estudios, "strNombreNivelEstudio", "intId")
 				}).ToList();
 
 			BulkInsert(insertData);

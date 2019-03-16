@@ -145,23 +145,5 @@ namespace ServiceModel.Entities.Soari
 		/// The number cuota ahorro.
 		/// </value>
 		public decimal numCuotaAhorro { get; set; }
-
-		/// <summary>
-		/// Gets or sets the tipo aporte.
-		/// </summary>
-		/// <value>
-		/// The tipo aporte.
-		/// </value>
-		[ForeignKey("idTipoAporte")]
-		public TipoAporte TipoAporte { get; set; }
-
-		/// <summary>
-		/// Gets or sets the agencia.
-		/// </summary>
-		/// <value>
-		/// The agencia.
-		/// </value>
-		[ForeignKey("idAgencia")]
-		public Agencia Agencia { get; set; }
 	}
 }

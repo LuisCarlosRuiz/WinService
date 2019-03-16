@@ -23,7 +23,6 @@ namespace ServiceModel.Entities.Soari
 		/// <value>
 		/// The int identifier.
 		/// </value>
-		[Key]
 		public int intId { get; set; }
 
 		/// <summary>
@@ -32,6 +31,7 @@ namespace ServiceModel.Entities.Soari
 		/// <value>
 		/// The string cod tipo transaccion.
 		/// </value>
+		[Key]
 		public string strCodTipoTransaccion { get; set; }
 
 		/// <summary>

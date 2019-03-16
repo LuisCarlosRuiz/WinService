@@ -11,6 +11,7 @@ namespace Soari.WinService.Test.JobTest
 	using Moq;
 	using Quartz;
 	using ServiceModel.Entities.Partial;
+	using ServiceModel.Entities.Soari;
 	using ServiceModel.SyncJobs;
 	using System.Collections.Generic;
 	using System.Configuration;

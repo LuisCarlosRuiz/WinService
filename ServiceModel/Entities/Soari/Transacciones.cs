@@ -145,41 +145,5 @@ namespace ServiceModel.Entities.Soari
 		/// The identifier agencia.
 		/// </value>
 		public int idAgencia { get; set; }
-
-		/// <summary>
-		/// Gets or sets the tipo producto.
-		/// </summary>
-		/// <value>
-		/// The tipo producto.
-		/// </value>
-		[ForeignKey("idTipoProducto")]
-		public TipoProducto TipoProducto { get; set; }
-
-		/// <summary>
-		/// Gets or sets the tipo transaccion.
-		/// </summary>
-		/// <value>
-		/// The tipo transaccion.
-		/// </value>
-		[ForeignKey("idTipoTransaccion")]
-		public TipoTransaccion TipoTransaccion { get; set; }
-
-		/// <summary>
-		/// Gets or sets the canal.
-		/// </summary>
-		/// <value>
-		/// The canal.
-		/// </value>
-		[ForeignKey("idCanal")]
-		public Canal Canal { get; set; }
-
-		/// <summary>
-		/// Gets or sets the agencia.
-		/// </summary>
-		/// <value>
-		/// The agencia.
-		/// </value>
-		[ForeignKey("idAgencia")]
-		public Agencia Agencia { get; set; }
 	}
 }

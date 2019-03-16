@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// Luis Carlos Ruiz 
+// <summary>
+//   Defines the GenericEntity type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace ServiceModel.Entities.dbService
 {

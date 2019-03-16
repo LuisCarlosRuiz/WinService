@@ -22,7 +22,6 @@ namespace ServiceModel.Entities.Soari
 		/// <value>
 		/// The int identifier.
 		/// </value>
-		[Key]
 		public int intId { get; set; }
 
 		/// <summary>
@@ -31,6 +30,7 @@ namespace ServiceModel.Entities.Soari
 		/// <value>
 		/// The string cod estado civil.
 		/// </value>
+		[Key]
 		public string strCodEstadoCivil { get; set; }
 
 		/// <summary>

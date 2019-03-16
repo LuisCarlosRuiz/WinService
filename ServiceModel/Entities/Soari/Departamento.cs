@@ -22,7 +22,6 @@ namespace ServiceModel.Entities.Soari
 		/// <value>
 		/// The int identifier.
 		/// </value>
-		[Key]
 		public int intId { get; set; }
 
 		/// <summary>
@@ -31,6 +30,7 @@ namespace ServiceModel.Entities.Soari
 		/// <value>
 		/// The string cod departamento.
 		/// </value>
+		[Key]
 		public string strCodDepartamento { get; set; }
 
 		/// <summary>
@@ -40,14 +40,6 @@ namespace ServiceModel.Entities.Soari
 		/// The string nombre departamento.
 		/// </value>
 		public string strNombreDepartamento { get; set; }
-
-		/// <summary>
-		/// Gets or sets the int identifier pais.
-		/// </summary>
-		/// <value>
-		/// The int identifier pais.
-		/// </value>
-		public int intIdPais { get; set; }
 
 		/// <summary>
 		/// Gets or sets the string equivalencia opa.

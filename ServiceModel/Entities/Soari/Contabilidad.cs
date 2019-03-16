@@ -74,14 +74,5 @@ namespace ServiceModel.Entities.Soari
 		/// </value>
 		[Column("dteFechaSaldo", TypeName = "datetime")]
 		public DateTime FechaSaldo { get; set; }
-
-		/// <summary>
-		/// Gets or sets the agencia.
-		/// </summary>
-		/// <value>
-		/// The agencia.
-		/// </value>
-		[ForeignKey("IdAgencia")]
-		public Agencia Agencia { get; set; }
 	}
 }

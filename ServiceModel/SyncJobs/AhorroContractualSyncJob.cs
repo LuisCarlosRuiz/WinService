@@ -15,8 +15,7 @@ namespace ServiceModel.SyncJobs
 	using Client.SoapiClient;
 	using ServiceModel.Entities.ConectionEngine;
 	using System.Collections.Generic;
-	using ServiceModel.Entities.Partial;
-	using ServiceModel.BussinesLogic.WorkFlow;
+	using ServiceModel.Entities;
 	using Partial = Entities.Partial;
 
 	/// <summary>
@@ -44,9 +43,6 @@ namespace ServiceModel.SyncJobs
 
 			var client = GetClientConfiguration(ClientId);
 
-			clientName = client.ClientName;
-			TaskName = ServiceTaskName.ObtenerAhorroContractual.ToString();
-
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);
 
@@ -69,10 +65,14 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		public override void InsertData()
 		{
-			var hdata = new HomologationData(ClientId);
-			var hAgencia = hdata.GetHomologationAgencia();
-			var hTipoAhorro = hdata.GetHomologationTipoAhorro();
-			var hEstado = hdata.GetHomologationEstadoAhorro();
+			var client = GetClientConfiguration(ClientId);
+
+			clientName = client.ClientName;
+			TaskName = Partial.ServiceTaskName.ObtenerAhorroContractual.ToString();
+
+			var hAgencia = new Homologation<Agencia>(ClientId, TaskName, clientName);
+			var hTipoAhorro = new Homologation<TipoAhorro>(ClientId, TaskName, clientName);
+			var hEstado = new Homologation<EstadoAhorro>(ClientId, TaskName, clientName);
 
 			var insertData = GetServiceData()
 				.Select(q => new Ahorro
@@ -88,9 +88,9 @@ namespace ServiceModel.SyncJobs
 					numTasaEfectiva = q.TasaInteres,
 					numTasaNominalPeriodica = 0, //Calculado
 					strCuenta = q.NumeroAhorroContractual,
-					idAgencia = (int)GetHomologation(hAgencia, q.Agencia, "strNombreAgencia", "intId"),
-					idTipoAhorro = (int)GetHomologation(hTipoAhorro, Partial.TipoAhorro.AhorroContractual.ToString(), "strNombreTipoAhorro", "intId"),
-					idEstadoAhorro = (int)GetHomologation(hEstado, q.Estado, "strNombreEstadoAhorro", "intId")
+					idAgencia = (int)hAgencia.GetHomologation(q.Agencia, "strNombreAgencia", "intId"),
+					idTipoAhorro = (int)hTipoAhorro.GetHomologation(Partial.TipoAhorro.AhorroContractual.ToString(), "strNombreTipoAhorro", "intId"),
+					idEstadoAhorro = (int)hEstado.GetHomologation(q.Estado, "strNombreEstadoAhorro", "intId")
 				}).ToList();
 
 			BulkInsert(insertData);

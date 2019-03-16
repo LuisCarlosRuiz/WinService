@@ -161,32 +161,5 @@ namespace ServiceModel.Entities.Soari
 		/// The identifier estado ahorro.
 		/// </value>
 		public int idEstadoAhorro { get; set; }
-
-		/// <summary>
-		/// Gets or sets the tipo ahorro.
-		/// </summary>
-		/// <value>
-		/// The tipo ahorro.
-		/// </value>
-		[ForeignKey("idTipoAhorro")]
-		public TipoAhorro TipoAhorro { get; set; }
-
-		/// <summary>
-		/// Gets or sets my property.
-		/// </summary>
-		/// <value>
-		/// My property.
-		/// </value>
-		[ForeignKey("idAgencia")]
-		public Agencia Agencia { get; set; }
-
-		/// <summary>
-		/// Gets or sets the estado ahorro.
-		/// </summary>
-		/// <value>
-		/// The estado ahorro.
-		/// </value>
-		[ForeignKey("idEstadoAhorro")]
-		public EstadoAhorro EstadoAhorro { get; set; }
 	}
 }

@@ -43,9 +43,6 @@ namespace ServiceModel.SyncJobs
 
 			var client = GetClientConfiguration(ClientId);
 
-			clientName = client.ClientName;
-			TaskName = ServiceTaskName.ObtenerTransacciones.ToString();
-
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);
 
@@ -69,17 +66,21 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		public override void InsertData()
 		{
-			var hData = new HomologationData(ClientId);
-			var hAgencia = hData.GetHomologationAgencia();
-			var hTipoProducto = hData.GetHomologationTipoProductoTransaccion();
-			var hTipoTransaccion = hData.GetHomologationTipoTransaccion();
+			var client = GetClientConfiguration(ClientId);
+
+			clientName = client.ClientName;
+			TaskName = ServiceTaskName.ObtenerTransacciones.ToString();
+
+			var hAgencia = new Homologation<Agencia>(ClientId, TaskName, clientName);
+			var hTipoProducto = new Homologation<TipoProducto>(ClientId, TaskName, clientName);
+			var hTipoTransaccion = new Homologation<TipoTransaccion>(ClientId, TaskName, clientName);
 
 			var insertData = GetServiceData()
 				.Select(q => new Transacciones
 				{
-					idAgencia = (int)GetHomologation(hAgencia, q.CodigoOficina, "strEquivalenciaOPA", "intId"),
-					idTipoProducto = (int)GetHomologation(hTipoProducto, q.TipoProducto, "strNombreTipoProducto", "intId"),
-					idTipoTransaccion = (int)GetHomologation(hTipoTransaccion, q.TipoTransaccion, "strNombreTipoTransaccion", "intId"),
+					idAgencia = (int)hAgencia.GetHomologation(q.CodigoOficina, "strEquivalenciaOPA", "intId"),
+					idTipoProducto = (int)hTipoProducto.GetHomologation(q.TipoProducto, "strNombreTipoProducto", "intId"),
+					idTipoTransaccion = (int)hTipoTransaccion.GetHomologation(q.TipoTransaccion, "strNombreTipoTransaccion", "intId"),
 					numNit = long.Parse(q.IdentificacionTitular),
 					strLineaProducto = q.CodigoLinea,
 					strNumeroCuenta = q.NumeroProducto,

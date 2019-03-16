@@ -44,9 +44,6 @@ namespace ServiceModel.SyncJobs
 
 			var client = GetClientConfiguration(ClientId);
 
-			clientName = client.ClientName;
-			TaskName = ServiceTaskName.ObtenerCreditos.ToString();
-
 			GetData obj = new GetData(client.ServiceUrl, client.ServiceUser
 									, client.ServicePassword);
 
@@ -66,11 +63,15 @@ namespace ServiceModel.SyncJobs
 		/// </summary>
 		public override void InsertData()
 		{
-			var hData = new HomologationData(ClientId);
-			var hTipoCuota = hData.GetHomologationTipoCuota();
-			var hAgencia = hData.GetHomologationAgencia();
-			var hTipoGarantia = hData.GetHomologationTipoGarantia();
-			var hModalidad = hData.GetHomologationModalidad();
+			var client = GetClientConfiguration(ClientId);
+
+			clientName = client.ClientName;
+			TaskName = ServiceTaskName.ObtenerCreditos.ToString();
+
+			var hTipoCuota = new Homologation<TipoCuota>(ClientId, TaskName, clientName);
+			var hAgencia = new Homologation<Agencia>(ClientId, TaskName, clientName);
+			var hTipoGarantia = new Homologation<TipoGarantia>(ClientId, TaskName, clientName);
+			var hModalidad = new Homologation<TipoModalidad>(ClientId, TaskName, clientName);
 
 			IEnumerable<Credito> insertData = GetServiceData()
 				.Select(q => new Credito
@@ -100,10 +101,10 @@ namespace ServiceModel.SyncJobs
 					numProvisionInteres = q.ProvisionInteres,
 					numNit = q.CedulaAsociado,
 					numCapitalProyectado = 0, //Calculado
-					idTipoCuotaCredito = (int)GetHomologation(hTipoCuota, q.TipoCuota, "strNombreTipoCuotaCredito", "intId"),
-					idAgencia = (int)GetHomologation(hAgencia, q.Agencia, "strNombreAgencia", "intId"),
-					idTipoGarantia = (int)GetHomologation(hTipoGarantia, q.ClaseGarantia, "strNombreTipoGarantia", "intId"),
-					idTipoModalidadCredito = (int)GetHomologation(hModalidad, q.ModalidadInteres, "strNombreTipoModalidadCredito", "intId"),
+					idTipoCuotaCredito = (int)hTipoCuota.GetHomologation(q.TipoCuota, "strNombreTipoCuotaCredito", "intId"),
+					idAgencia = (int)hAgencia.GetHomologation(q.Agencia, "strNombreAgencia", "intId"),
+					idTipoGarantia = (int)hTipoGarantia.GetHomologation(q.ClaseGarantia, "strNombreTipoGarantia", "intId"),
+					idTipoModalidadCredito = (int)hModalidad.GetHomologation(q.ModalidadInteres, "strNombreTipoModalidadCredito", "intId"),
 					numAño = q.FechaDesembolso.Year,
 					numTasaNominalPeriodica = 0, //Calculado
 					dtmFechaProximoPago = DateTime.Now, //Calculado
